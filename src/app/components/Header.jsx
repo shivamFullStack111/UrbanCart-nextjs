@@ -77,6 +77,27 @@ const Header = () => {
           </div>
         </div>
       </div>
+
+      <div className="flex items-center justify-between px-[7vw] py-4 bg-black">
+        <p className="border-b-2 text-[0.8vw] text-white border-black hover:border-white cursor-pointer font-semibold">
+          SALE
+        </p>
+        <p className="border-b-2 text-[0.8vw] text-white border-black hover:border-white cursor-pointer font-semibold">
+          MEN
+        </p>
+        <p className="border-b-2 text-[0.8vw] text-white border-black hover:border-white cursor-pointer font-semibold">
+          WOMEN
+        </p>
+        <p className="border-b-2 text-[0.8vw] text-white border-black hover:border-white cursor-pointer font-semibold">
+          KIDS
+        </p>
+        <p className="border-b-2 text-[0.8vw] text-white border-black hover:border-white cursor-pointer font-semibold">
+          WINTER WEARS
+        </p>
+        <p className="border-b-2 text-[0.8vw] text-white border-black hover:border-white cursor-pointer font-semibold">
+          SUMMER WEARS
+        </p>
+      </div>
     </>
   );
 };
