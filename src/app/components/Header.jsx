@@ -20,13 +20,13 @@ const Header = () => {
     <>
       <div
         className={
-          "flex items-center justify-between  border-b-[1px] border-black w-[100vw]"
+          "flex items-center justify-between  border-b-[1px] border-gray-300 w-[100vw] py-2"
         }
       >
-        <div className="flex items-center text-[170%] font-bold">
+        <div className="flex items-center text-[160%] font-bold">
           <Image
-            height={70}
-            width={70}
+            height={60}
+            width={60}
             alt="logo"
             src={companyLogo}
             className="ml-20"
@@ -34,21 +34,21 @@ const Header = () => {
           <p className={Abril.className}>Urban Cart</p>
         </div>
 
-        <div className="flex gap-5 ml-[10vw] ">
-          <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-lg ">
+        <div className="flex gap-5 ml-[7vw] ">
+          <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] ">
             MEN
           </p>
-          <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-lg ">
+          <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] ">
             WOMEN
           </p>
-          <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-lg ">
+          <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] ">
             KIDS
           </p>
         </div>
 
         <div className="flex items-center ">
           <div
-            className={`h-11 w-60 bg-gray-200 flex items-center border-2  p-2 ${
+            className={`h-9 w-56 bg-gray-200 flex items-center border-2  p-2 ${
               isFousOnSearch && "rounded-xl border-blue-400 "
             }  gap-2`}
           >
@@ -62,16 +62,16 @@ const Header = () => {
             />
           </div>
           <div className="ml-[3vw] mr-[10vw] gap-3 flex items-center">
-            <div className="bg-black border-2 border-black transition-all duration-400 hover:scale-105 text-white px-6 py-2 rounded-lg text-lg font-semibold cursor-pointer hover:bg-white hover:text-black ">
+            <div className="bg-black border-2 border-black transition-all duration-400 hover:scale-105 text-white px-5 py-1 rounded-lg text-lg font-semibold cursor-pointer hover:bg-white hover:text-black ">
               Login
             </div>
 
             <div className="flex flex-col items-center ml-[3vw] text-red-500 cursor-pointer hover hover:text-gray-500">
-              <CiHeart size={36} />
+              <CiHeart size={30} />
               <p className="text-sm font-medium">Wishlist</p>
             </div>
             <div className="flex flex-col items-center ml-[1vw] text-black cursor-pointer hover hover:text-gray-500">
-              <GiShoppingBag size={36} />
+              <GiShoppingBag size={30} />
               <p className="text-sm font-medium">Cart</p>
             </div>
           </div>
