@@ -33,7 +33,7 @@ const Footer = () => {
               Track Order
             </p>
             <p className="font-semibold text-red-400 hover:text-gray-400 mt-2 cursor-pointer ">
-              7 Day's return policy
+              {` 7 Day return policy`}
             </p>
             <p className="font-semibold text-red-400 hover:text-gray-400 mt-2 cursor-pointer ">
               Cash on Delivery
