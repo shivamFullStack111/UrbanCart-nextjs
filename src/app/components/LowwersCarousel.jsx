@@ -46,7 +46,7 @@ const CarOusal = () => {
   return (
     <div className="mb-4  py-5">
       <h2 className="text-2xl p-2 700px:text-3xl 800px:p-5 text-gray-600  font-bold">
-        Men Lower's
+        Men Lowers
       </h2>
       <Swiper
         autoPlay={true}
