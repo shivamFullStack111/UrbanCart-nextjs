@@ -5,11 +5,13 @@ import CarOusal from "./components/Carousal";
 import SaleBanner from "./components/SaleBanner";
 import fav from "./FavIcons/favicon.ico";
 import Banner from "./components/Banner";
-import { Roboto, ABeeZee } from "next/font/google";
-const roboto = ABeeZee({
+import { Roboto, ABeeZee, Quicksand } from "next/font/google";
+import LowwersCarousel from "./components/LowwersCarousel";
+import Footer from "./components/Footer";
+const roboto = Quicksand({
   weight: ["400"],
   style: ["normal"],
-  subsets: ["latin"],
+  subsets: ["latin-ext"],
   display: "swap",
 }); // Import the global CSS file
 
@@ -23,9 +25,13 @@ const Home = () => {
       </Head>
       <Header />
       {/* <Banner/> */}
-      <CarOusal />
+      <div className="max-800px:pt-16">
+        <CarOusal />
+      </div>
       <SaleBanner />
       {/* <Footer/> */}
+      <LowwersCarousel />
+      <Footer />
     </div>
   );
 };

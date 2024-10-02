@@ -44,7 +44,7 @@ const CarOusal = () => {
   }, []);
 
   return (
-    <div className="mb-4">
+    <div className="mb-4 mt pt-8">
       <h2 className="text-2xl p-2 700px:text-3xl 800px:p-5 text-gray-600  font-bold">
         Trending
       </h2>
