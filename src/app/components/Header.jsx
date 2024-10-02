@@ -9,6 +9,7 @@ import { GiShoppingBag } from "react-icons/gi";
 import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
 import { IoBagHandleSharp } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa";
+import Link from "next/link";
 
 const Abril = Abril_Fatface({
   weight: ["400"],
@@ -28,7 +29,7 @@ const Header = () => {
               "flex items-center    justify-between   border-b-[1px] border-gray-300 w-[100vw] py-2 h-20"
             }
           >
-            <div className="flex items-center text-[160%] font-bold">
+            <Link href="/" className="flex items-center text-[160%] font-bold">
               <Image
                 height={60}
                 width={60}
@@ -37,18 +38,27 @@ const Header = () => {
                 className="ml-4 1200px:ml-10"
               />
               <p className={Abril.className}>Urban Cart</p>
-            </div>
+            </Link>
 
             <div className="flex max-1000px:hidden gap-5 ">
-              <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] ">
+              <Link
+                href="/products?c=MEN"
+                className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] "
+              >
                 MEN
-              </p>
-              <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] ">
+              </Link>
+              <Link
+                href="/products?c=WOMEN"
+                className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] "
+              >
                 WOMEN
-              </p>
-              <p className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] ">
+              </Link>
+              <Link
+                href="/products?c=KIDS"
+                className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] "
+              >
                 KIDS
-              </p>
+              </Link>
             </div>
 
             <div className="flex items-center ">
@@ -84,9 +94,13 @@ const Header = () => {
           </div>
           <div className="flex overflow-x-scroll hide-scrollbar p-3 justify-center gap-4 800px:gap-10  bg-white">
             {cat.map((i) => (
-              <p className={"bg-black text-white px-6 py-2 rounded-xl"} key={i}>
+              <Link
+                href={`/products?c=${i}`}
+                className={"bg-black text-white px-6 py-2 rounded-xl"}
+                key={i}
+              >
                 {i}
-              </p>
+              </Link>
             ))}
           </div>
         </div>

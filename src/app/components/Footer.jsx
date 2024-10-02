@@ -16,7 +16,7 @@ const Footer = () => {
           <p className={"text-[50px] text-teal-500"}>Urabn Cart </p>
         </div>
         <div className="flex flex-col 850px:flex-row  max-850px:gap-10 ">
-          <div className="w-[33vw] ">
+          <div className="w-full 800px:w-[33vw]  ">
             <h3 className={"text-teal-500 text-lg font-bold"}>
               CUSTOMER SERVICES
             </h3>
@@ -39,7 +39,7 @@ const Footer = () => {
               Cash on Delivery
             </p>
           </div>
-          <div className="w-[33vw] ">
+          <div className="w-full 800px:w-[33vw]  ">
             <h3 className={"text-teal-500 text-lg font-bold"}>COMPANY</h3>
             <p className="font-semibold hover:text-gray-400 mt-2 cursor-pointer">
               About us
@@ -54,7 +54,7 @@ const Footer = () => {
               Register Complaint
             </p>
           </div>
-          <div className="w-[33vw] ">
+          <div className="w-full 800px:w-[33vw]  ">
             <h3 className={"text-teal-500 text-lg font-bold"}>SOCIAL MEDIA</h3>
             <p className="font-semibold hover:text-gray-400 mt-2 cursor-pointer">
               Instagram
