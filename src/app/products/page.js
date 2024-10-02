@@ -22,7 +22,7 @@ const ProductsContent = () => {
   console.log("Category: ", category); // Log category
 
   return (
-    <div>
+    <div className=''>
       <p>Search Term: {term}</p>
       <p>Category: {category}</p>
     </div>
@@ -33,7 +33,7 @@ const Products = () => {
   return (
     <div className={sand.className}>
       <Header />
-      <div className={"flex "}>
+      <div className={"800px:flex max-800px:pt-20  "}>
         <SideBar />
         <Suspense fallback={<div>Loading...</div>}>
           <ProductsContent />
