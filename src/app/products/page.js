@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { Suspense } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SideBar from "./SideBar";
@@ -13,20 +13,31 @@ const sand = Quicksand({
   display: "swap",
 });
 
-const Products = () => {
+const ProductsContent = () => {
   const searchParams = useSearchParams(); // Get search parameters
-  const term = searchParams.get("q"); // Extract 'term' parameter
-  const category = searchParams.get("q"); // Extract 'category' parameter
+  const term = searchParams.get("q"); // Extract 'q' (search term) parameter
+  const category = searchParams.get("category"); // Extract 'category' parameter
 
   console.log("Search Term: ", term); // Log search term
   console.log("Category: ", category); // Log category
 
   return (
+    <div>
+      <p>Search Term: {term}</p>
+      <p>Category: {category}</p>
+    </div>
+  );
+};
+
+const Products = () => {
+  return (
     <div className={sand.className}>
       <Header />
       <div className={"flex "}>
         <SideBar />
-        <div>rfhjn</div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <ProductsContent />
+        </Suspense>
       </div>
       <Footer />
     </div>

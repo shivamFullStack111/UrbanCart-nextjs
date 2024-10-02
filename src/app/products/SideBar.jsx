@@ -3,7 +3,7 @@ import { FaAngleRight, FaChevronRight } from "react-icons/fa";
 import { useState } from "react";
 
 const SideBar = () => {
-  const [open, setopen] = useState(second)  
+  const [open, setopen] = useState(1);
   return (
     <>
       <div className="w-[25%] h-full bg-white  p-3">
