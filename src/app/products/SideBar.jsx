@@ -15,7 +15,7 @@ const SideBar = () => {
     <>
       {/* desktop side bar */}
       <div className="w-[33%] 1200px:w-[25%] h-full max-800px:hidden bg-white  p-3">
-        <div className="text-2xl font-semibold p-2 border-2 rounded-lg">
+        <div className="text-xl 1000px:text-2xl   font-semibold p-2 border-2 rounded-lg">
           <p>Total Results</p>
           <p className={"text-sm text-gray-500"}>1,432 Products</p>
         </div>
@@ -62,7 +62,7 @@ const Cat = () => {
       className="border-b-2 p-2  py-3   "
     >
       <div className="cursor-pointer  flex justify-between items-center">
-        <p className="font-semibold text-2xl">Category</p>
+        <p className="font-semibold text-lg 1000px:text-2xl ">Category</p>
         <FaChevronRight size={26} />
       </div>
 
@@ -105,7 +105,7 @@ const Sort = () => {
       className="border-b-2 p-2  py-3   "
     >
       <div className="cursor-pointer  flex justify-between items-center">
-        <p className="font-semibold text-2xl">Sort</p>
+        <p className="font-semibold text-lg 1000px:text-2xl ">Sort</p>
         <FaChevronRight size={26} />
       </div>
 
@@ -135,7 +135,7 @@ const Color = () => {
       className="border-b-2 p-2  py-3   "
     >
       <div className="cursor-pointer  flex justify-between items-center">
-        <p className="font-semibold text-2xl">Color</p>
+        <p className="font-semibold text-lg 1000px:text-2xl ">Color</p>
         <FaChevronRight size={26} />
       </div>
 
@@ -164,7 +164,7 @@ const Price = () => {
         onClick={() => setisOpen(!isOpen)}
         className="cursor-pointer flex justify-between items-center"
       >
-        <p className="font-semibold text-2xl">Price</p>
+        <p className="font-semibold text-lg 1000px:text-2xl ">Price</p>
         <FaChevronRight size={26} />
       </div>
 
@@ -198,7 +198,7 @@ const Ratings = () => {
       }}
       className="border-b-2 cursor-pointer p-2  py-3  flex justify-between items-center"
     >
-      <p className="font-semibold text-2xl">Ratings</p>
+      <p className="font-semibold text-lg 1000px:text-2xl ">Ratings</p>
       <FaChevronRight size={26} />
     </div>
   );

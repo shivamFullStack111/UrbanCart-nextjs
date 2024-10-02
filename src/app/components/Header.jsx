@@ -77,7 +77,7 @@ const Header = () => {
                 />
               </div>
               <div className="ml-[3vw] mr-[10vw] gap-3 flex items-center">
-                <div className="bg-black border-2 border-black transition-all duration-400 hover:scale-105 text-white px-5 py-1 rounded-lg text-lg font-semibold cursor-pointer hover:bg-white hover:text-black ">
+                <div className="bg-black border-2 border-black transition-all duration-400 hover:scale-105 text-white px-5 py-1 rounded-lg text-sm 1000px:text-lg font-semibold cursor-pointer hover:bg-white hover:text-black ">
                   Login
                 </div>
 
@@ -92,11 +92,11 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="flex overflow-x-scroll hide-scrollbar p-3 justify-center gap-4 800px:gap-10  bg-white">
+          <div className="flex overflow-x-scroll hide-scrollbar text-sm 1000px:text-lg p-3 justify-center gap-4 800px:gap-10  bg-white">
             {cat.map((i) => (
               <Link
                 href={`/products?c=${i}`}
-                className={"bg-black text-white px-6 py-2 rounded-xl"}
+                className={"bg-black  text-white px-6 py-2 rounded-xl"}
                 key={i}
               >
                 {i}
@@ -118,7 +118,12 @@ const Header = () => {
 
           <div className="flex overflow-x-scroll hide-scrollbar p-3 gap-4  bg-white">
             {cat.map((i) => (
-              <p className={"bg-black text-white px-6 py-2 rounded-xl"} key={i}>
+              <p
+                className={
+                  "bg-black text-sm 1000px:text-lg p-3  text-white px-6 py-2 rounded-xl"
+                }
+                key={i}
+              >
                 {i}
               </p>
             ))}
