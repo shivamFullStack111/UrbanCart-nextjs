@@ -13,6 +13,7 @@ import SortFilter from "./SortFilter";
 import AllFilters from "./AllFilters";
 import { motion } from "framer-motion";
 import { RxCross1 } from "react-icons/rx";
+
 const SideBar = () => {
   const [sheet, setsheet] = useState("");
   const [sheetOpen, setsheetOpen] = useState(false);
@@ -47,7 +48,7 @@ const SideBar = () => {
         initial={{ y: 1000, opacity: sheetOpen ? 1 : 0 }}
         animate={{ y: sheetOpen ? 0 : 1000, opacity: sheetOpen ? 1 : 0 }}
         transition={{ duration: 0.3 }}
-        className="w-full h-[90%] rounded-t-3xl 800px:hidden fixed bg-white bottom-0 z-50"
+        className="w-full h-[90%] rounded-t-3xl hide-scrollbar  800px:hidden fixed overflow-y-scroll border-2 shadow-2xl bg-gray-200 bottom-0 z-50"
       >
         <RxCross1
           size={30}

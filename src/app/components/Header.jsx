@@ -173,8 +173,8 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="fixed w-full 800px:hidden z-40">
-          <div className=" w-full  z-30 items-center bg-teal-500 text-white p-3 flex shadow-md justify-between   ">
+        <div className="fixed w-full 800px:hidden bg-white z-40">
+          <div className=" w-full  z-30 items-center   text-gray-500 p-3 flex shadow-md justify-between   ">
             <IoReorderThreeOutline
               onClick={() => setisSideBarOpen(true)}
               className="text-[40px] cursor-pointer hover:text-gray-300"
@@ -183,7 +183,7 @@ const Header = () => {
             <div className="flex gap-3 items-center">
               <IoSearchOutline className="text-[25px]" />
               <IoBagHandleSharp className="text-[25px]" />
-              <FaRegHeart className="text-[23px] text-red-400" />
+              <FaRegHeart className="text-[23px] text-gray-500" />
             </div>
           </div>
 
