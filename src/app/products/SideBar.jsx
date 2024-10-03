@@ -196,10 +196,33 @@ const Ratings = () => {
       onClick={() => {
         console.log(setisOpen((p) => !p));
       }}
-      className="border-b-2 cursor-pointer p-2  py-3  flex justify-between items-center"
+      className="border-b-2 p-2  py-3   "
     >
-      <p className="font-semibold text-lg 1000px:text-2xl ">Ratings</p>
-      <FaChevronRight size={26} />
+      <div className="cursor-pointer  flex justify-between items-center">
+        <p className="font-semibold text-lg 1000px:text-2xl ">Rating</p>
+        <FaChevronRight size={26} />
+      </div>
+
+      {isOpen && (
+        <div className=" flex flex-col  mt-4">
+          <div className="flex gap-4 cursor-pointer font-semibold hover:bg-gray-300 0 rounded-lg  p-2 ">
+            <p className="h-6 w-6 border-2 border-black rounded-md "></p>
+            <p>1.0 and Above</p>
+          </div>
+          <div className="flex gap-4 cursor-pointer font-semibold hover:bg-gray-300 0 rounded-lg  p-2 ">
+            <p className="h-6 w-6 border-2 border-black rounded-md "></p>
+            <p>2.0 and Above</p>
+          </div>
+          <div className="flex gap-4 cursor-pointer font-semibold hover:bg-gray-300 rounded-lg p-2 ">
+            <p className="h-6 w-6 border-2 border-black rounded-md "></p>
+            <p>3.0 and Above</p>
+          </div>
+          <div className="flex gap-4 cursor-pointer font-semibold hover:bg-gray-300 rounded-lg p-2 ">
+            <p className="h-6 w-6 border-2 border-black rounded-md "></p>
+            <p>4.0 and Above</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
