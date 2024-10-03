@@ -37,7 +37,7 @@ const Abril = Abril_Fatface({
 
 const Header = () => {
   const [isFousOnSearch, setisFousOnSearch] = useState(false);
-  const [isSideBarOpen, setisSideBarOpen] = useState(true);
+  const [isSideBarOpen, setisSideBarOpen] = useState(false);
 
   return (
     <>

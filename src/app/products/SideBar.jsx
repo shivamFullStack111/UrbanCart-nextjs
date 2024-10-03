@@ -8,12 +8,23 @@ import {
 } from "react-icons/fa";
 import { useState } from "react";
 import { MdCategory } from "react-icons/md";
-
+import CategoryFilter from "./CategoryFilter";
+import SortFilter from "./SortFilter";
+import AllFilters from "./AllFilters";
+import { motion } from "framer-motion";
+import { RxCross1 } from "react-icons/rx";
 const SideBar = () => {
-  const [open, setopen] = useState(1);
+  const [sheet, setsheet] = useState("");
+  const [sheetOpen, setsheetOpen] = useState(false);
+
+  const toggleSheet = (type) => {
+    setsheet(type);
+    setsheetOpen(true);
+  };
+
   return (
     <>
-      {/* desktop side bar */}
+      {/* desktop filter side bar */}
       <div className="w-[33%] 1200px:w-[25%] h-full max-800px:hidden bg-white  p-3">
         <div className="text-xl 1000px:text-2xl   font-semibold p-2 border-2 rounded-lg">
           <p>Total Results</p>
@@ -30,18 +41,69 @@ const SideBar = () => {
         </div>
       </div>
 
-      {/* mobile side bar */}
+      {/* bottom sheet for mobile filter */}
+
+      <motion.div
+        initial={{ y: 1000, opacity: sheetOpen ? 1 : 0 }}
+        animate={{ y: sheetOpen ? 0 : 1000, opacity: sheetOpen ? 1 : 0 }}
+        transition={{ duration: 0.3 }}
+        className="w-full h-[90%] rounded-t-3xl 800px:hidden fixed bg-white bottom-0 z-50"
+      >
+        <RxCross1
+          size={30}
+          onClick={() => {
+            setsheetOpen(false);
+            setsheet("");
+          }}
+          className="ml-auto cursor-pointer hover:text-red-500 m-4"
+        />
+        {sheet == "category" && <CategoryFilter></CategoryFilter>}
+        {sheet == "sort" && <SortFilter></SortFilter>}
+        {sheet == "filter" && <AllFilters></AllFilters>}
+      </motion.div>
+
+      {/* mobile filter top bar */}
       <div className="800px:hidden flex gap-1 mx-1 ">
-        <div className="flex cursor-pointer gap-1 text-sm font-semibold py-3  w-full justify-center items-center bg-gray-200 ">
+        <div
+          onClick={() => {
+            if (sheet == "category") {
+              setsheet("");
+              setsheetOpen(false);
+            } else {
+              toggleSheet("category");
+            }
+          }}
+          className="flex cursor-pointer gap-1 text-sm font-semibold py-3  w-full justify-center items-center bg-gray-200 hover:bg-slate-300 "
+        >
           <MdCategory />
 
           <p>Category</p>
         </div>
-        <div className="flex cursor-pointer gap-1 text-sm font-semibold py-3  w-full justify-center items-center bg-gray-200 ">
+        <div
+          onClick={() => {
+            if (sheet == "sort") {
+              setsheet("");
+              setsheetOpen(false);
+            } else {
+              toggleSheet("sort");
+            }
+          }}
+          className="flex cursor-pointer gap-1 text-sm font-semibold py-3  w-full justify-center items-center bg-gray-200 hover:bg-slate-300 "
+        >
           <FaSortAmountUpAlt />
           <p>Sort</p>
         </div>
-        <div className="flex cursor-pointer gap-1 text-sm font-semibold py-3  w-full justify-center items-center bg-gray-200 ">
+        <div
+          onClick={() => {
+            if (sheet == "filter") {
+              setsheet("");
+              setsheetOpen(false);
+            } else {
+              toggleSheet("filter");
+            }
+          }}
+          className="flex cursor-pointer gap-1 text-sm font-semibold py-3  w-full justify-center items-center bg-gray-200 hover:bg-slate-300 "
+        >
           <FaFilter />
           <p>Filter</p>
         </div>
