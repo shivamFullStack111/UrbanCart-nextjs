@@ -50,7 +50,7 @@ const CarOusal = () => {
       </h2>
       <Swiper
         autoPlay={true}
-        className="h-[280px] 500px:h-[350px] "
+        className="h-[280px] 500px:h-[350px] 800px:h-[400px] 1200px:h-[450px] "
         slidesPerView={slidesNo} // Use the dynamic slidesNo
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}

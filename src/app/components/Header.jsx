@@ -6,10 +6,27 @@ import { Inter, Roboto_Mono, Roboto, Abril_Fatface } from "next/font/google";
 import { CiHeart, CiSearch } from "react-icons/ci";
 import { useState } from "react";
 import { GiShoppingBag } from "react-icons/gi";
-import { IoReorderThreeOutline, IoSearchOutline } from "react-icons/io5";
+import {
+  IoBagHandle,
+  IoLogOutOutline,
+  IoLogOutSharp,
+  IoReorderThreeOutline,
+  IoSearchOutline,
+} from "react-icons/io5";
+import { RxCross1 } from "react-icons/rx";
 import { IoBagHandleSharp } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
+import {
+  FaArrowRight,
+  FaChevronRight,
+  FaHome,
+  FaRegHeart,
+  FaUser,
+} from "react-icons/fa";
+import { FaBoxesPacking } from "react-icons/fa6";
 import Link from "next/link";
+import { motion } from "framer-motion";
+
+import { BsHearts } from "react-icons/bs";
 
 const Abril = Abril_Fatface({
   weight: ["400"],
@@ -20,10 +37,59 @@ const Abril = Abril_Fatface({
 
 const Header = () => {
   const [isFousOnSearch, setisFousOnSearch] = useState(false);
+  const [isSideBarOpen, setisSideBarOpen] = useState(true);
+
   return (
     <>
+      {/* mobile animated slider of side bar */}
+      <motion.div
+        initial={{ x: -500 }}
+        animate={{ x: isSideBarOpen ? 0 : -500 }}
+        transition={{ duration: 0.3 }}
+        className={`fixed w-full h-full z-50   bg-white top-0 max-w-[500px] left-0`}
+      >
+        <RxCross1
+          size={30}
+          onClick={() => setisSideBarOpen(false)}
+          className="ml-auto m-3 cursor-pointer"
+        />
+
+        {/* user profile  */}
+        <div className="flex gap-3 items-center mx-4  border-b-2 pb-5">
+          <div className="w-20 h-20  relative rounded-full">
+            <Image
+              fill={true}
+              alt="profile"
+              className="bg-cyan-200 rounded-full"
+              // src={"j"}
+            ></Image>
+          </div>
+          <div>
+            <p className="text-lg font-semibold ">Shivam</p>
+            <p className="text-sm text-gray-500">shivam@gmail.com</p>
+          </div>
+        </div>
+
+        {/* navigation and functionality of side bar */}
+
+        <div className="flex flex-col p-2 gap-1 px-3  ">
+          {navigations?.map((i) => (
+            <div
+              key={i}
+              className="flex items-center justify-between p-3 rounded-xl cursor-pointer hover:bg-gray-200"
+            >
+              <div className="flex gap-2 items-center  ">
+                {i?.icon}
+                <p className="font-semibold">{i?.title}</p>
+              </div>
+
+              <FaChevronRight />
+            </div>
+          ))}
+        </div>
+      </motion.div>
       <div className="block h-12  800px:h-36">
-        <div className="max-800px:hidden fixed z-50 bg-white">
+        <div className="max-800px:hidden fixed z-40 bg-white">
           <div
             className={
               "flex items-center    justify-between   border-b-[1px] border-gray-300 w-[100vw] py-2 h-20"
@@ -97,7 +163,7 @@ const Header = () => {
               <Link
                 href={`/products?c=${i}`}
                 className={
-                  "bg-gray-200 shadow-xl  font-semibold text-black px-4 800px:px-6 py-1 800px:px-2 rounded-xl hover:bg-black hover:text-white text-sm 800px:text-lg transition-all duration-150"
+                  "bg-gray-200 shadow-xl  font-semibold text-black px-4 800px:px-6 py-1 800px:py-2 rounded-xl hover:bg-black hover:text-white text-sm 800px:text-lg transition-all duration-150"
                 }
                 key={i}
               >
@@ -107,14 +173,17 @@ const Header = () => {
           </div>
         </div>
 
-        <div className="fixed w-full 800px:hidden z-50">
+        <div className="fixed w-full 800px:hidden z-40">
           <div className=" w-full  z-30 items-center bg-teal-500 text-white p-3 flex shadow-md justify-between   ">
-            <IoReorderThreeOutline className="text-[40px]" />
+            <IoReorderThreeOutline
+              onClick={() => setisSideBarOpen(true)}
+              className="text-[40px] cursor-pointer hover:text-gray-300"
+            />
 
-            <div className="flex gap-2 items-center">
-              <IoSearchOutline className="text-[28px]" />
-              <IoBagHandleSharp className="text-[28px]" />
-              <FaRegHeart className="text-[25px] text-red-400" />
+            <div className="flex gap-3 items-center">
+              <IoSearchOutline className="text-[25px]" />
+              <IoBagHandleSharp className="text-[25px]" />
+              <FaRegHeart className="text-[23px] text-red-400" />
             </div>
           </div>
 
@@ -123,7 +192,7 @@ const Header = () => {
               <Link
                 href={`/products?c=${i}`}
                 className={
-                  "bg-gray-200 shadow-xl  font-semibold text-black px-4 800px:px-6 py-1 800px:px-2 rounded-xl hover:bg-black hover:text-white text-sm 800px:text-lg transition-all duration-150"
+                  "bg-gray-200 shadow-xl  font-semibold text-black px-4 800px:px-6 py-1 800px:py-2 rounded-xl hover:bg-black hover:text-white text-sm 800px:text-lg transition-all duration-150"
                 }
                 key={i}
               >
@@ -140,3 +209,33 @@ const Header = () => {
 export default Header;
 
 const cat = ["MENS", "WOMENS", "KIDS", "LOWER", "UPPER", "SAREE", "SHOES"];
+const navigations = [
+  {
+    title: "Home",
+    icon: <FaHome size={30} className="text-red-500" />,
+  },
+  {
+    title: "Products",
+    icon: <IoBagHandle size={30} className="text-red-500" />,
+  },
+  {
+    title: "Wishlist",
+    icon: <BsHearts size={30} className="text-red-500" />,
+  },
+  {
+    title: "My Orders",
+    icon: <FaBoxesPacking size={30} className="text-red-500" />,
+  },
+  {
+    title: "My Cart",
+    icon: <IoBagHandle size={30} className="text-red-500" />,
+  },
+  {
+    title: "Profile",
+    icon: <FaUser size={30} className="text-red-500" />,
+  },
+  {
+    title: "Log Out",
+    icon: <IoLogOutSharp size={30} className="text-red-500" />,
+  },
+];
