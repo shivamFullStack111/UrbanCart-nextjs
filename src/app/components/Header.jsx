@@ -88,7 +88,8 @@ const Header = () => {
           ))}
         </div>
       </motion.div>
-      <div className="block h-12  800px:h-36">
+      <div className="block h-12  800px:h-16">
+        {/* desktop header  */}
         <div className="max-800px:hidden fixed z-40 bg-white">
           <div
             className={
@@ -158,21 +159,9 @@ const Header = () => {
               </div>
             </div>
           </div>
-          <div className="flex overflow-x-scroll hide-scrollbar text-sm 1000px:text-lg p-3 justify-center gap-4 800px:gap-10  bg-white">
-            {cat.map((i) => (
-              <Link
-                href={`/products?c=${i}`}
-                className={
-                  "bg-gray-200 shadow-xl  font-semibold text-black px-4 800px:px-6 py-1 800px:py-2 rounded-xl hover:bg-black hover:text-white text-sm 800px:text-lg transition-all duration-150"
-                }
-                key={i}
-              >
-                {i}
-              </Link>
-            ))}
-          </div>
         </div>
 
+        {/* mobile header  */}
         <div className="fixed w-full 800px:hidden bg-white z-40">
           <div className=" w-full  z-30 items-center   text-gray-500 p-3 flex shadow-md justify-between   ">
             <IoReorderThreeOutline
