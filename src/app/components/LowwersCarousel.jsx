@@ -44,9 +44,9 @@ const CarOusal = () => {
   }, []);
 
   return (
-    <div className="mb-4 mt pt-8">
-      <h2 className="text-2xl p-2 700px:text-3xl 800px:p-5 text-gray-600  font-bold">
-        Trending
+    <div className="mb-4 mt pt-2">
+      <h2 className=" text-xl 800px:text-2xl p-2 700px:text-3xl 800px:p-5 text-gray-600  font-bold">
+        Most Rated Products
       </h2>
       <Swiper
         autoPlay={true}
