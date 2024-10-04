@@ -35,7 +35,7 @@ const Abril = Abril_Fatface({
   display: "swap",
 });
 
-const Header = () => {
+const Header = ({ setisWishlistOpen }) => {
   const [isFousOnSearch, setisFousOnSearch] = useState(false);
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
 
@@ -148,14 +148,20 @@ const Header = () => {
                   Login
                 </div>
 
-                <div className="flex flex-col items-center ml-[3vw] text-red-500 cursor-pointer hover hover:text-gray-500">
+                <div
+                  onClick={() => setisWishlistOpen(true)}
+                  className="flex flex-col items-center ml-[3vw] text-red-500 cursor-pointer hover hover:text-gray-500"
+                >
                   <CiHeart size={30} />
                   <p className="text-sm font-medium">Wishlist</p>
                 </div>
-                <div className="flex flex-col items-center ml-[1vw] text-black cursor-pointer hover hover:text-gray-500">
+                <Link
+                  href={"/cart"}
+                  className="flex flex-col items-center ml-[1vw] text-black cursor-pointer hover hover:text-gray-500"
+                >
                   <GiShoppingBag size={30} />
                   <p className="text-sm font-medium">Cart</p>
-                </div>
+                </Link>
               </div>
             </div>
           </div>
@@ -171,7 +177,9 @@ const Header = () => {
 
             <div className="flex gap-3 items-center">
               <IoSearchOutline className="text-[25px]" />
-              <IoBagHandleSharp className="text-[25px]" />
+              <Link href="/cart">
+                <IoBagHandleSharp className="text-[25px]" />
+              </Link>
               <FaRegHeart className="text-[23px] text-gray-500" />
             </div>
           </div>

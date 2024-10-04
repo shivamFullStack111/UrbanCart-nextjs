@@ -2,7 +2,6 @@ import Footer from "@/app/components/Footer";
 import Header from "@/app/components/Header";
 import { dummyProduct } from "@/app/utils";
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { FaCartPlus } from "react-icons/fa";
 
@@ -22,18 +21,14 @@ const ProductDetail = () => {
           <div className=" h-full ml-2 py-9  overflow-y-scroll hide-scrollbar absolute z-30 ">
             {/* more images  */}
             {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-              <Link
-                href={`/product-detail/${i}`}
-                key={i}
-                className="w-20 mt-2 h-24 relative"
-              >
+              <div key={i} className="w-20 mt-2 h-24 relative">
                 <Image
                   alt="product"
                   className={`${i === 1 && "border-2 border-red-500"}`}
                   src={dummyProduct}
                   fill={true}
                 />
-              </Link>
+              </div>
             ))}
           </div>
         </div>
