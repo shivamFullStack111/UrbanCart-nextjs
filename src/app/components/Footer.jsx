@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { Jersey_25 } from "next/font/google";
 

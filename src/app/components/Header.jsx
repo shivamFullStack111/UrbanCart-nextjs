@@ -27,7 +27,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { BsHearts } from "react-icons/bs";
-import { dummyProducts } from "../utils";
+import { dummyProduct, dummyProducts } from "../utils";
 import dynamic from "next/dynamic";
 
 const Wishlist = dynamic(() => import("./Wishlist"), {
@@ -180,6 +180,23 @@ const Header = () => {
                   <div className="bg-violet-400 ml-3 border-black transition-all duration-400 hover:scale-105 text-white px-5 py-1 rounded-lg text-sm 1000px:text-lg font-semibold cursor-pointer hover:bg-gray-300 hover:text-black ">
                     Login
                   </div>
+
+                  <Link
+                    href="/profile"
+                    className={"flex flex-col items-center"}
+                  >
+                    <div className="relative h-[50px] border p-1 cursor-pointer border-violet-600 w-[50px] mt-2  rounded-full overflow-hidden bg-slate-500">
+                      <Image
+                        src={dummyProduct}
+                        alt="Product"
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </div>
+                    <p className="text-[10px] text-gray-500 font-semibold">
+                      john joe
+                    </p>
+                  </Link>
                 </div>
               </div>
             </div>

@@ -12,9 +12,6 @@ import Footer from "./components/Footer";
 import Image from "next/image";
 import { dummyProducts } from "./utils";
 import saleImage from "/src/app/images/sale.jpg";
-import { motion } from "framer-motion";
-import { useState } from "react";
-import { RxCross1 } from "react-icons/rx";
 
 const roboto = Quicksand({
   weight: ["400"],
