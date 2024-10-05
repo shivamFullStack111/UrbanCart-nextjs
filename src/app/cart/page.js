@@ -9,10 +9,12 @@ const Cart = () => {
   return (
     <>
       <Header />
-      <div className="h-full w-full flex  gap-3 justify-center  ">
-        <div className="w-[60%] flex justify-center">
-          <div className="w-[70%] px-3">
-            <p className="p-6 text-3xl font-semibold">My bag has (8) items</p>
+      <div className="h-full w-full flex flex-col 800px:flex-row  mt-14 gap-3 justify-center  ">
+        <div className="1400px:w-[60%] flex justify-center">
+          <div className="w-full 1400px:w-[70%]  px-3">
+            <p className="p-6 text-xl 800px:text-3xl font-semibold">
+              My bag has (8) items
+            </p>
             <p className="bg-yellow-200 mx-3 flex font-semibold justify-center items-center py-2 rounded-lg">
               Yay! you have free delivery
             </p>
@@ -21,30 +23,32 @@ const Cart = () => {
               <div
                 key={i}
                 className={
-                  "h-64 w-full flex hap-3 mt-9 items-center rounded-xl shadow-xl relative"
+                  "h-44 800px:h-52 1400px:h-62  w-full flex hap-3 mt-9 items-center rounded-xl shadow-xl relative"
                 }
               >
-                <RxCross1 className="text-3xl right-5 top-5 absolute hover:text-red-500 cursor-pointer" />
-                <div className="w-[170px] relative">
+                <RxCross1 className=" text-lg 800px:text-3xl right-5 top-5 absolute hover:text-red-500 cursor-pointer" />
+                <div className="w-[170px] h-full relative">
                   <Image
                     alt="product"
                     fill={true}
                     src={dummyProducts[0].images[0]}
                   />
                 </div>
-                <div className={"flex flex-col gap-2"}>
+                <div className={"flex flex-col  800px:gap-2"}>
                   <p className="text-yellow-400 font-semibold text-lg">
                     Bewakoof
                   </p>
-                  <p className="text-black font-bold text-xl">
+                  <p className="text-gray-700 font-bold text-lg 800px:text-xl">
                     Men Black Denim Jean Free style
                   </p>
-                  <p className="text-gray-500 font-semibold text-lg">
+                  <p className="text-gray-500 font-semibold 800px:text-lg">
                     FREE SHIPPING
                   </p>
                   <div className={"flex gap-4 "}>
-                    <p className="text-gray-900  font-semibold text-xl">$83</p>
-                    <p className="text-gray-400 line-through font-semibold text-2xl">
+                    <p className="text-gray-900  font-semibold text-lg 800px:text-xl">
+                      $83
+                    </p>
+                    <p className="text-gray-400 line-through font-semibold  800px:text-2xl">
                       $129
                     </p>
                   </div>
@@ -54,8 +58,8 @@ const Cart = () => {
           </div>
         </div>
 
-        <div className="w-[40%] mt-20 flex flex-col items-center  gap-3">
-          <div className="p-3 shadow-lg rounded-lg w-[80%]">
+        <div className="w-full 800px:w-[40%] mt-6 800px:mt-20 flex flex-col items-center  gap-3">
+          <div className="p-3 shadow-lg rounded-lg w-[90%] 1400px:w-[80%]">
             <p className="font-semibold test-gray-600 ">Coupons & Offers</p>
             <div className="flex gap-2 items-center">
               <Image
@@ -76,7 +80,7 @@ const Cart = () => {
               <p className={"text-blue-400 underline text-lg ml-auto "}>view</p>
             </div>
           </div>
-          <div className="rounded-lg shadow-lg p-3 w-[80%]">
+          <div className="rounded-lg shadow-lg p-3  w-[90%]  1400px:w-[80%]">
             <p
               className={
                 "text-lg font-serif tracking-widest mb-4 font-semibold text-black"

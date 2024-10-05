@@ -27,6 +27,12 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { BsHearts } from "react-icons/bs";
+import { dummyProducts } from "../utils";
+import dynamic from "next/dynamic";
+
+const Wishlist = dynamic(() => import("./Wishlist"), {
+  ssr: false, // Isko server side render nahi karna chahte
+});
 
 const Abril = Abril_Fatface({
   weight: ["400"],
@@ -44,21 +50,11 @@ const Header = () => {
   return (
     <>
       <div className="w-full overflow-x-hidden">
-        <motion.div
-          initial={{ x: 1000, opacity: 0 }}
-          animate={{
-            x: isWishlistOpen ? 0 : 1000,
-            opacity: isWishlistOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.4 }}
-          className="h-full w-full 500px:w-[500px] z-50  bg-white fixed top-0 right-0"
-        >
-          <RxCross1
-            onClick={() => setisWishlistOpen(false)}
-            size={30}
-            className="m-4 cursor-pointer hover:scale-105 "
-          />
-        </motion.div>
+        {/* wishlist  */}
+        <Wishlist
+          isWishlistOpen={isWishlistOpen}
+          setisWishlistOpen={setisWishlistOpen}
+        />
 
         {/* mobile animated slider of side bar */}
         <motion.div
@@ -165,25 +161,25 @@ const Header = () => {
                     onBlur={() => setisFousOnSearch(false)}
                   />
                 </div>
-                <div className="ml-[3vw] mr-[10vw] gap-3 flex items-center">
-                  <div className="bg-black border-2 border-black transition-all duration-400 hover:scale-105 text-white px-5 py-1 rounded-lg text-sm 1000px:text-lg font-semibold cursor-pointer hover:bg-white hover:text-black ">
-                    Login
-                  </div>
-
+                <div className="ml-[3vw] mr-[5vw] gap-4 flex items-center">
                   <div
                     onClick={() => setisWishlistOpen(true)}
-                    className="flex flex-col items-center ml-[3vw] text-red-500 cursor-pointer hover hover:text-gray-500"
+                    className="flex flex-col items-center ml-[3vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
                   >
                     <CiHeart size={30} />
                     <p className="text-sm font-medium">Wishlist</p>
                   </div>
                   <Link
                     href={"/cart"}
-                    className="flex flex-col items-center ml-[1vw] text-black cursor-pointer hover hover:text-gray-500"
+                    className="flex flex-col items-center ml-[1vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
                   >
                     <GiShoppingBag size={30} />
                     <p className="text-sm font-medium">Cart</p>
                   </Link>
+
+                  <div className="bg-violet-400 ml-3 border-black transition-all duration-400 hover:scale-105 text-white px-5 py-1 rounded-lg text-sm 1000px:text-lg font-semibold cursor-pointer hover:bg-gray-300 hover:text-black ">
+                    Login
+                  </div>
                 </div>
               </div>
             </div>
@@ -202,7 +198,10 @@ const Header = () => {
                 <Link href="/cart">
                   <IoBagHandleSharp className="text-[25px]" />
                 </Link>
-                <FaRegHeart className="text-[23px] text-gray-500" />
+                <FaRegHeart
+                  onClick={() => setisWishlistOpen(true)}
+                  className="text-[23px] text-gray-500"
+                />
               </div>
             </div>
 
