@@ -4,6 +4,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import Swiper styles
 import Image from "next/image";
 import logo from "../images/companyLogo.png";
+import { dummyProducts } from "../utils";
 
 const CarOusal = () => {
   const [windowSize, setWindowSize] = useState({
@@ -44,25 +45,24 @@ const CarOusal = () => {
   }, []);
 
   return (
-    <div className="mb-4 mt pt-2">
-      <h2 className=" text-xl 800px:text-2xl p-2 700px:text-3xl 800px:p-5 text-gray-600  font-bold">
+    <div className="mb-4 mt pt-2 bg-gray-300 mt-6 pb-10">
+      <h2 className=" text-xl 800px:text-2xl p-2 pt-0 700px:text-3xl 800px:p-5 text-gray-600  font-bold">
         Most Rated Products
       </h2>
       <Swiper
         autoPlay={true}
-        className="h-[280px] 500px:h-[350px] 800px:h-[400px] 1200px:h-[450px] "
+        className="h-[280px] 500px:h-[350px] 600px:h-[280px] 750px:h-[320px] 800px:h-[290px] 1000px:h-[320px]  1200px:h-[360px] "
         slidesPerView={slidesNo} // Use the dynamic slidesNo
         onSlideChange={() => console.log("slide change")}
         onSwiper={(swiper) => console.log(swiper)}
         spaceBetween={slidesNo > 3 ? 7 : 3}
       >
-        {Array.from({ length: 20 }).map((_, i) => (
-          <SwiperSlide key={i} className="border-[1px] ">
+        {dummyProducts.map((item, i) => (
+          <SwiperSlide key={i} className="border-[1px]  bg-white ">
             <div className="relative h-[80%]">
               <Image
-                src={
-                  "https://images.meesho.com/images/products/390809139/nijaf_400.webp"
-                }
+                src={item.images[0]}
+                className="hover:scale-125 transition-all duration-500"
                 fill={true}
                 alt="Slide 1"
               />

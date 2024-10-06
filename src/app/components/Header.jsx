@@ -88,18 +88,19 @@ const Header = () => {
           {/* navigation and functionality of side bar */}
 
           <div className="flex flex-col p-2 gap-1 px-3  ">
-            {navigations?.map((i) => (
-              <div
+            {navigations?.map((item, i) => (
+              <Link
+                href={"/"}
                 key={i}
                 className="flex items-center justify-between p-3 rounded-xl cursor-pointer hover:bg-gray-200"
               >
                 <div className="flex gap-2 items-center  ">
-                  {i?.icon}
-                  <p className="font-semibold">{i?.title}</p>
+                  {item?.icon}
+                  <p className="font-semibold">{item?.title}</p>
                 </div>
 
                 <FaChevronRight />
-              </div>
+              </Link>
             ))}
           </div>
         </motion.div>
@@ -248,30 +249,44 @@ const cat = ["MENS", "WOMENS", "KIDS", "LOWER", "UPPER", "SAREE", "SHOES"];
 const navigations = [
   {
     title: "Home",
+
+    to: "/",
     icon: <FaHome size={30} className="text-red-500" />,
   },
   {
     title: "Products",
+
+    to: "/products",
     icon: <IoBagHandle size={30} className="text-red-500" />,
   },
   {
     title: "Wishlist",
+
+    to: "/",
     icon: <BsHearts size={30} className="text-red-500" />,
   },
   {
     title: "My Orders",
+
+    to: "/profile/my-orders",
     icon: <FaBoxesPacking size={30} className="text-red-500" />,
   },
   {
     title: "My Cart",
+
+    to: "/cart",
     icon: <IoBagHandle size={30} className="text-red-500" />,
   },
   {
     title: "Profile",
+
+    to: "/profile",
     icon: <FaUser size={30} className="text-red-500" />,
   },
   {
     title: "Log Out",
+
+    to: "/",
     icon: <IoLogOutSharp size={30} className="text-red-500" />,
   },
 ];

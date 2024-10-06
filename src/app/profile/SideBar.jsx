@@ -32,6 +32,11 @@ const navigations = [
     icon: <PiCardsFill />,
     to: "/profile/live-orders",
   },
+  {
+    name: "Create Product",
+    icon: <PiCardsFill />,
+    to: "/profile/create-product",
+  },
 ];
 
 const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {

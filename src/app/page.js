@@ -3,10 +3,8 @@ import React from "react";
 
 import Head from "next/head"; // Import the Head component
 import Header from "./components/Header";
-import CarOusal from "./components/Carousal";
 import SaleBanner from "./components/SaleBanner";
-import Banner from "./components/Banner";
-import { Roboto, ABeeZee, Quicksand } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import LowwersCarousel from "./components/LowwersCarousel";
 import Footer from "./components/Footer";
 import Image from "next/image";
@@ -82,14 +80,14 @@ const Home = () => {
       <SaleBanner />
 
       <LowwersCarousel />
-      <p className="text-xl 800px:text-2xl font-bold text-gray-600 px-3 mb-2 800px:p-7 pt-1 animate-pulse">
+      <p className="text-xl 800px:text-2xl  font-bold text-gray-600 px-3 mb-2 800px:p-7 pt-1 animate-pulse">
         New Arrival
       </p>
-      <div className="flex mt-2 flex-wrap justify-center w-full">
+      <div className="flex mt-2 flex-wrap justify-center bg-gray-200 w-full">
         {dummyProducts.slice(6, 12)?.map((item, i) => (
           <div
             key={i}
-            className="h-64 bg-gray-200 border-2 border-white w-[48%] 500px:h-72 600px:h-68 600px:w-[32%] 800px:w-[37%] 900px:w-[30%] 900px:h-72 1050px:w-[32%] 1050px:h-80 1300px:h-[400px] 1500px:w-[25%]  1750px:h-[420] 1950px:h-[440] 2000px:h-[460px]"
+            className="h-64 cursor-pointer  border-2 border-white w-[48%] 500px:h-72 600px:h-68 600px:w-[32%] 800px:w-[37%] 900px:w-[30%] 900px:h-72 1050px:w-[32%] 1050px:h-80 1300px:h-[400px] 1500px:w-[25%]  1750px:h-[420] 1950px:h-[440] 2000px:h-[460px]"
           >
             <div className="w-full h-[70%] 800px:h-[80%] relative">
               <Image
@@ -97,6 +95,7 @@ const Home = () => {
                 alt="Product image"
                 src={item?.images[0]}
                 fill="true"
+                className="hover:scale-125 transition-all duration-500"
               />
             </div>
             <div className="px-2">
