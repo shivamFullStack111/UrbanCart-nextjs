@@ -63,11 +63,12 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
       <motion.div
         initial={{ height: 0, paddingTop: 0 }}
         animate={{
-          height: isSideBarOpen ? "70vh" : 0,
+          height: isSideBarOpen ? "auto" : 0,
           paddingTop: isSideBarOpen ? 20 : 0,
         }}
         transition={{ duration: 0.3 }}
-        className=" block  h-[70vh] overflow-hidden 800px:hidden w-full px-3 400px:px-10 600px:px-20   bg-green-200  "
+        style={{ paddingBottom: isSideBarOpen ? 10 : 0 }}
+        className=" block  h-auto overflow-hidden 800px:hidden w-full px-3 400px:px-10 600px:px-20   bg-green-200  "
       >
         {/* profile  */}
         <div className="flex mt-4 items-center bg-white py-2 px-2 rounded-xl gap-3">

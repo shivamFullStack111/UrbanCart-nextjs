@@ -232,7 +232,7 @@ const Header = () => {
                 </Link>
                 <FaRegHeart
                   onClick={() => setisWishlistOpen(true)}
-                  className="text-[23px] text-gray-500"
+                  className="text-[23px] cursor-pointer text-gray-500"
                 />
               </div>
             </div>
