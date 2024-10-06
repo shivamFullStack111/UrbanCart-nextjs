@@ -6,8 +6,12 @@ import React from "react";
 import { IoReorderThreeOutline } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { dummyProducts } from "../utils";
+import { useEffect } from "react";
 
-const Wishlist = ({ setisWishlistOpen, isWishlistOpen = false }) => {
+const Wishlist = ({ setisWishlistOpen, isWishlistOpen }) => {
+  useEffect(() => {
+    console.log("isWishlistOpen:", isWishlistOpen);
+  }, []);
   return (
     <motion.div
       initial={{ x: 3000 }}

@@ -2,33 +2,27 @@
 import Image from "next/image";
 import React from "react";
 import companyLogo from "../images/companyLogo.png";
-import { Inter, Roboto_Mono, Roboto, Abril_Fatface } from "next/font/google";
+import { Abril_Fatface } from "next/font/google";
 import { CiHeart, CiSearch } from "react-icons/ci";
 import { useState } from "react";
 import { GiShoppingBag } from "react-icons/gi";
 import {
   IoBagHandle,
-  IoLogOutOutline,
   IoLogOutSharp,
   IoReorderThreeOutline,
   IoSearchOutline,
 } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import { IoBagHandleSharp } from "react-icons/io5";
-import {
-  FaArrowRight,
-  FaChevronRight,
-  FaHome,
-  FaRegHeart,
-  FaUser,
-} from "react-icons/fa";
+import { FaChevronRight, FaHome, FaRegHeart, FaUser } from "react-icons/fa";
 import { FaBoxesPacking } from "react-icons/fa6";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
 import { BsHearts } from "react-icons/bs";
-import { dummyProduct, dummyProducts } from "../utils";
+import { dummyProduct } from "../utils";
 import dynamic from "next/dynamic";
+import { useEffect } from "react";
 
 const Wishlist = dynamic(() => import("./Wishlist"), {
   ssr: false, // Isko server side render nahi karna chahte
@@ -46,6 +40,12 @@ const Header = () => {
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
 
   const [isWishlistOpen, setisWishlistOpen] = useState(false);
+
+  useEffect(() => {
+    console.log("isFousOnSearch:", isFousOnSearch);
+    console.log("isSideBarOpen:", isSideBarOpen);
+    console.log("isWishlistOpen:", isWishlistOpen);
+  }, []);
 
   return (
     <>
@@ -76,7 +76,7 @@ const Header = () => {
                 fill={true}
                 alt="profile"
                 className="bg-cyan-200 rounded-full"
-                // src={"j"}
+                src={dummyProduct}
               ></Image>
             </div>
             <div>
@@ -90,7 +90,7 @@ const Header = () => {
           <div className="flex flex-col p-2 gap-1 px-3  ">
             {navigations?.map((item, i) => (
               <Link
-                href={"/"}
+                href={item?.to}
                 key={i}
                 className="flex items-center justify-between p-3 rounded-xl cursor-pointer hover:bg-gray-200"
               >
@@ -102,6 +102,20 @@ const Header = () => {
                 <FaChevronRight />
               </Link>
             ))}
+
+            <div
+              onClick={() => {
+                alert("log out");
+              }}
+              className="flex items-center justify-between p-3 rounded-xl cursor-pointer hover:bg-gray-200"
+            >
+              <div className="flex gap-2 items-center  ">
+                <IoLogOutSharp size={30} className="text-red-500" />
+                <p className="font-semibold">Log Out </p>
+              </div>
+
+              <FaChevronRight />
+            </div>
           </div>
         </motion.div>
         <div className="block h-12  800px:h-16">
@@ -260,12 +274,6 @@ const navigations = [
     icon: <IoBagHandle size={30} className="text-red-500" />,
   },
   {
-    title: "Wishlist",
-
-    to: "/",
-    icon: <BsHearts size={30} className="text-red-500" />,
-  },
-  {
     title: "My Orders",
 
     to: "/profile/my-orders",
@@ -282,11 +290,5 @@ const navigations = [
 
     to: "/profile",
     icon: <FaUser size={30} className="text-red-500" />,
-  },
-  {
-    title: "Log Out",
-
-    to: "/",
-    icon: <IoLogOutSharp size={30} className="text-red-500" />,
   },
 ];

@@ -6,7 +6,7 @@ const Banner = () => {
   return (
     <>
       <div className="h-12 700px:h-32  1000px:h-52 relative">
-        <Image className='' src={banner} alt="banner" fill={true}></Image>
+        <Image className="" src={banner} alt="banner" fill={true}></Image>
       </div>
     </>
   );

@@ -61,7 +61,7 @@ const CarOusal = () => {
           <SwiperSlide key={i} className="border-[1px]  bg-white ">
             <div className="relative h-[80%]">
               <Image
-                src={item.images[0]}
+                src={item?.images[0]}
                 className="hover:scale-125 transition-all duration-500"
                 fill={true}
                 alt="Slide 1"
