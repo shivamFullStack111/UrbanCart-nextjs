@@ -1654,3 +1654,256 @@ export const dummyProducts = [
       "https://cdn.dummyjson.com/products/images/groceries/Kiwi/thumbnail.png",
   },
 ];
+
+export const clothCategories = [
+  {
+    name: "Clothing",
+    subcategories: [
+      {
+        name: "Men",
+        types: [
+          "T-Shirts",
+          "Polo Shirts",
+          "Casual Shirts",
+          "Formal Shirts",
+          "Jeans",
+          "Chinos",
+          "Trousers",
+          "Shorts",
+          "Jackets",
+          "Coats",
+          "Sweaters",
+          "Hoodies",
+          "Activewear",
+          "Suits",
+          "Sleepwear",
+          "Underwear",
+          "Swimwear",
+          "Vests",
+        ],
+      },
+      {
+        name: "Women",
+        types: [
+          "T-Shirts",
+          "Tank Tops",
+          "Blouses",
+          "Casual Shirts",
+          "Dresses",
+          "Maxi Dresses",
+          "Skirts",
+          "Jeans",
+          "Leggings",
+          "Trousers",
+          "Shorts",
+          "Activewear",
+          "Cardigans",
+          "Jackets",
+          "Coats",
+          "Sweaters",
+          "Jumpsuits",
+          "Romper",
+          "Sleepwear",
+          "Loungewear",
+          "Underwear",
+          "Swimwear",
+        ],
+      },
+      {
+        name: "Kids",
+        subcategories: [
+          {
+            name: "Boys",
+            types: [
+              "T-Shirts",
+              "Polo Shirts",
+              "Casual Shirts",
+              "Shorts",
+              "Jeans",
+              "Trousers",
+              "Sweaters",
+              "Hoodies",
+              "Jackets",
+              "Activewear",
+              "Sleepwear",
+              "Swimwear",
+              "Underwear",
+            ],
+          },
+          {
+            name: "Girls",
+            types: [
+              "T-Shirts",
+              "Tank Tops",
+              "Blouses",
+              "Dresses",
+              "Skirts",
+              "Leggings",
+              "Jeans",
+              "Trousers",
+              "Shorts",
+              "Activewear",
+              "Jackets",
+              "Cardigans",
+              "Sweaters",
+              "Sleepwear",
+              "Swimwear",
+              "Underwear",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+  {
+    name: "Footwear",
+    subcategories: [
+      {
+        name: "Men",
+        types: [
+          "Casual Shoes",
+          "Formal Shoes",
+          "Loafers",
+          "Oxfords",
+          "Sneakers",
+          "Sports Shoes",
+          "Sandals",
+          "Boots",
+          "Chukka Boots",
+          "Dress Boots",
+          "Slippers",
+        ],
+      },
+      {
+        name: "Women",
+        types: [
+          "Heels",
+          "Flats",
+          "Ballet Flats",
+          "Sneakers",
+          "Sandals",
+          "Boots",
+          "Ankle Boots",
+          "Wedges",
+          "Loafers",
+          "Slippers",
+          "Flip Flops",
+        ],
+      },
+      {
+        name: "Kids",
+        subcategories: [
+          {
+            name: "Boys",
+            types: [
+              "Sneakers",
+              "Casual Shoes",
+              "Sandals",
+              "Boots",
+              "Loafers",
+              "Slippers",
+            ],
+          },
+          {
+            name: "Girls",
+            types: [
+              "Sneakers",
+              "Flats",
+              "Ballet Flats",
+              "Sandals",
+              "Boots",
+              "Heels",
+              "Slippers",
+            ],
+          },
+        ],
+      },
+    ],
+  },
+];
+
+{
+  /*Step 1: Basic Product Information
+Fields:
+
+Product Name:
+
+Type: Text Input
+Placeholder: "Enter product name"
+Category:
+
+Type: Dropdown
+Options:
+Clothing
+Footwear
+Subcategory:
+
+Type: Dropdown
+Options (dependent on selected category):
+For Clothing:
+Men
+Women
+Kids
+For Footwear:
+Men
+Women
+Kids
+Type:
+
+Type: Dropdown
+Options (dependent on selected subcategory):
+Men:
+T-Shirts
+Shirts
+Jeans
+Trousers
+Shorts
+Jackets
+Activewear
+Women:
+T-Shirts
+Tops
+Dresses
+Skirts
+Jeans
+Trousers
+Activewear
+Kids (Boys):
+T-Shirts
+Shorts
+Jeans
+Jackets
+Kids (Girls):
+T-Shirts
+Dresses
+Skirts
+Leggings
+Brand:
+
+Type: Text Input
+Placeholder: "Enter brand name"
+SKU (Stock Keeping Unit):
+
+Type: Text Input
+Placeholder: "Enter SKU"
+Price:
+
+Type: Number Input
+Placeholder: "Enter price"
+Validation: Must be a positive number
+Quantity in Stock:
+
+Type: Number Input
+Placeholder: "Enter quantity"
+Validation: Must be a non-negative integer
+Description:
+
+Type: Textarea
+Placeholder: "Enter product description"
+Validation: Optional field
+Upload Product Image:
+
+Type: File Input
+Accept: "image/*"
+Description: "Upload main product image" */
+}

@@ -11,6 +11,7 @@
   "dependencies": {
     "@coreui/icons": "^3.0.1",
     "@coreui/icons-react": "^2.3.0",
+    "@nextui-org/dropdown": "^2.1.31",
     "@nextui-org/react": "^2.4.8",
     "@nextui-org/slider": "^2.2.17",
     "axios": "^1.7.7",
