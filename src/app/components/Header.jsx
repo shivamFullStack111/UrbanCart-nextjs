@@ -108,12 +108,12 @@ const Header = () => {
           <div className="max-800px:hidden fixed z-40 bg-white">
             <div
               className={
-                "flex items-center    justify-between   border-b-[1px] border-gray-300 w-[100vw] py-2 h-20"
+                "flex items-center    justify-between   border-b-[1px] border-gray-300 w-[100vw] py-2 h-[70px]"
               }
             >
               <Link
                 href="/"
-                className="flex items-center text-[160%] font-bold"
+                className="flex items-center text-[140%] font-bold"
               >
                 <Image
                   height={60}
@@ -128,19 +128,19 @@ const Header = () => {
               <div className="flex max-1000px:hidden gap-5 ">
                 <Link
                   href="/products?c=MEN"
-                  className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] "
+                  className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[14px] "
                 >
                   MEN
                 </Link>
                 <Link
                   href="/products?c=WOMEN"
-                  className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] "
+                  className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[14px] "
                 >
                   WOMEN
                 </Link>
                 <Link
                   href="/products?c=KIDS"
-                  className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[16px] "
+                  className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[14px] "
                 >
                   KIDS
                 </Link>
@@ -166,14 +166,14 @@ const Header = () => {
                     onClick={() => setisWishlistOpen(true)}
                     className="flex flex-col items-center ml-[3vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
                   >
-                    <CiHeart size={30} />
+                    <CiHeart size={25} />
                     <p className="text-sm font-medium">Wishlist</p>
                   </div>
                   <Link
                     href={"/cart"}
                     className="flex flex-col items-center ml-[1vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
                   >
-                    <GiShoppingBag size={30} />
+                    <GiShoppingBag size={25} />
                     <p className="text-sm font-medium">Cart</p>
                   </Link>
 
@@ -185,7 +185,7 @@ const Header = () => {
                     href="/profile"
                     className={"flex flex-col items-center"}
                   >
-                    <div className="relative h-[50px] border p-1 cursor-pointer border-violet-600 w-[50px] mt-2  rounded-full overflow-hidden bg-slate-500">
+                    <div className="relative h-[40px] border p-1 cursor-pointer border-violet-600 w-[40px] mt-2  rounded-full overflow-hidden bg-slate-500">
                       <Image
                         src={dummyProduct}
                         alt="Product"
