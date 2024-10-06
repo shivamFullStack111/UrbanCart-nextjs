@@ -1822,88 +1822,114 @@ export const clothCategories = [
   },
 ];
 
-{
-  /*Step 1: Basic Product Information
-Fields:
+// Sizes for Clothing
+const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 
-Product Name:
+// Sizes for Footwear (Men)
+const menFootwearSizes = [6, 7, 8, 9, 10, 11, 12];
 
-Type: Text Input
-Placeholder: "Enter product name"
-Category:
+// Sizes for Footwear (Women)
+const womenFootwearSizes = [4, 5, 6, 7, 8, 9, 10];
 
-Type: Dropdown
-Options:
-Clothing
-Footwear
-Subcategory:
+// Sizes for Footwear (Kids)
+const kidsFootwearSizes = [2, 3, 4, 5, 6, 7, 8];
 
-Type: Dropdown
-Options (dependent on selected category):
-For Clothing:
-Men
-Women
-Kids
-For Footwear:
-Men
-Women
-Kids
-Type:
+// Colors for Clothing and Footwear
+const colors = [
+  "Red",
+  "Blue",
+  "Green",
+  "Black",
+  "White",
+  "Yellow",
+  "Pink",
+  "Purple",
+  "Brown",
+  "Orange",
+  "Grey",
+  "Navy",
+];
 
-Type: Dropdown
-Options (dependent on selected subcategory):
-Men:
-T-Shirts
-Shirts
-Jeans
-Trousers
-Shorts
-Jackets
-Activewear
-Women:
-T-Shirts
-Tops
-Dresses
-Skirts
-Jeans
-Trousers
-Activewear
-Kids (Boys):
-T-Shirts
-Shorts
-Jeans
-Jackets
-Kids (Girls):
-T-Shirts
-Dresses
-Skirts
-Leggings
-Brand:
+// Materials for Clothing
+const clothingMaterials = [
+  "Cotton",
+  "Wool",
+  "Polyester",
+  "Linen",
+  "Silk",
+  "Denim",
+  "Rayon",
+  "Nylon",
+  "Leather",
+  "Synthetic",
+];
 
-Type: Text Input
-Placeholder: "Enter brand name"
-SKU (Stock Keeping Unit):
+// Materials for Footwear
+const footwearMaterials = [
+  "Leather",
+  "Synthetic Leather",
+  "Suede",
+  "Canvas",
+  "Rubber",
+  "Textile",
+  "Mesh",
+];
 
-Type: Text Input
-Placeholder: "Enter SKU"
-Price:
+// Fit Types for Clothing
+const fitTypes = [
+  "Slim Fit",
+  "Regular Fit",
+  "Loose Fit",
+  "Relaxed Fit",
+  "Skinny Fit",
+  "Straight Fit",
+];
 
-Type: Number Input
-Placeholder: "Enter price"
-Validation: Must be a positive number
-Quantity in Stock:
+// Patterns for Clothing
+const patterns = [
+  "Solid",
+  "Printed",
+  "Striped",
+  "Checked",
+  "Floral",
+  "Embroidered",
+  "Polka Dots",
+];
 
-Type: Number Input
-Placeholder: "Enter quantity"
-Validation: Must be a non-negative integer
-Description:
+// Sleeve Types for Tops
+const sleeveTypes = [
+  "Sleeveless",
+  "Half Sleeve",
+  "Full Sleeve",
+  "Three-Quarter Sleeve",
+  "Cap Sleeve",
+];
 
-Type: Textarea
-Placeholder: "Enter product description"
-Validation: Optional field
-Upload Product Image:
+// Neck Styles for Tops and Dresses
+const neckStyles = [
+  "Round Neck",
+  "V-Neck",
+  "Collared",
+  "Boat Neck",
+  "Halter Neck",
+  "Off-Shoulder",
+];
 
-Type: File Input
-Accept: "image/*"
-Description: "Upload main product image" */
-}
+// Sole Materials for Footwear
+const soleMaterials = ["Rubber", "PU", "Leather", "EVA", "PVC", "TPR"];
+
+// Heel Heights for Footwear
+const heelHeights = [
+  "Flat",
+  "Low (1-2 inches)",
+  "Medium (2-3 inches)",
+  "High (3-4 inches)",
+  "Very High (4+ inches)",
+];
+
+// Example of how to use in a dropdown
+// <select>
+//   {sizes.map(size => (
+//     <option key={size} value={size}>{size}</option>
+//   ))}
+// </select>
