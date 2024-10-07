@@ -557,13 +557,13 @@ Leggings
                     {/* Product Name */}
                     <div>
                       <p className="text-gray-500 font-medium">Product Name</p>
-                      <p className="text-gray-700">Men's T-shirt</p>
+                      <p className="text-gray-700">Mens T-shirt</p>
                     </div>
 
                     {/* Category */}
                     <div>
                       <p className="text-gray-500 font-medium">Category</p>
-                      <p className="text-gray-700">Men's Clothing</p>
+                      <p className="text-gray-700">Mens Clothing</p>
                     </div>
 
                     {/* Type */}
