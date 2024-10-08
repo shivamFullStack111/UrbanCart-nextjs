@@ -1,24 +1,45 @@
 import { dbConnect } from "@/lib/dbConnect";
 import User from "@/models/User";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 export async function POST(req) {
   try {
     await dbConnect();
 
-    // Await the JSON parsing
-    const body = await req.json();
-    console.log("Request body:", body);
+    const { name, email, phoneNumber, password } = await req.json();
 
-    // Create a new user
-    const newUser = new User(body);
+    if (!email || !name || !phoneNumber || !password) {
+      return new Response(
+        JSON.stringify({ message: "all field are required", success: false })
+      );
+    }
 
-    // Save the new user to the database
+    const isExist = await User.findOne({ email: email });
+
+    if (isExist) {
+      return new Response(
+        JSON.stringify({ message: "email already registered", success: false })
+      );
+    }
+
+    const hashpass = await bcrypt.hash(password, 10);
+
+    const newUser = new User({
+      name: name,
+      email: email,
+      password: hashpass,
+      phoneNumber,
+    });
+
     await newUser.save();
 
-    // Return a success response
     return new Response(
-      JSON.stringify({ success: true, message: "Registration successful" }),
-      { status: 201 } // 201 Created status
+      JSON.stringify({
+        message: "registration successfull ",
+        success: true,
+        user: newUser,
+      })
     );
   } catch (error) {
     console.error("Error occurred:", error); // Log error for debugging
