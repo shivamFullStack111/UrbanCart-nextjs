@@ -4,6 +4,7 @@ import { IoMail } from "react-icons/io5";
 import { FaPhoneAlt } from "react-icons/fa";
 import { TbPasswordFingerprint } from "react-icons/tb";
 const Login = () => {
+  const [error, seterror] = useState(false);
   return (
     <>
       <div
