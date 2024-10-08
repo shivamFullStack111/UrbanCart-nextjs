@@ -11,3 +11,15 @@
 .hide-scrollbar::-webkit-scrollbar {
   display: none; /* Chrome, Safari, and Opera */
 }
+.inputremove {
+  /* Chrome, Safari, Edge, Opera */
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+.inputremove::-webkit-outer-spin-button,
+.inputremove::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
