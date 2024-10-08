@@ -1,3 +1,4 @@
+import { JWT_SECRET } from "@/app/utils";
 import { dbConnect } from "@/lib/dbConnect";
 import User from "@/models/User";
 import bcrypt from "bcrypt";
@@ -32,6 +33,10 @@ export async function POST(req) {
       phoneNumber,
     });
 
+    const token = await jwt.sign({ user: newUser }, JWT_SECRET, {
+      expiresIn: "90d",
+    });
+
     await newUser.save();
 
     return new Response(
@@ -39,6 +44,7 @@ export async function POST(req) {
         message: "registration successfull ",
         success: true,
         user: newUser,
+        token,
       })
     );
   } catch (error) {

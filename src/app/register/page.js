@@ -7,8 +7,9 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { TbPasswordFingerprint } from "react-icons/tb";
 import { useState } from "react";
 import axios from "axios";
+import Link from "next/link";
 
-const Login = () => {
+const Register = () => {
   const [data, setdata] = useState({
     name: "",
     email: "",
@@ -24,12 +25,12 @@ const Login = () => {
       return seterror("Please fill all the fields");
     }
 
-    const res = await axios.post("http://localhost:3000/api/register", data);
-    alert(res.data.message);
-    console.log(res.data);
-
     try {
-      console.log(data);
+      const res = await axios.post("/api/register", data);
+      alert(res.data.message);
+      console.log(res.data);
+
+      alert(res.data?.message);
     } catch (error) {
       console.log(error.message);
     }
@@ -138,7 +139,9 @@ const Login = () => {
             </div>
             <div className="flex gap-1 text-gray-500 font-semibold ">
               <p>Already have an account? </p>
-              <p className="cursor-pointer text-blue-400">Sign in</p>
+              <Link href={"/login"} className="cursor-pointer text-blue-400">
+                Sign in
+              </Link>
             </div>
           </div>
         </div>
@@ -147,4 +150,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;

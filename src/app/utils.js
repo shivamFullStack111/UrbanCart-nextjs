@@ -1933,3 +1933,6 @@ const heelHeights = [
 //     <option key={size} value={size}>{size}</option>
 //   ))}
 // </select>
+
+// ?backend ..............................................................................
+export const JWT_SECRET = "hgvbhjbkjbvhjbhvngcghch";
