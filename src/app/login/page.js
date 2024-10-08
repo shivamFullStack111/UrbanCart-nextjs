@@ -8,20 +8,27 @@ import { TbPasswordFingerprint } from "react-icons/tb";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import toast, { Toaster } from "react-hot-toast";
+import { setUser } from "@/store/slices/userSlice";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter();
   const [data, setdata] = useState({
     email: "",
     phoneNumber: "",
   });
   const [error, seterror] = useState("");
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
+  // useEffect(() => {
+  //   if (user) {
+  //     router.push("/");
+  //   }
+  // }, [user]);
 
   const handleSubmit = async () => {
     seterror("");
@@ -32,9 +39,14 @@ const Login = () => {
 
     try {
       const res = await axios.post("/api/login", data);
-      alert(res.data.message);
       console.log(res.data);
-      alert(res.data?.message);
+      if (res.data.success) {
+        toast.success(res.data.message);
+        dispatch(setUser(res.data?.user));
+        localStorage.setItem("token_urbancart", res.data?.token);
+      } else {
+        toast.error(res.data.message);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -42,6 +54,7 @@ const Login = () => {
 
   return (
     <>
+      <Toaster />
       <div
         className={
           "flex justify-center items-center bg-gradient-to-r  from-blue-400 to-blue-700 w-full min-h-[100vh]"

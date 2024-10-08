@@ -8,6 +8,7 @@ import { TbPasswordFingerprint } from "react-icons/tb";
 import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = () => {
   const [data, setdata] = useState({
@@ -27,10 +28,17 @@ const Register = () => {
 
     try {
       const res = await axios.post("/api/register", data);
-      alert(res.data.message);
       console.log(res.data);
 
-      alert(res.data?.message);
+      if (res.data.success) {
+        toast.success(res.data.message);
+
+        toast.success(res.data.message);
+        dispatch(setUser(res.data?.user));
+        localStorage.setItem("token_urbancart", res.data?.token);
+      } else {
+        toast.error(res.data.message);
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -38,6 +46,7 @@ const Register = () => {
 
   return (
     <>
+      <Toaster />
       <div
         className={
           "flex justify-center items-center bg-gradient-to-r  from-blue-400 to-blue-700 w-full min-h-[100vh]"

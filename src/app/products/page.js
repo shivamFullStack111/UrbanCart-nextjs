@@ -74,9 +74,7 @@ const ProductsContent = () => {
                 <p className="text-sm 800px:text-lg font-semibold">
                   ${item?.price}
                 </p>
-                <p className="text-sm font-semibold line-through">
-                  ${Math.floor(item?.price * (1 + Math.random()))}
-                </p>
+                <p className="text-sm font-semibold line-through">4839</p>
               </div>
               <p className="bg-green-500 px-2 py-1 text-sm 1000px:text-lg rounded-xl text-white animate-bounce">
                 13% off
