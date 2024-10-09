@@ -13,6 +13,7 @@ import { useEffect } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { setUser } from "@/store/slices/userSlice";
 import { useRouter } from "next/navigation";
+import Cookies from "js-cookie";
 
 const Login = () => {
   const router = useRouter();
@@ -44,6 +45,7 @@ const Login = () => {
         toast.success(res.data.message);
         dispatch(setUser(res.data?.user));
         localStorage.setItem("token_urbancart", res.data?.token);
+        Cookies.set("token_urbancart", res.data?.token);
       } else {
         toast.error(res.data.message);
       }

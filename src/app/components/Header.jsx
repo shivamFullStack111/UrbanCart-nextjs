@@ -23,6 +23,7 @@ import { BsHearts } from "react-icons/bs";
 import { dummyProduct } from "../utils";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
 
 const Wishlist = dynamic(() => import("./Wishlist"), {
   ssr: false, // Isko server side render nahi karna chahte
@@ -38,6 +39,7 @@ const Abril = Abril_Fatface({
 const Header = () => {
   const [isFousOnSearch, setisFousOnSearch] = useState(false);
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
+  const { user } = useSelector((state) => state.user);
 
   const [isWishlistOpen, setisWishlistOpen] = useState(false);
 
@@ -192,26 +194,28 @@ const Header = () => {
                     <p className="text-sm font-medium">Cart</p>
                   </Link>
 
-                  <div className="bg-violet-400 ml-3 border-black transition-all duration-400 hover:scale-105 text-white px-5 py-1 rounded-lg text-sm 1000px:text-lg font-semibold cursor-pointer hover:bg-gray-300 hover:text-black ">
-                    Login
-                  </div>
+                  {!user && (
+                    <Link className="font-semibold underline hover:scale-105 transition-all duration-200">
+                      Login
+                    </Link>
+                  )}
 
-                  <Link
-                    href="/profile"
-                    className={"flex flex-col items-center"}
-                  >
-                    <div className="relative h-[40px] border p-1 cursor-pointer border-violet-600 w-[40px] mt-2  rounded-full overflow-hidden bg-slate-500">
-                      <Image
-                        src={dummyProduct}
-                        alt="Product"
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </div>
-                    <p className="text-[10px] text-gray-500 font-semibold">
-                      john joe
-                    </p>
-                  </Link>
+                  {user && (
+                    <Link
+                      href="/profile"
+                      className={"flex flex-col items-center"}
+                    >
+                      <div className="w-10 h-10 rounded-full relative">
+                        <Image
+                          src={dummyProduct}
+                          alt="Product"
+                          layout="fill"
+                          objectFit="cover"
+                          className="rounded-full"
+                        />
+                      </div>
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>

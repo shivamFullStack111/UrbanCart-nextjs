@@ -6,9 +6,14 @@ import Footer from "@/app/components/Footer";
 import DropDown from "./DropDown";
 import { FaArrowCircleLeft, FaPlus } from "react-icons/fa";
 import { TiTick } from "react-icons/ti";
+import axios from "axios";
 const CreateProduct = () => {
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
   const [pageNo, setpageNo] = useState(1);
+  const [productDetails, setproductDetails] = useState({
+    images: [""],
+  });
+  const [productSpecifications, setproductSpecifications] = useState({});
 
   // Dummy array of orders
   const dummyOrders = [
@@ -35,6 +40,19 @@ const CreateProduct = () => {
       status: "Delivered",
     },
   ];
+
+  const handleCreateProduct = async () => {
+    try {
+      const res = await axios.post("/api/create-product", {
+        tittle: "new product",
+      });
+
+      console.log(res.data);
+      alert(res.data.message);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
 
   return (
     <>
@@ -142,7 +160,16 @@ const CreateProduct = () => {
                       <p className="text-[16px] font-bold text-gray-500">
                         Tittle
                       </p>
-                      <input className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"></input>
+                      <input
+                        value={productDetails.tittle}
+                        onChange={(e) =>
+                          setproductDetails((p) => ({
+                            ...p,
+                            tittle: e.target.value,
+                          }))
+                        }
+                        className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
+                      ></input>
                     </div>
 
                     {/* category wear type  */}
@@ -253,7 +280,16 @@ Leggings
                       <p className="text-[16px] font-bold text-gray-500">
                         Brand
                       </p>
-                      <input className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"></input>
+                      <input
+                        value={productDetails.brand}
+                        onChange={(e) =>
+                          setproductDetails((p) => ({
+                            ...p,
+                            brand: e.target.value,
+                          }))
+                        }
+                        className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
+                      ></input>
                     </div>
 
                     {/* sku  */}
@@ -262,7 +298,15 @@ Leggings
                         Stock Keeping Unit
                       </p>
                       <input
+                        value={productDetails.stockKeepingUnit}
+                        onChange={(e) =>
+                          setproductDetails((p) => ({
+                            ...p,
+                            stockKeepingUnit: e.target.value,
+                          }))
+                        }
                         placeholder="Enter SKU"
+                        type="number"
                         className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
                       ></input>
                     </div>
@@ -272,6 +316,13 @@ Leggings
                         (MRP) Price
                       </p>
                       <input
+                        value={productDetails.mrpPrice}
+                        onChange={(e) =>
+                          setproductDetails((p) => ({
+                            ...p,
+                            mrpPrice: e.target.value,
+                          }))
+                        }
                         placeholder="Enter MRP* Price"
                         className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
                       ></input>
@@ -282,6 +333,13 @@ Leggings
                         Selling Price
                       </p>
                       <input
+                        value={productDetails.sellingPrice}
+                        onChange={(e) =>
+                          setproductDetails((p) => ({
+                            ...p,
+                            sellingPrice: e.target.value,
+                          }))
+                        }
                         placeholder="Enter Selling price"
                         className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
                       ></input>
@@ -292,6 +350,13 @@ Leggings
                         Stock
                       </p>
                       <input
+                        value={productDetails.stock}
+                        onChange={(e) =>
+                          setproductDetails((p) => ({
+                            ...p,
+                            stock: e.target.value,
+                          }))
+                        }
                         placeholder="Enter Stock Quantity"
                         className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
                       ></input>
@@ -302,6 +367,13 @@ Leggings
                         Description
                       </p>
                       <textarea
+                        value={productDetails.description}
+                        onChange={(e) =>
+                          setproductDetails((p) => ({
+                            ...p,
+                            description: e.target.value,
+                          }))
+                        }
                         placeholder="Enter Description"
                         className="w-full p-1 py-2 resize min-h-56  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
                       ></textarea>
@@ -312,17 +384,52 @@ Leggings
                         <p className="text-[16px] font-bold text-gray-500">
                           Image Urls
                         </p>
-                        <FaPlus className="text-gray-500" size={25} />
+                        <FaPlus
+                          onClick={() => {
+                            if (
+                              !productDetails.images[
+                                productDetails?.images?.length - 1
+                              ]
+                            ) {
+                              alert("please first fill all image url fields");
+                            } else {
+                              setproductDetails((p) => ({
+                                ...p,
+                                images: [...p.images, ""],
+                              }));
+                            }
+                          }}
+                          className="text-gray-500"
+                          size={25}
+                        />
                       </div>
-                      <input
-                        placeholder="http://example.png"
-                        className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
-                      ></input>
+                      <div className="flex flex-col gap-2 w-full">
+                        {productDetails?.images?.map((img, i) => (
+                          <input
+                            value={img}
+                            onChange={(e) =>
+                              setproductDetails((p) => ({
+                                ...p,
+                                images: p.images.map((img, j) => {
+                                  if (i == j) {
+                                    return e.target.value;
+                                  } else {
+                                    return img;
+                                  }
+                                }),
+                              }))
+                            }
+                            placeholder="http://example.png"
+                            className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
+                          ></input>
+                        ))}
+                      </div>
                     </div>
 
                     {/* next button  */}
                     <div
                       onClick={() => {
+                        console.log(productDetails);
                         setpageNo(2);
                         window.scrollTo({
                           top: 0,
@@ -636,7 +743,7 @@ Leggings
                       />
                     </div>
                     <div
-                      onClick={() => setpageNo(4)}
+                      onClick={() => handleCreateProduct()}
                       className="text-white  mt-6 font-bold text-lg bg-green-400 cursor-pointer transition-all duration-200 hover:bg-white border-2 border-green-400 rounded-lg  hover:text-green-600  py-1 flex justify-center items-center"
                     >
                       Create Product
