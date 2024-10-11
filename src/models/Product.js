@@ -2,10 +2,12 @@ const { default: mongoose } = require("mongoose");
 
 const productSchema = new mongoose.Schema({
   tittle: String,
+  gender: String,
   category: String,
-  subCategory: String,
   brand: String,
+  clothType: String,
   stockKeepingUnit: Number,
+  brand: String,
   mrpPrice: Number,
   sellingPrice: Number,
   stock: Number,
@@ -19,7 +21,7 @@ const productSchema = new mongoose.Schema({
   fitType: String,
   sleeveType: String,
   neckType: String,
-  heelHeight: String,
+  heelHeight: Number,
   soleMaterial: String,
 });
 

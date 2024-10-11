@@ -1823,19 +1823,140 @@ export const clothCategories = [
 ];
 
 // Sizes for Clothing
-const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
+export const sizes = ["XS", "S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 
 // Sizes for Footwear (Men)
-const menFootwearSizes = [6, 7, 8, 9, 10, 11, 12];
+export const menFootwearSizes = [6, 7, 8, 9, 10, 11, 12];
 
 // Sizes for Footwear (Women)
-const womenFootwearSizes = [4, 5, 6, 7, 8, 9, 10];
+export const womenFootwearSizes = [4, 5, 6, 7, 8, 9, 10];
 
 // Sizes for Footwear (Kids)
-const kidsFootwearSizes = [2, 3, 4, 5, 6, 7, 8];
+export const kidsFootwearSizes = [2, 3, 4, 5, 6, 7, 8];
+
+export const menClothing = [
+  { label: "T-Shirts", key: "T-Shirts" },
+  { label: "Polo Shirts", key: "Polo Shirts" },
+  { label: "Casual Shirts", key: "Casual Shirts" },
+  { label: "Formal Shirts", key: "Formal Shirts" },
+  { label: "Jeans", key: "Jeans" },
+  { label: "Chinos", key: "Chinos" },
+  { label: "Trousers", key: "Trousers" },
+  { label: "Shorts", key: "Shorts" },
+  { label: "Jackets", key: "Jackets" },
+  { label: "Coats", key: "Coats" },
+  { label: "Sweaters", key: "Sweaters" },
+  { label: "Hoodies", key: "Hoodies" },
+  { label: "Activewear", key: "Activewear" },
+  { label: "Suits", key: "Suits" },
+  { label: "Sleepwear", key: "Sleepwear" },
+  { label: "Underwear", key: "Underwear" },
+  { label: "Swimwear", key: "Swimwear" },
+  { label: "Vests", key: "Vests" },
+];
+export const womenClothing = [
+  { label: "T-Shirts", key: "T-Shirts" },
+  { label: "Tank Tops", key: "Tank Tops" },
+  { label: "Blouses", key: "Blouses" },
+  { label: "Casual Shirts", key: "Casual Shirts" },
+  { label: "Dresses", key: "Dresses" },
+  { label: "Maxi Dresses", key: "Maxi Dresses" },
+  { label: "Skirts", key: "Skirts" },
+  { label: "Jeans", key: "Jeans" },
+  { label: "Leggings", key: "Leggings" },
+  { label: "Trousers", key: "Trousers" },
+  { label: "Shorts", key: "Shorts" },
+  { label: "Activewear", key: "Activewear" },
+  { label: "Cardigans", key: "Cardigans" },
+  { label: "Jackets", key: "Jackets" },
+  { label: "Coats", key: "Coats" },
+  { label: "Sweaters", key: "Sweaters" },
+  { label: "Jumpsuits", key: "Jumpsuits" },
+  { label: "Romper", key: "Romper" },
+  { label: "Sleepwear", key: "Sleepwear" },
+  { label: "Loungewear", key: "Loungewear" },
+  { label: "Underwear", key: "Underwear" },
+  { label: "Swimwear", key: "Swimwear" },
+];
+
+export const kidsClothing = [
+  { label: "T-Shirts", key: "T-Shirts" },
+  { label: "Tank Tops", key: "Tank Tops" },
+  { label: "Blouses", key: "Blouses" },
+  { label: "Dresses", key: "Dresses" },
+  { label: "Skirts", key: "Skirts" },
+  { label: "Leggings", key: "Leggings" },
+  { label: "Jeans", key: "Jeans" },
+  { label: "Trousers", key: "Trousers" },
+  { label: "Shorts", key: "Shorts" },
+  { label: "Activewear", key: "Activewear" },
+  { label: "Jackets", key: "Jackets" },
+  { label: "Cardigans", key: "Cardigans" },
+  { label: "Sweaters", key: "Sweaters" },
+  { label: "Sleepwear", key: "Sleepwear" },
+  { label: "Swimwear", key: "Swimwear" },
+  { label: "T-Shirts", key: "T-Shirts" },
+  { label: "Polo Shirts", key: "Polo Shirts" },
+  { label: "Casual Shirts", key: "Casual Shirts" },
+  { label: "Shorts", key: "Shorts" },
+  { label: "Jeans", key: "Jeans" },
+  { label: "Trousers", key: "Trousers" },
+  { label: "Sweaters", key: "Sweaters" },
+  { label: "Hoodies", key: "Hoodies" },
+  { label: "Jackets", key: "Jackets" },
+  { label: "Activewear", key: "Activewear" },
+  { label: "Sleepwear", key: "Sleepwear" },
+  { label: "Swimwear", key: "Swimwear" },
+  { label: "Underwear", key: "Underwear" },
+  { label: "Underwear", key: "Underwear" },
+];
+
+export const menFootwear = [
+  { label: "Casual Shoes", key: "Casual Shoes" },
+  { label: "Formal Shoes", key: "Formal Shoes" },
+  { label: "Loafers", key: "Loafers" },
+  { label: "Oxfords", key: "Oxfords" },
+  { label: "Sneakers", key: "Sneakers" },
+  { label: "Sports Shoes", key: "Sports Shoes" },
+  { label: "Sandals", key: "Sandals" },
+  { label: "Boots", key: "Boots" },
+  { label: "Chukka Boots", key: "Chukka Boots" },
+  { label: "Dress Boots", key: "Dress Boots" },
+  { label: "Slippers", key: "Slippers" },
+];
+
+export const womenFootwear = [
+  { label: "Heels", key: "Heels" },
+  { label: "Flats", key: "Flats" },
+  { label: "Ballet Flats", key: "Ballet Flats" },
+  { label: "Sneakers", key: "Sneakers" },
+  { label: "Sandals", key: "Sandals" },
+  { label: "Boots", key: "Boots" },
+  { label: "Ankle Boots", key: "Ankle Boots" },
+  { label: "Wedges", key: "Wedges" },
+  { label: "Loafers", key: "Loafers" },
+  { label: "Slippers", key: "Slippers" },
+  { label: "Flip Flops", key: "Flip Flops" },
+];
+
+export const kidsFootwear = [
+  { label: "Sneakers", key: "Sneakers" },
+  { label: "Casual Shoes", key: "Casual Shoes" },
+  { label: "Sandals", key: "Sandals" },
+  { label: "Boots", key: "Boots" },
+  { label: "Loafers", key: "Loafers" },
+  { label: "Slippers", key: "Slippers" },
+  { label: "Sneakers", key: "Sneakers" },
+  { label: "Flats", key: "Flats" },
+  { label: "Ballet Flats", key: "Ballet Flats" },
+  { label: "Sandals", key: "Sandals" },
+  { label: "Boots", key: "Boots" },
+  { label: "Heels", key: "Heels" },
+  { label: "Slippers", key: "Slippers" },
+];
 
 // Colors for Clothing and Footwear
-const colors = [
+export const colors = [
   "Red",
   "Blue",
   "Green",
@@ -1851,88 +1972,132 @@ const colors = [
 ];
 
 // Materials for Clothing
-const clothingMaterials = [
-  "Cotton",
-  "Wool",
-  "Polyester",
-  "Linen",
-  "Silk",
-  "Denim",
-  "Rayon",
-  "Nylon",
-  "Leather",
-  "Synthetic",
+// Materials for Clothing
+export const clothingMaterials = [
+  { label: "Cotton", key: "Cotton" },
+  { label: "Wool", key: "Wool" },
+  { label: "Polyester", key: "Polyester" },
+  { label: "Linen", key: "Linen" },
+  { label: "Silk", key: "Silk" },
+  { label: "Denim", key: "Denim" },
+  { label: "Rayon", key: "Rayon" },
+  { label: "Nylon", key: "Nylon" },
+  { label: "Leather", key: "Leather" },
+  { label: "Synthetic", key: "Synthetic" },
 ];
 
 // Materials for Footwear
-const footwearMaterials = [
-  "Leather",
-  "Synthetic Leather",
-  "Suede",
-  "Canvas",
-  "Rubber",
-  "Textile",
-  "Mesh",
+export const footwearMaterials = [
+  { label: "Leather", key: "Leather" },
+  { label: "Synthetic Leather", key: "Synthetic Leather" },
+  { label: "Suede", key: "Suede" },
+  { label: "Canvas", key: "Canvas" },
+  { label: "Rubber", key: "Rubber" },
+  { label: "Textile", key: "Textile" },
+  { label: "Mesh", key: "Mesh" },
 ];
 
 // Fit Types for Clothing
-const fitTypes = [
-  "Slim Fit",
-  "Regular Fit",
-  "Loose Fit",
-  "Relaxed Fit",
-  "Skinny Fit",
-  "Straight Fit",
+export const fitTypes = [
+  { label: "Slim Fit", key: "Slim Fit" },
+  { label: "Regular Fit", key: "Regular Fit" },
+  { label: "Loose Fit", key: "Loose Fit" },
+  { label: "Relaxed Fit", key: "Relaxed Fit" },
+  { label: "Skinny Fit", key: "Skinny Fit" },
+  { label: "Straight Fit", key: "Straight Fit" },
 ];
 
 // Patterns for Clothing
-const patterns = [
-  "Solid",
-  "Printed",
-  "Striped",
-  "Checked",
-  "Floral",
-  "Embroidered",
-  "Polka Dots",
+export const patterns = [
+  { label: "Solid", key: "Solid" },
+  { label: "Printed", key: "Printed" },
+  { label: "Striped", key: "Striped" },
+  { label: "Checked", key: "Checked" },
+  { label: "Floral", key: "Floral" },
+  { label: "Embroidered", key: "Embroidered" },
+  { label: "Polka Dots", key: "Polka Dots" },
 ];
 
 // Sleeve Types for Tops
-const sleeveTypes = [
-  "Sleeveless",
-  "Half Sleeve",
-  "Full Sleeve",
-  "Three-Quarter Sleeve",
-  "Cap Sleeve",
+export const sleeveTypes = [
+  { label: "Sleeveless", key: "Sleeveless" },
+  { label: "Half Sleeve", key: "Half Sleeve" },
+  { label: "Full Sleeve", key: "Full Sleeve" },
+  { label: "Three-Quarter Sleeve", key: "Three-Quarter Sleeve" },
+  { label: "Cap Sleeve", key: "Cap Sleeve" },
 ];
 
 // Neck Styles for Tops and Dresses
-const neckStyles = [
-  "Round Neck",
-  "V-Neck",
-  "Collared",
-  "Boat Neck",
-  "Halter Neck",
-  "Off-Shoulder",
+export const neckStyles = [
+  { label: "Round Neck", key: "Round Neck" },
+  { label: "V-Neck", key: "V-Neck" },
+  { label: "Collared", key: "Collared" },
+  { label: "Boat Neck", key: "Boat Neck" },
+  { label: "Halter Neck", key: "Halter Neck" },
+  { label: "Off-Shoulder", key: "Off-Shoulder" },
 ];
 
 // Sole Materials for Footwear
-const soleMaterials = ["Rubber", "PU", "Leather", "EVA", "PVC", "TPR"];
-
-// Heel Heights for Footwear
-const heelHeights = [
-  "Flat",
-  "Low (1-2 inches)",
-  "Medium (2-3 inches)",
-  "High (3-4 inches)",
-  "Very High (4+ inches)",
+export const soleMaterials = [
+  { label: "Rubber", key: "Rubber" },
+  { label: "PU", key: "PU" },
+  { label: "Leather", key: "Leather" },
+  { label: "EVA", key: "EVA" },
+  { label: "PVC", key: "PVC" },
+  { label: "TPR", key: "TPR" },
 ];
 
-// Example of how to use in a dropdown
-// <select>
-//   {sizes.map(size => (
-//     <option key={size} value={size}>{size}</option>
-//   ))}
-// </select>
+// Heel Heights for Footwear
+export const heelHeights = [
+  { label: "Flat", key: "Flat" },
+  { label: "Low (1-2 inches)", key: "Low (1-2 inches)" },
+  { label: "Medium (2-3 inches)", key: "Medium (2-3 inches)" },
+  { label: "High (3-4 inches)", key: "High (3-4 inches)" },
+  { label: "Very High (4+ inches)", key: "Very High (4+ inches)" },
+];
+
+export const bgColors = [
+  { name: "Red-Orange", color: "#FF5733" },
+  { name: "Lime Green", color: "#33FF57" },
+  { name: "Blue", color: "#3357FF" },
+  { name: "Khaki", color: "#F0E68C" },
+  { name: "Gold", color: "#FFD700" },
+  { name: "Hot Pink", color: "#FF69B4" },
+  { name: "Blue Violet", color: "#8A2BE2" },
+  { name: "Chartreuse", color: "#7FFF00" },
+  { name: "Orange Red", color: "#FF4500" },
+  { name: "Sea Green", color: "#2E8B57" },
+  { name: "Steel Blue", color: "#4682B4" },
+  { name: "Firebrick", color: "#B22222" },
+  { name: "Cadet Blue", color: "#5F9EA0" },
+  { name: "Medium Spring Green", color: "#00FA9A" },
+  { name: "Chocolate", color: "#D2691E" },
+  { name: "Dark Turquoise", color: "#00CED1" },
+  { name: "Tomato", color: "#FF6347" },
+  { name: "Slate Blue", color: "#6A5ACD" },
+  { name: "Pale Violet Red", color: "#DB7093" },
+  { name: "Light Sea Green", color: "#20B2AA" },
+  { name: "Light Salmon", color: "#FFA07A" },
+  { name: "Medium Violet Red", color: "#C71585" },
+  { name: "Turquoise", color: "#40E0D0" },
+  { name: "Maroon", color: "#800000" },
+  { name: "Powder Blue", color: "#B0E0E6" },
+  { name: "Medium Slate Blue", color: "#7B68EE" },
+  { name: "Dark Orange", color: "#FF8C00" },
+  { name: "Slate Gray", color: "#708090" },
+  { name: "Brown", color: "#A52A2A" },
+  { name: "Medium Purple", color: "#9370DB" },
+  { name: "Saddle Brown", color: "#8B4513" },
+  { name: "Peach Puff", color: "#FFDAB9" },
+  { name: "Forest Green", color: "#228B22" },
+  { name: "Plum", color: "#DDA0DD" },
+  { name: "Dodger Blue", color: "#1E90FF" },
+  { name: "Yellow Green", color: "#9ACD32" },
+  { name: "Cornflower Blue", color: "#6495ED" },
+  { name: "Deep Pink", color: "#FF1493" },
+  { name: "Medium Aquamarine", color: "#66CDAA" },
+  { name: "Light Pink", color: "#FFB6C1" },
+];
 
 // ?backend ..............................................................................
 export const JWT_SECRET = "hgvbhjbkjbvhjbhvngcghch";

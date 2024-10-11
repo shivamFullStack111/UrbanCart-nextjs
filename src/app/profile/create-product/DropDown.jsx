@@ -6,7 +6,7 @@ import {
   Button,
 } from "@nextui-org/react";
 
-export default function DropDown({ items, heading }) {
+export default function DropDown({ items, heading, onSelect }) {
   return (
     <Dropdown className="w-[300px] rounded-lg h-full ">
       <DropdownTrigger className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100 w-full h-full justify-start">
@@ -21,7 +21,7 @@ export default function DropDown({ items, heading }) {
       >
         {(item) => (
           <DropdownItem
-            onPress={() => alert(item.key)}
+            onPress={() => onSelect(item.key)}
             color={item.key === "delete" ? "danger" : "default"}
             className={`${
               item.key === "delete" ? "text-danger" : ""
