@@ -26,7 +26,7 @@ import {
 import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
 import ProductDetails from "./ProductDetails";
-import ProductSpecifications from "./productSpecifications";
+import ProductSpecifications from "./ProductSpecifications";
 import ProductOverview from "./ProductOverview";
 import ProcessSteps from "./ProcessStep";
 const CreateProduct = () => {
