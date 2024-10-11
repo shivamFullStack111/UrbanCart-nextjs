@@ -71,7 +71,7 @@ const CreateProduct = () => {
       console.log(productSpecifications, productDetails);
       const res = await axios.post("/api/create-product", {
         ...productDetails,
-        productSpecifications,
+        ...productSpecifications,
       });
 
       console.log(res.data);

@@ -286,21 +286,21 @@ const ProductDetails = ({ setproductDetails, setpageNo, productDetails }) => {
                   description,
                   images,
                 } = productDetails;
-                // if (
-                //   !tittle ||
-                //   !gender ||
-                //   !clothType ||
-                //   !category ||
-                //   !brand ||
-                //   !stockKeepingUnit ||
-                //   !mrpPrice ||
-                //   !sellingPrice ||
-                //   !stock ||
-                //   !description ||
-                //   !images?.length
-                // ) {
-                //   return toast.error("please fill all field to continue");
-                // }
+                if (
+                  !tittle ||
+                  !gender ||
+                  !clothType ||
+                  !category ||
+                  !brand ||
+                  !stockKeepingUnit ||
+                  !mrpPrice ||
+                  !sellingPrice ||
+                  !stock ||
+                  !description ||
+                  !images?.length
+                ) {
+                  return toast.error("please fill all field to continue");
+                }
                 setpageNo(2);
                 window.scrollTo({
                   top: 0,
