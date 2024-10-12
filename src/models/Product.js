@@ -13,16 +13,18 @@ const productSchema = new mongoose.Schema(
     mrpPrice: { type: Number, required: true },
     sellingPrice: { type: Number, required: true },
     stock: { type: Number, required: true, min: 0 }, // Prevent negative stock
+    totalSale: { type: Number, default: 0, min: 0 }, // Prevent negative stock
     description: { type: String, required: true },
     images: { type: [String], required: true }, // Array of image URLs
+    totalRating: { type: Number, default: 0 },
     // Specification
     colors: { type: [String], default: [] },
     sizes: { type: [String], default: [] },
     material: { type: String, required: true },
-    clothPattern: { type: String, required: true },
-    fitType: { type: String, required: true },
-    sleeveType: { type: String, required: true },
-    neckType: { type: String, required: true },
+    clothPattern: { type: String },
+    fitType: { type: String },
+    sleeveType: { type: String },
+    neckType: { type: String },
     heelHeight: { type: Number, default: 0 }, // Optional for non-shoe products
     soleMaterial: { type: String, default: "" }, // Optional
   },

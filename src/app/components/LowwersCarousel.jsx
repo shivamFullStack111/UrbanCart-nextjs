@@ -5,12 +5,14 @@ import "swiper/css"; // Import Swiper styles
 import Image from "next/image";
 import logo from "../images/companyLogo.png";
 import { dummyProducts } from "../utils";
+import { useSelector } from "react-redux";
 
 const CarOusal = () => {
   const [windowSize, setWindowSize] = useState({
     width: undefined,
     height: undefined,
   });
+  const { mostRatedProducts } = useSelector((state) => state.product);
   const [slidesNo, setSlidesNo] = useState(5); // Default number of slides
 
   useEffect(() => {
@@ -57,7 +59,7 @@ const CarOusal = () => {
         onSwiper={(swiper) => console.log(swiper)}
         spaceBetween={slidesNo > 3 ? 7 : 3}
       >
-        {dummyProducts.map((item, i) => (
+        {mostRatedProducts?.map((item, i) => (
           <SwiperSlide key={i} className="border-[1px]  bg-white ">
             <div className="relative h-[80%]">
               <Image
