@@ -22,10 +22,22 @@ const roboto = Quicksand({
 });
 
 const Home = () => {
-  const { allProducts, trendingProducts, isLoading, mostRatedProducts } =
-    useSelector((state) => state.product);
+  const {
+    allProducts,
+    trendingProducts,
+    isLoading,
+    mostRatedProducts,
+    newArrivalProducts,
+  } = useSelector((state) => state.product);
   return (
     <div className={roboto.className}>
+      {
+        (allProducts?.length,
+        trendingProducts?.length,
+        isLoading,
+        mostRatedProducts?.length,
+        newArrivalProducts?.length)
+      }
       <Head>
         <title>Urban Cart</title>
         <link rel="icon" href="/favicon.ico" /> {/* Updated favicon path */}
