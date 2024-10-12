@@ -9,7 +9,7 @@ import store from "@/store/store";
 
 export const getAllProducts = async (pageNumber) => {
   try {
-    const res = await axios.post("/api/product/all-products", { pageNumber });
+    const res = await axios.post("/api/all-products", { pageNumber });
     if (res.data?.success) {
       store.dispatch(addProducts(res.data?.products));
     } else {
@@ -21,7 +21,7 @@ export const getAllProducts = async (pageNumber) => {
 };
 export const getTrendingProducts = async () => {
   try {
-    const res = await axios.get("/api/product/trending-products");
+    const res = await axios.get("/api/trending-products");
     if (res.data?.success) {
       store.dispatch(addTrendingProducts(res.data?.products));
     } else {
@@ -33,7 +33,7 @@ export const getTrendingProducts = async () => {
 };
 export const getMostRatedProducts = async () => {
   try {
-    const res = await axios.get("/api/product/most-reated-products");
+    const res = await axios.get("/api/most-reated-products");
     if (res?.data?.success) {
       store.dispatch(addMostRatedProducts(res.data?.products));
     } else {
@@ -45,7 +45,7 @@ export const getMostRatedProducts = async () => {
 };
 export const getNewArrivalProducts = async () => {
   try {
-    const res = await axios.get("/api/product/new-arrivals");
+    const res = await axios.get("/api/new-arrivals");
     if (res?.data?.success) {
       store.dispatch(addNewArrivalProducts(res.data?.products));
     } else {
