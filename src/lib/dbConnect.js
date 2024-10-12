@@ -4,21 +4,26 @@ let isAlreadyConnected = false;
 
 export const dbConnect = async () => {
   if (isAlreadyConnected) {
-    console.log("already connected");
+    console.log("Already connected to MongoDB");
     return;
   }
-  if (!process.env.MONGOURL) {
+
+  // Check if MongoDB URL is provided in environment variables
+  const mongoUrl = process.env.MONGOURL;
+  if (!mongoUrl) {
     throw new Error("MongoDB connection URL not provided");
   }
 
   try {
-    const db = await mongoose.connect(
-      "mongodb+srv://agdtyuimnb:agdtyuimnb@cluster0.uyhpu.mongodb.net/URBANCART?retryWrites=true&w=majority&appName=Cluster0"
-    );
+    const db = await mongoose.connect(mongoUrl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
 
     isAlreadyConnected = db.connection.readyState;
+    console.log("Connected to MongoDB");
   } catch (error) {
-    console.log("error in connect mongodb", error.message);
-    return error;
+    console.log("Error connecting to MongoDB:", error.message);
+    throw error;
   }
 };
