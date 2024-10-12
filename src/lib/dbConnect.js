@@ -12,9 +12,7 @@ export const dbConnect = async () => {
   }
 
   try {
-    const db = await mongoose.connect(
-      "mongodb+srv://agdtyuimnb:agdtyuimnb@cluster0.uyhpu.mongodb.net/URBANCART?retryWrites=true&w=majority&appName=Cluster0"
-    );
+    const db = await mongoose.connect(process.env.MONGOURL || "");
 
     isAlreadyConnected = db.connection.readyState;
   } catch (error) {
