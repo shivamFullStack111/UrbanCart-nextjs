@@ -20,7 +20,7 @@ const AuthCheck = ({ children }) => {
     getTrendingProducts();
     getMostRatedProducts();
     dispatch(setisLoading(false));
-  }, [dispatch]);
+  }, []);
 
   useEffect(() => {
     console.log("all products", allProducts?.length);
