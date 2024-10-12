@@ -1,9 +1,18 @@
 "use client";
-import React from "react";
-import { useDispatch } from "react-redux";
+import { getAllProducts } from "@/functions/productsFunction";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 const AuthCheck = ({ children }) => {
-  const dispatch = useDispatch();
+  const { allProducts } = useSelector((state) => state.product);
+
+  useEffect(() => {
+    getAllProducts(1);
+  }, []);
+
+  useEffect(() => {
+    console.log(allProducts);
+  }, [allProducts]);
 
   return <>{children}</>;
 };

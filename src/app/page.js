@@ -10,6 +10,7 @@ import Footer from "./components/Footer";
 import Image from "next/image";
 import { dummyProducts } from "./utils";
 import saleImage from "/src/app/images/sale.jpg";
+import { useSelector } from "react-redux";
 
 const roboto = Quicksand({
   weight: ["400"],
@@ -19,8 +20,10 @@ const roboto = Quicksand({
 });
 
 const Home = () => {
+  const { allProducts } = useSelector((state) => state.product);
   return (
     <div className={roboto.className}>
+      <p>{allProducts?.length}</p>
       <Head>
         <title>Urban Cart</title>
         <link rel="icon" href="/favicon.ico" /> {/* Updated favicon path */}

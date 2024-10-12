@@ -9,6 +9,7 @@ import { useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const Register = () => {
   const [data, setdata] = useState({
@@ -18,6 +19,7 @@ const Register = () => {
     password: "",
   });
   const [error, seterror] = useState("");
+  const router = useRouter();
 
   const handleSubmit = async () => {
     seterror("");
@@ -36,6 +38,7 @@ const Register = () => {
         toast.success(res.data.message);
         dispatch(setUser(res.data?.user));
         localStorage.setItem("token_urbancart", res.data?.token);
+        router.push("/");
       } else {
         toast.error(res.data.message);
       }
