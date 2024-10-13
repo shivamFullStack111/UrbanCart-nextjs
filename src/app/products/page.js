@@ -28,53 +28,13 @@ const Products = () => {
   });
   const [ratingAndAbove, setratingAndAbove] = useState("");
   const [gender, setgender] = useState("");
-  const param = useSearchParams();
   const [isRequesting, setisRequesting] = useState(false);
   const [products, setproducts] = useState([]);
 
-  useEffect(() => {
-    let gen = param.get("gender");
-
-    if (gen) {
-      setgender(gen?.toLocaleLowerCase());
-    }
-  }, [param]);
-
-  const getProducts_withFilter = async (filter, pageNumber) => {
-    try {
-      const res = await axios.post(
-        `/api/get-product-by-filter/${pageNumber}`,
-        filter
-      );
-      console.log(res.data?.products?.length);
-      setproducts(res.data?.products);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      getProducts_withFilter(
-        {
-          category,
-          sortBy,
-          color,
-          price,
-          ratingAndAbove,
-          gender,
-        },
-        1
-      );
-    }, 500);
-
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [category, sortBy, color, price, ratingAndAbove, gender]);
-
+  // Suspense Boundary ke andar useSearchParams ko wrap karein
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
+      <SearchParamsWrapper setgender={setgender} />
       <Head>
         <title>My page title</title>
       </Head>
@@ -95,17 +55,27 @@ const Products = () => {
             gender={gender}
             setgender={setgender}
           />
-          <Suspense fallback={<div>Loading...</div>}>
-            <ProductsContent products={products} />
-          </Suspense>
+          <ProductsContent products={products} />
         </div>
         <Footer />
       </div>
-    </>
+    </Suspense>
   );
 };
 
-export default Products;
+const SearchParamsWrapper = ({ setgender }) => {
+  const param = useSearchParams();
+
+  useEffect(() => {
+    let gen = param.get("gender");
+
+    if (gen) {
+      setgender(gen?.toLocaleLowerCase());
+    }
+  }, [param]);
+
+  return null; // Yeh component sirf gender set karne ke liye hai
+};
 
 const ProductsContent = ({ products }) => {
   return (
@@ -171,56 +141,4 @@ export const generateMetaData = ({ params }) => {
   };
 };
 
-// const ProductsContent = ({ products }) => {
-//   console.log(products);
-//   // useEffect(() => {
-//   //   const getDummyProducts = async () => {
-//   //     const res = await axios.get("https://dummyjson.com/products");
-//   //     setProducts(res?.data?.products);
-//   //     console.log(products);
-//   //   };
-
-//   //   getDummyProducts();
-//   // }, []);
-
-//   return (
-//     <div className="flex mt-2  justify-center 800px:max-w-[70%] 800px:w-[70%] 1200px:min-w-[77%] 1200px:max-w-[77%]">
-//       {products?.map((item, i) => (
-//         <Link
-//           href={`/product-detail/${i}`}
-//           key={i}
-//           className="h-64 bg-gray-100 border-2 border-white w-[48%] 500px:h-72 600px:h-68 600px:w-[32%] 800px:w-[45%] 900px:h-72 1050px:w-[32%] 1300px:h-[360px] 1500px:w-[25%] 1500px:h-80 1750px:h-[370px] 1950px:h-[400px]"
-//         >
-//           <div className="w-full h-[70%] 800px:h-[80%] relative">
-//             {item?.images?.length && (
-//               <Image
-//                 lazy="true"
-//                 alt="Product image"
-//                 src={item?.images[0]}
-//                 fill="true"
-//               />
-//             )}
-//           </div>
-//           <div className="px-2">
-//             <p className="text-sm font-semibold text-gray-500">
-//               {item?.tittle}
-//             </p>
-//             <div className="flex items-center justify-between">
-//               <div className="flex gap-2">
-//                 <p className="text-sm 800px:text-lg font-semibold">
-//                   ${item?.sellingPrice}
-//                 </p>
-//                 <p className="text-sm font-semibold line-through">
-//                   {item?.mrpPrice}
-//                 </p>
-//               </div>
-//               <p className="bg-green-500 px-2 py-1 text-sm 1000px:text-lg rounded-xl text-white animate-bounce">
-//                 13% off
-//               </p>
-//             </div>
-//           </div>
-//         </Link>
-//       ))}
-//     </div>
-//   );
-// };
+export default Products;
