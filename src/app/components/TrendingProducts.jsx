@@ -27,7 +27,7 @@ const TrendingProducts = () => {
               </div>
               <div className="px-2">
                 <p className="text-sm font-semibold text-gray-500">
-                  {item?.tittle}
+                  {item?.title}
                 </p>
                 <div className="flex items-center justify-between">
                   <div className="flex gap-2">

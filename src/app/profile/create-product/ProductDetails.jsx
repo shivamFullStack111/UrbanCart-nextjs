@@ -35,11 +35,11 @@ const ProductDetails = ({ setproductDetails, setpageNo, productDetails }) => {
             <div className="p-1">
               <p className="text-[16px] font-bold text-gray-500">Tittle</p>
               <input
-                value={productDetails.tittle}
+                value={productDetails.title}
                 onChange={(e) =>
                   setproductDetails((p) => ({
                     ...p,
-                    tittle: e.target.value,
+                    title: e.target.value,
                   }))
                 }
                 className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"
@@ -274,7 +274,7 @@ const ProductDetails = ({ setproductDetails, setpageNo, productDetails }) => {
               onClick={() => {
                 console.log(productDetails);
                 const {
-                  tittle,
+                  title,
                   gender,
                   clothType,
                   category,
@@ -287,7 +287,7 @@ const ProductDetails = ({ setproductDetails, setpageNo, productDetails }) => {
                   images,
                 } = productDetails;
                 if (
-                  !tittle ||
+                  !title ||
                   !gender ||
                   !clothType ||
                   !category ||

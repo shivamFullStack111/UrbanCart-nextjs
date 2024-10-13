@@ -125,7 +125,7 @@ const ProductsContent = ({ products }) => {
 
               <div className="px-2">
                 <p className="text-lg font-semibold text-gray-700">
-                  {item?.tittle}
+                  {item?.title}
                 </p>
                 <div className="flex items-center justify-between">
                   <div className="flex gap-2">

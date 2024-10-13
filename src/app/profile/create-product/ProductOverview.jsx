@@ -43,7 +43,7 @@ const ProductOverview = ({
             {/* Product Name */}
             <div>
               <p className="text-gray-500 font-medium">Product Name</p>
-              <p className="text-gray-700">{productDetails?.tittle}</p>
+              <p className="text-gray-700">{productDetails?.title}</p>
             </div>
 
             {/* Category */}
