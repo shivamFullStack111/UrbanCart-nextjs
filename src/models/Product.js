@@ -18,7 +18,13 @@ const productSchema = new mongoose.Schema(
     images: { type: [String], required: true }, // Array of image URLs
     totalRating: { type: Number, default: 0 },
     // Specification
-    colors: { type: [String], default: [] },
+    colors: [
+      {
+        name: String,
+        color: String,
+      },
+    ],
+
     sizes: { type: [String], default: [] },
     material: { type: String, required: true },
     clothPattern: { type: String },

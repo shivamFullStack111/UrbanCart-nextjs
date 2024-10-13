@@ -144,19 +144,19 @@ const Header = () => {
 
               <div className="flex max-1000px:hidden gap-5 ">
                 <Link
-                  href="/products?c=MEN"
+                  href="/products?gender=MEN"
                   className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[14px] "
                 >
                   MEN
                 </Link>
                 <Link
-                  href="/products?c=WOMEN"
+                  href="/products?=gender=WOMEN"
                   className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[14px] "
                 >
                   WOMEN
                 </Link>
                 <Link
-                  href="/products?c=KIDS"
+                  href="/products?gender=KID"
                   className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[14px] "
                 >
                   KIDS
