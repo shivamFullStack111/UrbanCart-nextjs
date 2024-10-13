@@ -150,7 +150,7 @@ const Header = () => {
                   MEN
                 </Link>
                 <Link
-                  href="/products?=gender=WOMEN"
+                  href="/products?gender=WOMEN"
                   className="border-b-2 border-b-white hover:border-b-black cursor-pointer font-semibold text-[14px] "
                 >
                   WOMEN
