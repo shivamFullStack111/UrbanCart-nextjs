@@ -15,6 +15,7 @@ import { addMostRatedProducts } from "@/store/slices/productSlice";
 import ProductSkeleton from "./components/ProductSkeleton";
 import NewArrival from "./components/NewArrival/page";
 import Link from "next/link";
+import TrendingProducts from "./components/TrendingProducts";
 
 const roboto = Quicksand({
   weight: ["400"],
@@ -24,13 +25,8 @@ const roboto = Quicksand({
 });
 
 const Home = () => {
-  const {
-    allProducts,
-    trendingProducts,
-    isLoading,
-    mostRatedProducts,
-    newArrivalProducts,
-  } = useSelector((state) => state.product);
+  const { allProducts, T, isLoading, mostRatedProducts, newArrivalProducts } =
+    useSelector((state) => state.product);
   return (
     <div className={roboto.className}>
       <Head>
@@ -95,7 +91,7 @@ const Home = () => {
       ) : (
         <div>
           {/* tending products  */}
-          <trendingProducts />
+          <TrendingProducts />
           {/* <SaleBanner /> */}
           <LowwersCarousel />
           <NewArrival />
