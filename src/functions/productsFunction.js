@@ -55,3 +55,13 @@ export const getNewArrivalProducts = async () => {
     console.log(error.message);
   }
 };
+
+export const getSingleProduct = async (productid) => {
+  try {
+    const res = await axios.post("/api/single-product", { productid });
+
+    return res;
+  } catch (error) {
+    console.log(error.message);
+  }
+};

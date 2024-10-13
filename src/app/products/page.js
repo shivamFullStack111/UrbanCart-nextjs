@@ -115,9 +115,10 @@ const ProductsContent = ({ products }) => {
     <div className="w-full h-full p-2 gap-1 grid grid-cols-1 300px:grid-cols-2 550px:grid-cols-3 1200px:grid-cols-4 1800px:grid-cols-5">
       {products?.length
         ? products.map((item, i) => (
-            <div
+            <Link
+              href={`/product-detail/${item?._id}`}
               key={i}
-              className="w-full h-[110vw] 300px:h-[64vw] 550px:h-[40vw] 800px:h-[30vw] 1200px:h-[27vw] 1800px:h-[22vw]"
+              className="w-full cursor-pointer h-[110vw] 300px:h-[64vw] 550px:h-[40vw] 800px:h-[30vw] 1200px:h-[27vw] 1800px:h-[22vw]"
             >
               <div className="w-full h-[80%] relative">
                 <Image fill={true} src={item?.images[0]} className="" />
@@ -141,7 +142,7 @@ const ProductsContent = ({ products }) => {
                   </p>
                 </div>
               </div>
-            </div>
+            </Link>
           ))
         : // Skeleton Loader
           [...Array(20)].map((_, i) => (
