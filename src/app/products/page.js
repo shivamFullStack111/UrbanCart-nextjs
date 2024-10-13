@@ -31,6 +31,39 @@ const Products = () => {
   const [isRequesting, setisRequesting] = useState(false);
   const [products, setproducts] = useState([]);
 
+  const getProducts_withFilter = async (filter, pageNumber) => {
+    try {
+      const res = await axios.post(
+        `/api/get-product-by-filter/${pageNumber}`,
+        filter
+      );
+      console.log(res.data?.products?.length);
+      setproducts(res.data?.products);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      getProducts_withFilter(
+        {
+          category,
+          sortBy,
+          color,
+          price,
+          ratingAndAbove,
+          gender,
+        },
+        1
+      );
+    }, 500);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [category, sortBy, color, price, ratingAndAbove, gender]);
+
   // Suspense Boundary ke andar useSearchParams ko wrap karein
   return (
     <Suspense fallback={<div>Loading...</div>}>

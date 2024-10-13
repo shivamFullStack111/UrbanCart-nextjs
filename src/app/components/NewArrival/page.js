@@ -1,3 +1,4 @@
+"use client";
 import { dummyProducts } from "@/app/utils";
 import Image from "next/image";
 import React from "react";

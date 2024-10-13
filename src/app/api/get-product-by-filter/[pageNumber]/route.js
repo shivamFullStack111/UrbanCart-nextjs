@@ -19,7 +19,7 @@ export async function POST(req, res) {
     }
 
     if (price && price?.from && price.to) {
-      query.price = { $gte: price.from, $lte: price.to };
+      query.sellingPrice = { $gte: price.from, $lte: price.to };
     }
     if (ratingAndAbove) {
       query.totalRating = { $gte: ratingAndAbove };
