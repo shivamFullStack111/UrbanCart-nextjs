@@ -125,7 +125,7 @@ const ProductsContent = ({ products }) => {
   return (
     <div className="w-full h-full p-2 gap-1 grid grid-cols-1 300px:grid-cols-2 550px:grid-cols-3 1200px:grid-cols-4 1800px:grid-cols-5">
       {products?.length
-        ? products.map((item, i) => <Card item={item} i={i} />)
+        ? products.map((item, i) => <Card key={i} item={item} i={i} />)
         : // Skeleton Loader
           [...Array(20)].map((_, i) => (
             <div
