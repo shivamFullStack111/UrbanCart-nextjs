@@ -61,7 +61,7 @@ const Wishlist = ({ setisWishlistOpen, isWishlistOpen }) => {
               <div
                 key={i}
                 className={
-                  "h-44  1400px:h-62  w-full flex hap-3 mt-9 items-center rounded-xl shadow-lg relative"
+                  "h-44  1400px:h-62  gap-3 w-full flex hap-3 mt-9 rounded-xl shadow-lg relative"
                 }
               >
                 <RxCross1
@@ -70,26 +70,28 @@ const Wishlist = ({ setisWishlistOpen, isWishlistOpen }) => {
                   }}
                   className=" text-lg 800px:text-3xl right-5 top-5 absolute hover:text-red-500 cursor-pointer"
                 />
-                <div className="w-[170px] h-full relative">
+                <div className="w-[150px] h-full relative">
                   <Image alt="product" fill={true} src={item?.images[0]} />
                 </div>
-                <div className={"flex flex-col  800px:gap-2"}>
-                  <p className="text-yellow-400 font-semibold text-lg">
+                <div className={"flex flex-col mt-3  "}>
+                  <p className="text-yellow-400 font-semibold text-sm 800px:text-md 1000px:text-lg">
                     {item?.brand}
                   </p>
-                  <p className="text-gray-700 font-bold text-lg 800px:text-xl">
+                  <p className="text-gray-700 font-bold text-[15px] 800px:text-lg 1000px:text-xl">
                     {item?.title}
                   </p>
-                  <p className="text-gray-500 font-semibold 800px:text-lg">
+                  <p className="text-gray-500 font-semibold text-[16px] 800px:text-lg">
                     FREE SHIPPING
                   </p>
-                  <div className={"flex gap-4 "}>
-                    <p className="text-gray-900  font-semibold text-lg 800px:text-xl">
-                      ${item?.sellingPrice}
-                    </p>
-                    <p className="text-gray-400 line-through font-semibold  800px:text-2xl">
-                      ${item?.mrpPrice}
-                    </p>
+                  <div className={"flex gap-2 800px:gap-4 flex-col  "}>
+                    <div className="flex gap-2 800px:gap-5 items-center">
+                      <p className="text-gray-900  font-semibold text-[16px] 800px:text-lg 1000px:text-xl">
+                        ${item?.sellingPrice}
+                      </p>
+                      <p className="text-gray-400 line-through font-semibold  800px:text-lg">
+                        ${item?.mrpPrice}
+                      </p>
+                    </div>
                     <div
                       onClick={() => handleAddToCart()}
                       className="w-28 h-9 ml-auto  bg-violet-400 text-white cursor-pointer hover:-translate-y-2 transition-all duration-150  justify-center items-center flex rounded-md"

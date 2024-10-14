@@ -24,9 +24,9 @@ const Cart = () => {
   return (
     <>
       <Header />
-      <div className="h-full w-full flex flex-col 800px:flex-row  mt-14 gap-3 justify-center  ">
-        <div className="1400px:w-[60%] flex justify-center">
-          <div className="w-full 1400px:w-[70%]  px-3">
+      <div className="h-full w-full flex flex-col 950px:flex-row  mt-14 gap-3  items-center  ">
+        <div className="w-full 700px:w-[80%]  1400px:w-[60%] flex justify-center">
+          <div className="w-full   1400px:w-[70%]  px-3">
             <p className="p-6 text-xl 800px:text-3xl font-semibold">
               My bag has ({cart?.length}) items
             </p>
@@ -41,32 +41,34 @@ const Cart = () => {
                   <div
                     key={i}
                     className={
-                      "h-44 800px:h-52 1400px:h-62 gap-3  w-full flex hap-3 mt-9 items-center rounded-xl shadow-xl relative"
+                      "h-44 800px:h-52 1400px:h-62 gap-3  w-full flex hap-3 mt-9  rounded-xl shadow-xl relative"
                     }
                   >
                     <RxCross1
                       onClick={() => dispatch(removeItemFromCart(item?._id))}
                       className=" text-lg 800px:text-3xl right-5 top-5 absolute hover:text-red-500 cursor-pointer"
                     />
-                    <div className="w-[170px] h-full relative">
+                    <div className="w-[150px] h-full relative">
                       <Image alt="product" fill={true} src={item?.images[0]} />
                     </div>
-                    <div className={"flex flex-col  800px:gap-1"}>
-                      <p className="text-yellow-400 font-semibold text-lg">
+                    <div
+                      className={"flex flex-col mt-3 800px:mt-6   800px:gap-1"}
+                    >
+                      <p className="text-yellow-400 font-semibold 800px:text-lg">
                         {item?.brand}
                       </p>
-                      <p className="text-gray-700 font-bold text-lg 800px:text-xl">
+                      <p className="text-gray-700 font-bold text-sm 800px:text-lg 1000px:text-xl">
                         {item?.title}
                       </p>
-                      <p className="text-gray-500 font-semibold 800px:text-lg">
+                      <p className="text-gray-500 font-semibold text-[16px] 800px:text-lg">
                         FREE SHIPPING
                       </p>
                       <div className={"flex gap-4 "}>
-                        <p className="text-gray-900  font-semibold text-lg 800px:text-xl">
-                          {item?.sellingPrice}
+                        <p className="text-gray-600  font-semibold text-lg 800px:text-xl">
+                          ${item?.sellingPrice}
                         </p>
                         <p className="text-gray-400 line-through font-semibold  800px:text-2xl">
-                          {item?.mrpPrice}
+                          ${item?.mrpPrice}
                         </p>
                       </div>
                     </div>

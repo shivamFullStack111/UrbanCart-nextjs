@@ -191,7 +191,7 @@ const Card = ({ item, i }) => {
   return (
     <div
       // href={`/product-detail/${item?._id}`}
-      className="w-full cursor-pointer h-[110vw] 300px:h-[64vw] 550px:h-[40vw] 800px:h-[30vw] 1200px:h-[27vw] 1800px:h-[22vw]"
+      className="w-full cursor-pointer h-[110vw] mb-2 300px:h-[64vw] 550px:h-[40vw] 800px:h-[30vw] 1200px:h-[27vw] 1800px:h-[22vw]"
     >
       <Toaster />
       <div className="w-full h-[80%] relative">
@@ -223,15 +223,17 @@ const Card = ({ item, i }) => {
         />
       </div>
 
-      <Link href={`/product-detail/${item?._id}`} className="px-2">
-        <p className="text-lg font-semibold text-gray-700">{item?.title}</p>
+      <Link href={`/product-detail/${item?._id}`} className="">
+        <p className="text-sm 00px:text-lg font-semibold text-gray-700">
+          {item?.title?.slice(0, 15)}...
+        </p>
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
             <p className="text-sm 800px:text-lg font-semibold">
               ${item?.sellingPrice}
             </p>
             <p className="text-sm font-semibold line-through">
-              {item?.mrpPrice}
+              ${item?.mrpPrice}
             </p>
           </div>
           <p className="bg-green-500 px-2 py-[2px] text-[10px] 1000px:text-sm rounded-sm text-white ">
