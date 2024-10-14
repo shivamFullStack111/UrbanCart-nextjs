@@ -24,6 +24,8 @@ import { dummyProduct } from "../utils";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import toast from "react-hot-toast";
+import { addItemToWishlist } from "@/store/slices/wishlistSlice";
 
 const Wishlist = dynamic(() => import("./Wishlist"), {
   ssr: false, // Isko server side render nahi karna chahte
@@ -42,12 +44,6 @@ const Header = () => {
   const { user } = useSelector((state) => state.user);
 
   const [isWishlistOpen, setisWishlistOpen] = useState(false);
-
-  useEffect(() => {
-    console.log("isFousOnSearch:", isFousOnSearch);
-    console.log("isSideBarOpen:", isSideBarOpen);
-    console.log("isWishlistOpen:", isWishlistOpen);
-  }, []);
 
   return (
     <>
