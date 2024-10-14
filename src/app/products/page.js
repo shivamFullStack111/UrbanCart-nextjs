@@ -8,7 +8,7 @@ import axios from "axios";
 import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
 import { BsCart, BsHeart } from "react-icons/bs";
 import { FaHeart } from "react-icons/fa6";
@@ -156,6 +156,7 @@ const Card = ({ item, i }) => {
   const { wishlist } = useSelector((state) => state.wishlist);
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const router = useRouter();
 
   useEffect(() => {
     const isExist = wishlist.find((w) => w._id === item?._id);
@@ -194,7 +195,12 @@ const Card = ({ item, i }) => {
     >
       <Toaster />
       <div className="w-full h-[80%] relative">
-        <Image fill={true} src={item?.images[0]} className="z-20  " />
+        <Image
+          onClick={() => router.push(`/product-detail/${item?._id}`)}
+          fill={true}
+          src={item?.images[0]}
+          className="z-20  "
+        />
         <IoCart
           onClick={(e) => {
             e.stopPropagation();
@@ -202,7 +208,7 @@ const Card = ({ item, i }) => {
             handleAddToCart();
           }}
           className="absolute top-2  hover:scale-105 transition-all text-gray-500 duration-150  right-2 z-30"
-          size={24}
+          size={26}
         />
         <FaHeart
           onClick={(e) => {
@@ -217,7 +223,7 @@ const Card = ({ item, i }) => {
         />
       </div>
 
-      <div className="px-2">
+      <Link href={`/product-detail/${item?._id}`} className="px-2">
         <p className="text-lg font-semibold text-gray-700">{item?.title}</p>
         <div className="flex items-center justify-between">
           <div className="flex gap-2">
@@ -232,7 +238,7 @@ const Card = ({ item, i }) => {
             13% off
           </p>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };

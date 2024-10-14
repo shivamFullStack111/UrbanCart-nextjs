@@ -46,7 +46,8 @@ const Login = () => {
         dispatch(setUser(res.data?.user));
         localStorage.setItem("token_urbancart", res.data?.token);
         Cookies.set("token_urbancart", res.data?.token);
-        router.push("/");
+        // router.push("/");
+        window.location.reload();
       } else {
         toast.error(res.data.message);
       }
