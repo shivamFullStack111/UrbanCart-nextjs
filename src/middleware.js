@@ -9,7 +9,7 @@ export async function middleware(request) {
   // Check if token exists
   if (token) {
     try {
-      const res = await axios.get("http://localhost:3000/api/isauthenticated", {
+      const res = await axios.get("/api/isauthenticated", {
         headers: { Authorization: token },
       });
 
