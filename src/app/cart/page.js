@@ -11,6 +11,8 @@ import { FaBagShopping } from "react-icons/fa6";
 import { removeItemFromCart } from "@/store/slices/cartSlice";
 import { useRouter } from "next/navigation";
 import Address from "./Address";
+import Script from "next/script";
+import axios from "axios";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -25,6 +27,84 @@ const Cart = () => {
     if (user && user?.addresses?.length > 0)
       setselectedAddress(user?.addresses[0]);
   }, [user]);
+
+  const createOrderId = async () => {
+    try {
+      const res = await axios.post("/api/razorpay-intense", { amount: 40000 });
+
+      console.log(res?.data);
+      return res?.data?.orderId;
+    } catch (error) {
+      console.error("There was a problem with your fetch operation:", error);
+    }
+  };
+  const processPayment = async () => {
+    try {
+      // Fetch the order ID from your backend
+      const orderId = await createOrderId();
+
+      // Define Razorpay payment options
+      const options = {
+        key: process.env.key_id, // Use your Razorpay Key ID
+        amount: parseFloat(1000) * 100, // Convert amount to paise
+        currency: "INR",
+        name: "Your Company Name", // Customize as needed
+        description: "Product Description", // Customize as needed
+        order_id: orderId, // The order ID from Razorpay
+        handler: async function (response) {
+          const data = {
+            orderCreationId: orderId,
+            razorpayPaymentId: response.razorpay_payment_id,
+            razorpayOrderId: response.razorpay_order_id,
+            razorpaySignature: response.razorpay_signature,
+          };
+
+          // Verify the payment on the backend
+          // try {
+          //   const result = await fetch('/api/verify', {
+          //     method: 'POST',
+          //     headers: { 'Content-Type': 'application/json' },
+          //     body: JSON.stringify(data),
+          //   });
+
+          //   const res = await result.json();
+          //   if (res.isOk) {
+          //     alert("Payment successful!");
+          //   } else {
+          //     alert(res.message || "Payment verification failed. Please try again.");
+          //   }
+          // } catch (verifyError) {
+          //   console.error("Payment verification failed:", verifyError);
+          //   alert("An error occurred while verifying the payment. Please try again.");
+          // }
+        },
+        prefill: {
+          name: "shivam", // User's name
+          email: "shivam@gmail.com", // User's email
+        },
+        theme: {
+          color: "#3399cc", // Customize the color theme
+        },
+      };
+
+      // Create Razorpay payment object
+      const paymentObject = new window.Razorpay(options);
+
+      // Handle payment failure
+      paymentObject.on("payment.failed", function (response) {
+        console.error("Payment failed:", response.error);
+        alert(
+          response.error.description || "Payment failed. Please try again."
+        );
+      });
+
+      // Open the Razorpay payment modal
+      paymentObject.open();
+    } catch (error) {
+      console.error("Payment process error:", error);
+      alert("An error occurred during the payment process. Please try again.");
+    }
+  };
 
   useEffect(() => {
     if (cart?.length) {
@@ -43,9 +123,15 @@ const Cart = () => {
       user,
     };
     localStorage.setItem("latestOrder_urbancart", JSON.stringify(order));
+
+    processPayment();
   };
   return (
     <>
+      <Script
+        id="razorpay-checkout-js"
+        src="https://checkout.razorpay.com/v1/checkout.js"
+      />
       <Address
         addressOpen={addressOpen}
         setselectedAddress={setselectedAddress}

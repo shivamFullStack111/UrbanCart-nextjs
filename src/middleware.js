@@ -46,7 +46,6 @@ export async function middleware(request) {
   //     return NextResponse.redirect(new URL("/login", request.url));
   //   }
   // }
-  console.log(currentPath, "orihginjrf :-", request.nextUrl.origin, token);
   if (currentPath === "/login" || currentPath === "/register") {
     if (token) {
       return NextResponse.redirect(
