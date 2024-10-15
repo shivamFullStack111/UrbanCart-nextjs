@@ -1,14 +1,25 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Image from "next/image";
 import { dummyProduct } from "../utils";
 import { useState } from "react";
 import SideBarOfProfile from "./SideBar";
+import { useSelect } from "@nextui-org/react";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
+  const { user } = useSelector((state) => state.user);
+  const [data, setdata] = useState({});
+
+  useEffect(() => {
+    if (user) {
+      setdata(user);
+      console.log(user);
+    }
+  }, [user]);
   return (
     <>
       <Header />
@@ -36,6 +47,7 @@ const Profile = () => {
                   Name:
                   <div className="w-full p-2 mt-2 bg-gray-100 rounded-lg shadow-md">
                     <input
+                      value={data?.name}
                       className="bg-gray-100 w-full outline-none"
                       placeholder="Name"
                     />
@@ -45,6 +57,8 @@ const Profile = () => {
                   Email:
                   <div className="w-full p-2 mt-2 bg-gray-100 rounded-lg shadow-md">
                     <input
+                      value={data?.email}
+                      readOnly
                       className="bg-gray-100 w-full outline-none"
                       placeholder="Email"
                     />
@@ -57,27 +71,31 @@ const Profile = () => {
                   Phone number:
                   <div className="w-full p-2 mt-2 bg-gray-100 rounded-lg shadow-md">
                     <input
+                      value={data?.phoneNumber}
+                      readOnly
                       className="bg-gray-100 w-full outline-none"
                       placeholder="Phone number"
                     />
                   </div>
                 </div>
-                <div className="w-full">
-                  Email:
+                {/* <div className="w-full">
+                  Gender:
                   <div className="w-full p-2 mt-2 bg-gray-100 rounded-lg shadow-md">
                     <input
+                      value={data?.gender}
+                      
                       className="bg-gray-100 w-full outline-none"
-                      placeholder="Email"
+                      placeholder="Gender"
                     />
                   </div>
-                </div>
+                </div> */}
               </div>
 
               {/* botton  */}
 
-              <div className="w-full bg-violet-400 rounded-xl hover:translate-y-3 text-white hover:scale-105 transition-all duration-200 cursor-pointer font-bold hover:bg-violet-600 mt-5 mb-5  text-lg   800px:text-xl p-3 flex justify-center items-center">
+              {/* <div className="w-full bg-violet-400 rounded-xl hover:translate-y-3 text-white hover:scale-105 transition-all duration-200 cursor-pointer font-bold hover:bg-violet-600 mt-5 mb-5  text-lg   800px:text-xl p-3 flex justify-center items-center">
                 <p>Update Profile</p>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

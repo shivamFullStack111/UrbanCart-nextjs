@@ -41,7 +41,7 @@ const Home = () => {
       </div>
 
       {/* gender categories  */}
-      <div className="w-full flex justify-center gap-6  mt-10">
+      <div className="w-full flex justify-center gap-6  mt-6">
         <Link
           href={"/products?gender=kid"}
           className="flex flex-col items-center"

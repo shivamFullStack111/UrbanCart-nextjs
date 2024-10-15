@@ -9,11 +9,16 @@ import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { FaBagShopping } from "react-icons/fa6";
 import { removeItemFromCart } from "@/store/slices/cartSlice";
+import { useRouter } from "next/navigation";
+import Address from "./Address";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [totalPrice, settotalPrice] = useState("");
+  const router = useRouter();
+  const [addressOpen, setaddressOpen] = useState(true);
 
   useEffect(() => {
     if (cart?.length) {
@@ -21,8 +26,23 @@ const Cart = () => {
       settotalPrice(total);
     }
   }, [cart]);
+
+  const handleNextStep = () => {
+    let order = {
+      cart,
+      discount: totalPrice * 0.03,
+      delivery: 0,
+      itemsTotalPrice: totalPrice,
+      subTotal: totalPrice + totalPrice * 0.07,
+      user,
+    };
+    localStorage.setItem("latestOrder_urbancart", JSON.stringify(order));
+
+    setaddressOpen(true);
+  };
   return (
     <>
+      <Address addressOpen={addressOpen} setaddressOpen={setaddressOpen} />
       <Header />
       <div className="h-full w-full flex flex-col 950px:flex-row  mt-14 gap-3  items-center  ">
         <div className="w-full 700px:w-[80%]  1400px:w-[60%] flex justify-center">
@@ -128,7 +148,7 @@ const Cart = () => {
                   Total MRP (Incl. of taxes)
                 </p>
                 <p className={" font-semibold text-gray-500 text-lg"}>
-                  ${totalPrice}
+                  ${totalPrice + totalPrice * 0.1}
                 </p>
               </div>
               <div className="justify-between flex mt-2 ">
@@ -141,9 +161,11 @@ const Cart = () => {
               </div>
               <div className="justify-between flex mt-2">
                 <p className={"text-xl font-semibold text-gray-600"}>
-                  Bag Discount
+                  Discount
                 </p>
-                <p className={" font-semibold text-gray-500 text-lg"}>$3</p>
+                <p className={" font-semibold text-green-500 text-lg"}>
+                  -${totalPrice * 0.03}
+                </p>
               </div>
               <div className="justify-between flex mt-2">
                 <p className={"text-xl font-semibold text-green-500"}>
@@ -156,14 +178,19 @@ const Cart = () => {
 
               <div className="justify-between flex mt-2">
                 <p className={"text-2xl font-bold text-black"}>Subtotal</p>
-                <p className={" font-semibold text-gray-700 text-xl"}>$292</p>
+                <p className={" font-semibold text-gray-700 text-xl"}>
+                  {totalPrice + totalPrice * 0.07}
+                </p>
               </div>
 
               <p className="bg-green-200 my-3 flex font-semibold justify-center items-center py-2 rounded-lg">
-                You are saving a total of ₹600 on this order
+                You are saving a total of {totalPrice * 0.03} on this order
               </p>
-
-              <p className="bg-violet-400 my-3 flex font-bold text-white text-xl justify-center items-center py-3 rounded-xl">
+              {/* ₹ */}
+              <p
+                onClick={handleNextStep}
+                className="bg-violet-400 cursor-pointer my-3 flex font-bold text-white text-xl justify-center items-center py-3 rounded-xl"
+              >
                 Procced
               </p>
             </div>

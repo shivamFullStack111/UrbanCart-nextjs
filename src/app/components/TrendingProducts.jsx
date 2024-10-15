@@ -7,8 +7,8 @@ const TrendingProducts = () => {
   const { trendingProducts } = useSelector((state) => state.product);
   return (
     <>
-      <div className="max-800px:pt-12  ">
-        <p className="text-xl 800px:text-2xl font-bold text-gray-600 px-3 mt-4 mb-2 800px:p-7 animate-pulse">
+      <div className="  ">
+        <p className="text-xl 800px:text-2xl font-bold text-gray-600 px-3 mb-2 800px:p-2 animate-pulse">
           Trending
         </p>
         <div className="flex mt-2 flex-wrap justify-center w-full">
