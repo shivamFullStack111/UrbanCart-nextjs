@@ -1,9 +1,11 @@
 import { JWT_SECRET } from "@/app/utils";
+import { dbConnect } from "@/lib/dbConnect";
 import Product from "@/models/Product";
 import User from "@/models/User";
 import jwt from "jsonwebtoken";
 export async function POST(req) {
   try {
+    await dbConnect();
     const data = await req.json();
     console.log(data);
     const cookies = req.headers.get("cookie");

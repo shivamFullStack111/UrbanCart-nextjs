@@ -1,8 +1,10 @@
 import { JWT_SECRET } from "@/app/utils";
+import { dbConnect } from "@/lib/dbConnect";
 import User from "@/models/User";
 import jwt from "jsonwebtoken";
 export const authentication = async (req, res, next) => {
   try {
+    await dbConnect();
     const { authorization } = req.headers;
 
     if (!authorization)

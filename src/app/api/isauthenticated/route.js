@@ -1,9 +1,11 @@
 import jwt from "jsonwebtoken";
 import User from "@/models/User"; // Assuming you have a User model
 import { JWT_SECRET } from "@/app/utils"; // Replace with your JWT_SECRET
+import { dbConnect } from "@/lib/dbConnect";
 
 export async function GET(req) {
   try {
+    await dbConnect();
     // Access the 'authorization' header using the Fetch API method
     const authorization = req.headers.get("authorization");
 

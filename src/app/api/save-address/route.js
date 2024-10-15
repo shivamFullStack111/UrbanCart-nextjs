@@ -2,6 +2,7 @@ import User from "@/models/User";
 
 export async function POST(req) {
   try {
+    await dbConnect();
     const { user, address } = await req.json();
 
     const isUserExist = await User.findOne({ _id: user?._id });
