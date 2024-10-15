@@ -7,17 +7,12 @@ import {
   FaPhone,
   FaRegAddressCard,
 } from "react-icons/fa6";
-import { Country, State, City } from "country-state-city";
+import { Country, State } from "country-state-city";
 import { TbBrandGoogleMaps } from "react-icons/tb";
-import { CiDeliveryTruck } from "react-icons/ci";
-import { MdDeliveryDining } from "react-icons/md";
 import { GiDeliveryDrone } from "react-icons/gi";
-import Image from "next/image";
 import axios from "axios";
-import { useSelect } from "@nextui-org/react";
 import { useSelector } from "react-redux";
 import toast, { Toaster } from "react-hot-toast";
-import { Button } from "bootstrap";
 import { RxCross1 } from "react-icons/rx";
 import { motion } from "framer-motion";
 

@@ -18,7 +18,7 @@ const Cart = () => {
   const dispatch = useDispatch();
   const [totalPrice, settotalPrice] = useState("");
   const router = useRouter();
-  const [addressOpen, setaddressOpen] = useState(true);
+  const [addressOpen, setaddressOpen] = useState(false);
 
   useEffect(() => {
     if (cart?.length) {
