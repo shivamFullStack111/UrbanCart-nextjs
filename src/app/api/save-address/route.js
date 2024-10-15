@@ -12,7 +12,7 @@ export async function POST(req) {
         { status: 404 }
       );
     }
-
+    // rfj
     isUserExist.addresses = [address];
 
     await isUserExist.save(); // Save the updated user
