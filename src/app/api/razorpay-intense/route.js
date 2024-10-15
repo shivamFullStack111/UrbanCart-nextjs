@@ -10,16 +10,13 @@ export async function POST(req) {
     const { amount } = await req.json();
 
     var options = {
-      amount: amount,
+      amount: amount * 100,
       currency: "INR",
       receipt: "rcp1",
     };
+
     let order;
-    console.log(
-      process.env.RAZ_KEYID,
-      "------------",
-      process.env.RAZ_KEYSECRET
-    );
+
     try {
       order = await razorpay.orders.create(options);
     } catch (error) {

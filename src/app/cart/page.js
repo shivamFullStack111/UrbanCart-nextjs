@@ -8,11 +8,12 @@ import { dummyProduct, dummyProducts } from "../utils";
 import { RxCross1 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import { FaBagShopping } from "react-icons/fa6";
-import { removeItemFromCart } from "@/store/slices/cartSlice";
+import { removeItemFromCart, setallCart } from "@/store/slices/cartSlice";
 import { useRouter } from "next/navigation";
 import Address from "./Address";
 import Script from "next/script";
 import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
 
 const Cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -30,7 +31,9 @@ const Cart = () => {
 
   const createOrderId = async () => {
     try {
-      const res = await axios.post("/api/razorpay-intense", { amount: 40000 });
+      const res = await axios.post("/api/razorpay-intense", {
+        amount: Math.floor(totalPrice + totalPrice * 0.07),
+      });
 
       console.log(res?.data);
       return res?.data?.orderId;
@@ -46,10 +49,10 @@ const Cart = () => {
       // Define Razorpay payment options
       const options = {
         key: process.env.key_id, // Use your Razorpay Key ID
-        amount: parseFloat(1000) * 100, // Convert amount to paise
+        amount: totalPrice, // Convert amount to paise
         currency: "INR",
-        name: "Your Company Name", // Customize as needed
-        description: "Product Description", // Customize as needed
+        name: "Urban Cart", // Customize as needed
+        description: "this is description", // Customize as needed
         order_id: orderId, // The order ID from Razorpay
         handler: async function (response) {
           const data = {
@@ -59,6 +62,36 @@ const Cart = () => {
             razorpaySignature: response.razorpay_signature,
           };
 
+          console.log("order success :-", data);
+
+          let order = {
+            cart,
+            discount: totalPrice * 0.03,
+            delivery: 0,
+            totalMRP: totalPrice,
+            subTotal: totalPrice + totalPrice * 0.07,
+            user,
+            address: selectedAddress,
+            orderid: orderId,
+          };
+          if (
+            data?.orderCreationId &&
+            data?.razorpayOrderId &&
+            data?.razorpayPaymentId &&
+            data?.razorpaySignature
+          ) {
+            const res = await axios.post("/api/create-order", { user, order });
+            if (res?.data?.success) {
+              toast.success("order successfull");
+              dispatch(setallCart([]));
+              localStorage.setItem("cart_urbancart", JSON.stringify([]));
+              router.push("/order-success");
+            } else {
+              toast.error(res?.data?.message);
+            }
+          } else {
+            toast.error("something went wrong");
+          }
           // Verify the payment on the backend
           // try {
           //   const result = await fetch('/api/verify', {
@@ -79,8 +112,8 @@ const Cart = () => {
           // }
         },
         prefill: {
-          name: "shivam", // User's name
-          email: "shivam@gmail.com", // User's email
+          name: user?.name, // User's name
+          email: user?.email, // User's email
         },
         theme: {
           color: "#3399cc", // Customize the color theme
@@ -89,7 +122,7 @@ const Cart = () => {
 
       // Create Razorpay payment object
       const paymentObject = new window.Razorpay(options);
-
+      console.log("paymentObject:-", paymentObject);
       // Handle payment failure
       paymentObject.on("payment.failed", function (response) {
         console.error("Payment failed:", response.error);
@@ -114,20 +147,11 @@ const Cart = () => {
   }, [cart]);
 
   const handleNextStep = () => {
-    let order = {
-      cart,
-      discount: totalPrice * 0.03,
-      delivery: 0,
-      itemsTotalPrice: totalPrice,
-      subTotal: totalPrice + totalPrice * 0.07,
-      user,
-    };
-    localStorage.setItem("latestOrder_urbancart", JSON.stringify(order));
-
     processPayment();
   };
   return (
     <>
+      <Toaster />
       <Script
         id="razorpay-checkout-js"
         src="https://checkout.razorpay.com/v1/checkout.js"
@@ -138,8 +162,8 @@ const Cart = () => {
         setaddressOpen={setaddressOpen}
       />
       <Header />
-      <div className="h-full w-full flex flex-col 950px:flex-row  mt-14 gap-3  max-800px:items-center  ">
-        <div className="w-full 700px:w-[80%]  1400px:w-[60%] flex justify-center">
+      <div className="h-full w-full flex flex-col 950px:flex-row  mt-4 gap-3 justify-center max-950px:items-center  ">
+        <div className="w-full   1400px:w-[160%] flex justify-center ">
           <div className="w-full   1400px:w-[70%]  px-3">
             <p className="p-6 text-xl 800px:text-3xl font-semibold">
               My bag has ({cart?.length}) items
@@ -201,7 +225,7 @@ const Cart = () => {
           </div>
         </div>
         {cart?.length > 0 && (
-          <div className="w-full 800px:w-[40%] mt-6 800px:mt-20 flex flex-col items-center  gap-3">
+          <div className="w-full  mt-6 800px:mt-10 flex flex-col items-center  gap-3">
             <div className="p-3 shadow-lg rounded-lg w-[90%] 1400px:w-[80%]">
               <p className="font-semibold test-gray-600 ">Coupons & Offers</p>
               <div className="flex gap-2 items-center">
@@ -258,7 +282,7 @@ const Cart = () => {
                   Discount
                 </p>
                 <p className={" font-semibold text-green-500 text-lg"}>
-                  -${totalPrice * 0.03}
+                  -${Math.floor(totalPrice * 0.03)}
                 </p>
               </div>
               <div className="justify-between flex mt-2">
@@ -278,7 +302,8 @@ const Cart = () => {
               </div>
 
               <p className="bg-green-200 my-3 flex font-semibold justify-center items-center py-2 rounded-lg">
-                You are saving a total of {totalPrice * 0.03} on this order
+                You are saving a total of {Math.floor(totalPrice * 0.03)} on
+                this order
               </p>
               {/* ₹ */}
 
