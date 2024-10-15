@@ -9,9 +9,12 @@ export async function middleware(request) {
   // Check if token exists
   if (token) {
     try {
-      const res = await axios.get("/api/isauthenticated", {
-        headers: { Authorization: token },
-      });
+      const res = await axios.get(
+        `${request.nextUrl.origin}/api/isauthenticated`,
+        {
+          headers: { Authorization: token },
+        }
+      );
 
       console.log(res.data.success);
       console.log(currentPath);
