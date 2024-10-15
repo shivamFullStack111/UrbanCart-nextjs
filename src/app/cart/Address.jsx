@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaBuilding,
   FaCity,
   FaMap,
   FaPhone,
   FaRegAddressCard,
+  FaUser,
 } from "react-icons/fa6";
 import { Country, State } from "country-state-city";
 import { TbBrandGoogleMaps } from "react-icons/tb";
@@ -16,11 +17,15 @@ import toast, { Toaster } from "react-hot-toast";
 import { RxCross1 } from "react-icons/rx";
 import { motion } from "framer-motion";
 
-const Address = ({ addressOpen, setaddressOpen }) => {
+const Address = ({ addressOpen, setaddressOpen, setselectedAddress }) => {
   const [address, setaddress] = useState({
     addressType: "home",
   });
   const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (user) setaddress(user?.addresses[0]);
+  }, [user]);
 
   const handleSaveAddress = async () => {
     try {
@@ -49,6 +54,8 @@ const Address = ({ addressOpen, setaddressOpen }) => {
 
       if (res.data?.success) {
         toast.success(res?.data?.message);
+        setselectedAddress(res?.data?.user?.addresses[0]);
+        setaddressOpen(false);
       } else {
         toast.error(res?.data?.message);
       }
@@ -69,11 +76,26 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                 width: addressOpen ? "100%" : 0,
                 height: addressOpen ? "100%" : 0,
               }}
-              className=" w-full h-full  justify-center  650px:h-[95vh] 650px:w-[600px] overflow-y-scroll relative p-2 bg-white rounded-xl  flex flex-col items-center"
+              className=" w-full h-full  justify-center  650px:h-[95vh] 650px:w-[600px] overflow-scroll p-3 overflow-x-hidden relative py-16  bg-white rounded-xl  flex flex-col items-center"
             >
-              <h3 className="text-xl font-bold text-gray-700">
+              <h3 className="text-xl mt-10 font-bold text-gray-700">
                 Add your address
               </h3>
+
+              <p className="text-lg font-semibold w-full mt-4">
+                Save Addresses
+              </p>
+              <div className="flex gap-2 w-full mx-3">
+                {user?.addresses?.map((adrs, i) => (
+                  <div
+                    onClick={() => setaddress(adrs)}
+                    key={i}
+                    className="px-5 py-1 mt-2 bg-slate-300 border-2 cursor-pointer hover:bg-gray-300 border-gray-400 rounded-md flex justify-center items-center text-lg font-semibold"
+                  >
+                    {adrs?.addressType}
+                  </div>
+                ))}
+              </div>
               <RxCross1
                 onClick={() => {
                   setaddressOpen(false);
@@ -87,12 +109,28 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                 <div>
                   <p className=" font-semibold">Name:</p>
                   <div className=" flex bg-gray-100 rounded-md items-center gap-2 px-2  h-10">
-                    <FaRegAddressCard size={28} className="text-gray-500" />
+                    <FaUser size={28} className="text-gray-500 p-[2px]" />
                     <input
                       onChange={(e) =>
                         setaddress((p) => ({ ...p, name: e.target.value }))
                       }
-                      placeholder="Enter address"
+                      placeholder="Enter your name"
+                      value={address?.name}
+                      type="text"
+                      className="w-[90%] h-full outline-none  bg-gray-100"
+                    />
+                  </div>
+                </div>
+                <div>
+                  <p className=" font-semibold">Address:</p>
+                  <div className=" flex bg-gray-100 rounded-md items-center gap-2 px-2  h-10">
+                    <FaRegAddressCard size={28} className="text-gray-500" />
+                    <input
+                      onChange={(e) =>
+                        setaddress((p) => ({ ...p, address: e.target.value }))
+                      }
+                      placeholder="Enter your address"
+                      value={address?.address}
                       type="text"
                       className="w-[90%] h-full outline-none  bg-gray-100"
                     />
@@ -104,6 +142,7 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                   <div className=" flex bg-gray-100 rounded-md items-center gap-2 px-2  h-10">
                     <FaPhone size={23} className="text-gray-500" />
                     <input
+                      value={address?.phoneNumber}
                       onChange={(e) =>
                         setaddress((p) => ({
                           ...p,
@@ -121,6 +160,7 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                   <div className=" flex bg-gray-100 rounded-md items-center gap-2 px-2  h-10">
                     <FaBuilding size={25} className="text-gray-500" />
                     <input
+                      value={address?.appartment}
                       onChange={(e) =>
                         setaddress((p) => ({
                           ...p,
@@ -138,6 +178,7 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                   <div className=" flex bg-gray-100 rounded-md items-center relative gap-2 px-2  h-10">
                     <FaMap size={25} className="text-gray-500" />
                     <select
+                      value={address?.country}
                       onChange={(e) =>
                         setaddress((p) => ({ ...p, country: e.target.value }))
                       }
@@ -156,6 +197,7 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                   <div className=" flex bg-gray-100 rounded-md items-center relative gap-2 px-2  h-10">
                     <FaCity size={25} className="text-gray-500" />
                     <select
+                      value={address?.city}
                       onChange={(e) =>
                         setaddress((p) => ({ ...p, state: e.target.value }))
                       }
@@ -178,6 +220,7 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                   <div className=" flex bg-gray-100 rounded-md items-center gap-2 px-2  h-10">
                     <TbBrandGoogleMaps size={23} className="text-gray-500" />
                     <input
+                      value={address?.pincode}
                       onChange={(e) =>
                         setaddress((p) => ({ ...p, pincode: e.target.value }))
                       }
@@ -194,6 +237,7 @@ const Address = ({ addressOpen, setaddressOpen }) => {
                   <div className=" flex bg-gray-100 rounded-md items-center relative gap-2 px-2  h-10">
                     <GiDeliveryDrone size={25} className="text-gray-500" />
                     <select
+                      value={address?.addressType}
                       onChange={(e) =>
                         setaddress((p) => ({
                           ...p,

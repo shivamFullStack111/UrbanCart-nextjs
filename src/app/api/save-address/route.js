@@ -13,14 +13,14 @@ export async function POST(req) {
       );
     }
 
-    isUserExist.addresses = [...(isUserExist.addresses || []), address];
+    isUserExist.addresses = [address];
 
     await isUserExist.save(); // Save the updated user
 
     return new Response(
       JSON.stringify({
         success: true,
-        message: "Address added successfully",
+        message: "Address saved successfully",
         user: isUserExist,
       }),
       { status: 200 }

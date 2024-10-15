@@ -19,6 +19,11 @@ const Cart = () => {
   const [totalPrice, settotalPrice] = useState("");
   const router = useRouter();
   const [addressOpen, setaddressOpen] = useState(false);
+  const [selectedAddress, setselectedAddress] = useState();
+
+  useEffect(() => {
+    if (user && user?.addresses[0]) setselectedAddress(user?.addresses[0]);
+  }, [user]);
 
   useEffect(() => {
     if (cart?.length) {
@@ -37,14 +42,16 @@ const Cart = () => {
       user,
     };
     localStorage.setItem("latestOrder_urbancart", JSON.stringify(order));
-
-    setaddressOpen(true);
   };
   return (
     <>
-      <Address addressOpen={addressOpen} setaddressOpen={setaddressOpen} />
+      <Address
+        addressOpen={addressOpen}
+        setselectedAddress={setselectedAddress}
+        setaddressOpen={setaddressOpen}
+      />
       <Header />
-      <div className="h-full w-full flex flex-col 950px:flex-row  mt-14 gap-3  items-center  ">
+      <div className="h-full w-full flex flex-col 950px:flex-row  mt-14 gap-3  max-800px:items-center  ">
         <div className="w-full 700px:w-[80%]  1400px:w-[60%] flex justify-center">
           <div className="w-full   1400px:w-[70%]  px-3">
             <p className="p-6 text-xl 800px:text-3xl font-semibold">
@@ -187,6 +194,21 @@ const Cart = () => {
                 You are saving a total of {totalPrice * 0.03} on this order
               </p>
               {/* ₹ */}
+
+              <div
+                onClick={() => setaddressOpen(true)}
+                className="flex gap-3 items-center border-2 rounded-md  p-1 cursor-pointer "
+              >
+                <p className="font-semibold text-lg text-gray-700 ">
+                  Address:-
+                </p>
+                <p className="font-semibold text-lg text-gray-500">
+                  {selectedAddress?.addressType}
+                </p>
+                <p className="text-blue-400 underline font-semibold ml-auto">
+                  Edit
+                </p>
+              </div>
               <p
                 onClick={handleNextStep}
                 className="bg-violet-400 cursor-pointer my-3 flex font-bold text-white text-xl justify-center items-center py-3 rounded-xl"
