@@ -23,10 +23,6 @@ const Address = ({ addressOpen, setaddressOpen, setselectedAddress }) => {
   });
   const { user } = useSelector((state) => state.user);
 
-  useEffect(() => {
-    if (user) setaddress(user?.addresses[0]);
-  }, [user]);
-
   const handleSaveAddress = async () => {
     try {
       const {

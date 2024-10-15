@@ -22,7 +22,8 @@ const Cart = () => {
   const [selectedAddress, setselectedAddress] = useState();
 
   useEffect(() => {
-    if (user && user?.addresses[0]) setselectedAddress(user?.addresses[0]);
+    if (user && user?.addresses?.length > 0)
+      setselectedAddress(user?.addresses[0]);
   }, [user]);
 
   useEffect(() => {
