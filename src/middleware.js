@@ -13,6 +13,8 @@ export async function middleware(request) {
         `${request.nextUrl.origin}/api/isauthenticated`,
         {
           headers: { Authorization: token },
+
+          timeout: 10000, // 10 seconds
         }
       );
 
@@ -33,7 +35,7 @@ export async function middleware(request) {
         }
       }
     } catch (error) {
-      console.error("Error in middleware:", error.message);
+      alert("Error in middleware:", error.message);
       // Optionally redirect to a fallback page if the API call fails
       return NextResponse.redirect(new URL("/error", request.url));
     }
