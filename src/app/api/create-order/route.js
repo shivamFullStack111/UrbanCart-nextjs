@@ -15,7 +15,7 @@ export async function POST(req) {
       );
     }
 
-    const newOrder = new Order(order);
+    const newOrder = new Order({ ...order, userEmail: user?.email });
 
     await newOrder.save();
 

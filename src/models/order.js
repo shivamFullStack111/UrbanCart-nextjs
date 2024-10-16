@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 const orderSchema = new mongoose.Schema(
   {
     user: Object,
+    userEmail: String,
     orderid: String,
     totalMRP: Number,
     subTotal: Number,
@@ -10,6 +11,11 @@ const orderSchema = new mongoose.Schema(
     discount: Number,
     delivery: Number,
     address: Object,
+    status: {
+      type: String,
+      default: "Processing",
+    },
+    reason: String,
   },
   { timestamps: true }
 );

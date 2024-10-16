@@ -5,6 +5,7 @@ import { PiCardsFill } from "react-icons/pi";
 import { RxCross1 } from "react-icons/rx";
 import { dummyProduct } from "../utils";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 
 const navigations = [
   {
@@ -32,14 +33,16 @@ const navigations = [
     icon: <PiCardsFill />,
     to: "/profile/live-orders",
   },
-  {
-    name: "Create Product",
-    icon: <PiCardsFill />,
-    to: "/profile/create-product",
-  },
+  // {
+  //   name: "Create Product",
+  //   icon: <PiCardsFill />,
+  //   to: "/profile/create-product",
+  // },
 ];
 
 const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
+  const { user } = useSelector((state) => state.user);
+
   return (
     <>
       {/* mobile side bar in top headder button */}
@@ -121,6 +124,16 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
               {item.name}
             </Link>
           ))}
+          {user && user?.isAdmin && (
+            <Link
+              href={"/profile/create-product"}
+              className={`text-lg py-2 bg-white text-gray-700 hover:bg-yellow-200 cursor-pointer hover:translate-x-2 transition-all duration-150 rounded-xl px-2 font-semibold ${
+                page == 6 && "bg-yellow-200 translate-x-2 "
+              } `}
+            >
+              Create Product
+            </Link>
+          )}
         </div>
       </div>
     </>

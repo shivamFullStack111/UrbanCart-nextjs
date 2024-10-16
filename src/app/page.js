@@ -4,7 +4,7 @@ import React from "react";
 import Head from "next/head"; // Import the Head component
 import Header from "./components/Header";
 import SaleBanner from "./components/SaleBanner";
-import { Quicksand } from "next/font/google";
+import { Poppins } from "next/font/google";
 import LowwersCarousel from "./components/LowwersCarousel";
 import Footer from "./components/Footer";
 import Image from "next/image";
@@ -17,7 +17,7 @@ import NewArrival from "./components/NewArrival/page";
 import Link from "next/link";
 import TrendingProducts from "./components/TrendingProducts";
 
-const roboto = Quicksand({
+const roboto = Poppins({
   weight: ["400"],
   style: ["normal"],
   subsets: ["latin-ext"],
