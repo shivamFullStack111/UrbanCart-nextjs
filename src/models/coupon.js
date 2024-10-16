@@ -5,9 +5,9 @@ const couponSchema = new mongoose.Schema({
   discountPercent: Number,
   minValue: Number,
   maxValue: Number,
-  porductId: String,
+  productsId: Array,
 });
 
-const Coupon = mongoose.models.Coupon || mongoose.model("Order", couponSchema);
+const Coupon = mongoose.models.Coupon || mongoose.model("Coupon", couponSchema);
 
 export default Coupon;
