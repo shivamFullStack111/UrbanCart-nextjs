@@ -15,7 +15,7 @@ const NewArrival = () => {
             key={i}
             className="h-64 cursor-pointer  border-2 border-white w-[48%] 500px:h-72 600px:h-68 600px:w-[32%] 800px:w-[37%] 900px:w-[30%] 900px:h-72 1050px:w-[32%] 1050px:h-80 1300px:h-[400px] 1500px:w-[25%]  1750px:h-[420] 1950px:h-[440] 2000px:h-[460px]"
           >
-            <div className="w-full h-[70%] 800px:h-[80%] relative">
+            <div className="w-full h-[70%] overflow-hidden 800px:h-[80%] relative">
               <Image
                 lazy="true"
                 alt="Product image"
