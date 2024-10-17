@@ -191,7 +191,10 @@ const Header = () => {
                   </Link>
 
                   {!user && (
-                    <Link className="font-semibold underline hover:scale-105 transition-all duration-200">
+                    <Link
+                      href={"/login"}
+                      className="font-semibold underline hover:scale-105 transition-all duration-200"
+                    >
                       Login
                     </Link>
                   )}

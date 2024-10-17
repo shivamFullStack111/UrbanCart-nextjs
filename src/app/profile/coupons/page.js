@@ -70,13 +70,15 @@ const Coupons = () => {
           {/* Coupons Box */}
           <div className="grid grid-cols-1 gap-4 max-w-4xl w-full 800px:h-[400px]">
             <div className="w-full flex justify-end mt-2 800px:mt-4">
-              <div
-                onClick={() => setcreateCouponsOpen(true)}
-                className="flex gap-2 py-1 px-3 max-h-12 cursor-pointer  100px:px-4 rounded-md  items-center text-white font-semibold text-lg bg-blue-500 hover:bg-blue-400"
-              >
-                <BsPlusCircle />
-                <p>Create coupon</p>
-              </div>
+              {user?.isAdmin && (
+                <div
+                  onClick={() => setcreateCouponsOpen(true)}
+                  className="flex gap-2 py-1 px-3 max-h-12 cursor-pointer  100px:px-4 rounded-md  items-center text-white font-semibold text-lg bg-blue-500 hover:bg-blue-400"
+                >
+                  <BsPlusCircle />
+                  <p>Create coupon</p>
+                </div>
+              )}
             </div>
             {allCoupons.map((coupon) => (
               <div
@@ -302,11 +304,13 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
             className=" rounded-md p-2 outline-none h-10 w-full bg-gray-100 border-2 focus:border-yellow-300 "
           />
 
-          <p className="font-semibold mt-4 text-gray-500">Title:</p>
+          <p className="font-semibold mt-4 text-gray-500">Expire in:</p>
           <input
-            onChange={(e) => setdata((p) => ({ ...p, title: e.target.value }))}
+            onChange={(e) =>
+              setdata((p) => ({ ...p, expireDate: e.target.value }))
+            }
             type="datetime-local"
-            placeholder="Enter title"
+            placeholder="Select expire date time"
             className=" rounded-md p-2 outline-none h-10 w-full bg-gray-100 border-2 focus:border-yellow-300 "
           />
 
