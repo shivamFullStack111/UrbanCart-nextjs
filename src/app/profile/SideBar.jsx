@@ -5,7 +5,10 @@ import { PiCardsFill } from "react-icons/pi";
 import { RxCross1 } from "react-icons/rx";
 import { dummyProduct } from "../utils";
 import Link from "next/link";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { GiExitDoor } from "react-icons/gi";
+import { setUser } from "@/store/slices/userSlice";
+import Cookies from "js-cookie";
 
 const navigations = [
   {
@@ -42,6 +45,7 @@ const navigations = [
 
 const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -96,6 +100,17 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
               {item.name}
             </Link>
           ))}
+          <div
+            onClick={() => {
+              dispatch(setUser(null));
+              Cookies.remove("token_urbancart");
+              window.location.reload();
+            }}
+            className={`text-lg py-2 flex gap-2 items-center bg-white text-gray-700 hover:bg-yellow-200 cursor-pointer hover:translate-x-2 transition-all duration-150 rounded-xl px-2 font-semibold  `}
+          >
+            <p> Log out</p>
+            <GiExitDoor size={25} />
+          </div>
         </div>
       </motion.div>
 
@@ -124,6 +139,7 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
               {item.name}
             </Link>
           ))}
+
           {user && user?.isAdmin && (
             <Link
               href={"/profile/create-product"}
@@ -134,6 +150,18 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
               Create Product
             </Link>
           )}
+
+          <div
+            onClick={() => {
+              dispatch(setUser(null));
+              Cookies.remove("token_urbancart");
+              window.location.reload();
+            }}
+            className={`text-lg flex gap-2 items-center py-2 bg-white text-gray-700 hover:bg-yellow-200 cursor-pointer hover:translate-x-2 transition-all duration-150 rounded-xl px-2 font-semibold  `}
+          >
+            <p>Log out</p>
+            <GiExitDoor />
+          </div>
         </div>
       </div>
     </>

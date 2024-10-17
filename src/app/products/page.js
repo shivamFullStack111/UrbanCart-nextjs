@@ -83,7 +83,7 @@ const Products = () => {
         <title>My page title</title>
       </Head>
       <div className={sand.className}>
-        <Header />
+        <Header active={2} />
         <div className={"800px:flex max-800px:pt-20"}>
           <SideBar
             category={category}

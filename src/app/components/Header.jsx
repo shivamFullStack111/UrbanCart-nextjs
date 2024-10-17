@@ -23,9 +23,11 @@ import { BsHearts } from "react-icons/bs";
 import { dummyProduct } from "../utils";
 import dynamic from "next/dynamic";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import toast from "react-hot-toast";
 import { addItemToWishlist } from "@/store/slices/wishlistSlice";
+import { setUser } from "@/store/slices/userSlice";
+import Cookies from "js-cookie";
 
 const Wishlist = dynamic(() => import("./Wishlist"), {
   ssr: false, // Isko server side render nahi karna chahte
@@ -38,10 +40,11 @@ const Abril = Abril_Fatface({
   display: "swap",
 });
 
-const Header = () => {
+const Header = ({ active }) => {
   const [isFousOnSearch, setisFousOnSearch] = useState(false);
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const [isWishlistOpen, setisWishlistOpen] = useState(false);
 
@@ -90,7 +93,9 @@ const Header = () => {
               <Link
                 href={item?.to}
                 key={i}
-                className="flex items-center justify-between p-3 rounded-xl cursor-pointer hover:bg-gray-200"
+                className={`flex items-center justify-between p-3 rounded-xl cursor-pointer  ${
+                  active === i + 1 && "bg-red-200"
+                }`}
               >
                 <div className="flex gap-2 items-center  ">
                   {item?.icon}
@@ -103,7 +108,9 @@ const Header = () => {
 
             <div
               onClick={() => {
-                alert("log out");
+                dispatch(setUser(null));
+                Cookies.remove("token_urbancart");
+                window.location.reload();
               }}
               className="flex items-center justify-between p-3 rounded-xl cursor-pointer hover:bg-gray-200"
             >

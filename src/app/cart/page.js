@@ -161,7 +161,7 @@ const Cart = () => {
         setselectedAddress={setselectedAddress}
         setaddressOpen={setaddressOpen}
       />
-      <Header />
+      <Header active={4} />
       <div className="h-full w-full flex flex-col 950px:flex-row  mt-4 gap-3 justify-center max-950px:items-center  ">
         <div className="w-full   1400px:w-[160%] flex justify-center ">
           <div className="w-full   1400px:w-[70%]  px-3">

@@ -41,7 +41,7 @@ const MyOrders = () => {
 
   return (
     <>
-      <Header />
+      <Header active={3} />
       <Toaster />
       <div className="flex flex-col 800px:flex-row min-h-screen">
         <SideBarOfProfile

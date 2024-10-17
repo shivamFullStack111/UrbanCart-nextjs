@@ -33,7 +33,7 @@ const Home = () => {
         <title>Urban Cart</title>
         <link rel="icon" href="/favicon.ico" /> {/* Updated favicon path */}
       </Head>
-      <Header />
+      <Header active={1} />
       <div className="flex justify-center bg-gray-300">
         <div className="p-3 w-full h-52 550px:h-64  800px:h-80 1000px:w-[1300px] 1000px:h-[600px] relative">
           <Image fill={true} alt="sale" src={saleImage} />
