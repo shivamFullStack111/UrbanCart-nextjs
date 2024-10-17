@@ -8,7 +8,6 @@ import Footer from "@/app/components/Footer";
 import { dummyProducts } from "@/app/utils";
 import { useSelector } from "react-redux";
 import axios from "axios";
-import CanceledOrders from "../cancel-orders/page";
 import { IoTrash } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import toast, { Toaster } from "react-hot-toast";
@@ -23,7 +22,7 @@ const MyOrders = () => {
   const [cacelOrderOpen, setcacelOrderOpen] = useState(false);
 
   const [orderForTrackComponent, setorderForTrackComponent] = useState(null);
-  const [isTrackOpen, setisTrackOpen] = useState(true);
+  const [isTrackOpen, setisTrackOpen] = useState(false);
 
   const getAllOrdersOfUser = async () => {
     try {

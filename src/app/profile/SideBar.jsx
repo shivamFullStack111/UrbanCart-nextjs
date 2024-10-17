@@ -26,11 +26,11 @@ const navigations = [
     icon: <PiCardsFill />,
     to: "/profile/coupons",
   },
-  {
-    name: "Cancel Orders",
-    icon: <PiCardsFill />,
-    to: "/profile/cancel-orders",
-  },
+  // {
+  //   name: "Cancel Orders",
+  //   icon: <PiCardsFill />,
+  //   to: "/profile/cancel-orders",
+  // },
   {
     name: "Live Orders",
     icon: <PiCardsFill />,

@@ -91,7 +91,7 @@ const CreateProduct = () => {
           <SideBarOfProfile
             isSideBarOpen={isSideBarOpen}
             setisSideBarOpen={setisSideBarOpen}
-            page={6}
+            page={5}
           />
           {/* Profile Right */}
           <div className="w-full 800px:pt-4 1000px:p-6 flex justify-center bg-gray-100">
