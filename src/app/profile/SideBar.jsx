@@ -144,7 +144,7 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
             <Link
               href={"/profile/create-product"}
               className={`text-lg py-2 bg-white text-gray-700 hover:bg-yellow-200 cursor-pointer hover:translate-x-2 transition-all duration-150 rounded-xl px-2 font-semibold ${
-                page == 6 && "bg-yellow-200 translate-x-2 "
+                page == 5 && "bg-yellow-200 translate-x-2 "
               } `}
             >
               Create Product
