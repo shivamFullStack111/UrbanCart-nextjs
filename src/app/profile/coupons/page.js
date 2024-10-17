@@ -12,10 +12,27 @@ import axios from "axios";
 import { FaPlus } from "react-icons/fa6";
 import { isNextUIEl } from "@nextui-org/react";
 import toast, { Toaster } from "react-hot-toast";
+import { useSelector } from "react-redux";
 
 const Coupons = () => {
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
   const [createCouponsOpen, setcreateCouponsOpen] = useState(false);
+  const [allCoupons, setallCoupons] = useState([]);
+  const { user } = useSelector((state) => state.user);
+
+  const getAllCoupon = async () => {
+    try {
+      const res = await axios.get("/api/get-all-coupons");
+      console.log(res.data);
+      setallCoupons(res?.data?.coupons);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getAllCoupon();
+  }, [user]);
 
   // Dummy coupons data
   const dummyCoupons = [
@@ -49,32 +66,32 @@ const Coupons = () => {
           page={3}
         />
         {/* Profile Right */}
-        <div className="w-full 800px:pt-4 p-3 flex justify-center">
+        <div className="w-full 800px:pt-4 overflow-y-scroll p-3 flex justify-center">
           {/* Coupons Box */}
           <div className="grid grid-cols-1 gap-4 max-w-4xl w-full 800px:h-[400px]">
             <div className="w-full flex justify-end mt-2 800px:mt-4">
-              <p
+              <div
                 onClick={() => setcreateCouponsOpen(true)}
-                className="flex gap-2 py-1 px-3 cursor-pointer  100px:px-4 rounded-md  items-center text-white font-semibold text-lg bg-blue-500 hover:bg-blue-400"
+                className="flex gap-2 py-1 px-3 max-h-12 cursor-pointer  100px:px-4 rounded-md  items-center text-white font-semibold text-lg bg-blue-500 hover:bg-blue-400"
               >
                 <BsPlusCircle />
                 <p>Create coupon</p>
-              </p>
+              </div>
             </div>
-            {dummyCoupons.map((coupon) => (
+            {allCoupons.map((coupon) => (
               <div
-                key={coupon.id}
-                className="relative bg-gradient-to-r from-blue-400 to-blue-600 text-white rounded-lg shadow-md p-4  overflow-hidden"
+                key={coupon?._id}
+                className="relative bg-gradient-to-r min-h-48 from-blue-400 to-blue-600 text-white rounded-lg shadow-md p-4  overflow-hidden"
               >
                 <div className="absolute left-0 right-0 top-0 h-4 bg-white rounded-tl-lg rounded-tr-lg"></div>
                 <div className="absolute left-0 right-0 bottom-0 h-4 bg-white rounded-bl-lg rounded-br-lg"></div>
 
-                <h3 className="text-lg font-bold">{coupon.title}</h3>
-                <p className="mt-2 text-sm">{coupon.description}</p>
+                <h3 className="text-lg font-bold">{coupon?.title}</h3>
+                <p className="mt-2 text-sm">{coupon?.description}</p>
                 <p className="mt-4 font-semibold">
                   Use Code:{" "}
                   <span className="bg-white text-blue-600 px-2 py-1 rounded">
-                    {coupon.code}
+                    {coupon?.code || "save 20"}
                   </span>
                 </p>
                 <p className="mt-2 text-xs">
@@ -102,6 +119,8 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
   const [productsId, setproductsId] = useState([]);
   const [value, setvalue] = useState("");
   const [products, setproducts] = useState([]);
+
+  const [totalProductIn_db, settotalProductIn_db] = useState(null);
   const [pageNumber, setpageNumber] = useState(1);
   const [data, setdata] = useState({});
 
@@ -113,6 +132,7 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
       });
       if (res?.data?.success) {
         setproducts(res?.data?.products);
+        settotalProductIn_db(res?.data?.totalProducts);
       }
     } catch (error) {
       console.log(error.message);
@@ -122,6 +142,8 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
   useEffect(() => {
     if (value?.length === 0) {
       setproducts([]);
+      settotalProductIn_db(0);
+      setpageNumber(1);
       return;
     }
     const time = setTimeout(() => {
@@ -195,30 +217,35 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
             <p>Porducts selected</p>
           </div>
           {products?.map((item, i) => (
-            <div
-              onClick={() => {
-                const isExist = productsId?.find((id) => id === item?._id);
-                if (!isExist) {
-                  setproductsId((p) => [...p, item?._id]);
-                }
-              }}
+            <ProductCard
               key={i}
-              className="rounded-md hover:bg-yellow-200 cursor-pointer p-1 overflow-hidden border flex gap-3"
-            >
-              <div className="relative w-[60px]  h-[70px]">
-                <Image src={item?.images[0]} fill={true} />
-              </div>
-              <div>
-                <p className="text-[16px] font-semibold text-yellow-400">
-                  {item?.title}
-                </p>
-                <p className="font-semibold text-gray-400">${item?.price}</p>
-                <p className="text-sm text-gray-400">
-                  {item?.description?.slice(0, 15)}
-                </p>
-              </div>
-            </div>
+              item={item}
+              productsId={productsId}
+              setproductsId={setproductsId}
+              totalProductIn_db={totalProductIn_db}
+              setpageNumber={setpageNumber}
+            />
           ))}
+
+          <div className="flex justify-between ">
+            {pageNumber < totalProductIn_db / 8 && (
+              <div
+                onClick={() => setpageNumber((p) => p + 1)}
+                className="ml-auto cursor-pointer text-blue-500 font-semibold text-lg underline"
+              >
+                Next
+              </div>
+            )}
+
+            {pageNumber > 1 && (
+              <div
+                onClick={() => setpageNumber((p) => p - 1)}
+                className="mr-auto cursor-pointer text-red-500 font-semibold text-lg underline"
+              >
+                Prev
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="  ">
@@ -227,6 +254,13 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
             onChange={(e) => setdata((p) => ({ ...p, title: e.target.value }))}
             type="text"
             placeholder="Enter title"
+            className=" rounded-md p-2 outline-none h-10 w-full bg-gray-100 border-2 focus:border-yellow-300 "
+          />
+          <p className="font-semibold mt-4 text-gray-500">Coupon Code:</p>
+          <input
+            onChange={(e) => setdata((p) => ({ ...p, code: e.target.value }))}
+            type="text"
+            placeholder="Enter coupon code"
             className=" rounded-md p-2 outline-none h-10 w-full bg-gray-100 border-2 focus:border-yellow-300 "
           />
 
@@ -268,6 +302,14 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
             className=" rounded-md p-2 outline-none h-10 w-full bg-gray-100 border-2 focus:border-yellow-300 "
           />
 
+          <p className="font-semibold mt-4 text-gray-500">Title:</p>
+          <input
+            onChange={(e) => setdata((p) => ({ ...p, title: e.target.value }))}
+            type="datetime-local"
+            placeholder="Enter title"
+            className=" rounded-md p-2 outline-none h-10 w-full bg-gray-100 border-2 focus:border-yellow-300 "
+          />
+
           <div
             onClick={handleSubmit}
             className="bg-yellow-400 gap-2 hover:bg-yellow-300 text-white rounded-md font-semibold text-xl flex justify-center items-center mt-4 py-2"
@@ -275,6 +317,52 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
             <CiDiscount1 size={25} /> Create
           </div>
         </div>
+      </div>
+    </div>
+  );
+};
+
+const ProductCard = ({ item, i, productsId, setproductsId }) => {
+  const [isAdded, setisAdded] = useState(false);
+
+  useEffect(() => {
+    const isAdd = productsId.find((id) => id === item?._id);
+
+    if (isAdd) {
+      setisAdded(true);
+    } else {
+      setisAdded(false);
+    }
+  }, [item, productsId]);
+
+  return (
+    <div
+      onClick={() => {
+        const isExist = productsId?.find((id) => id === item?._id);
+        if (!isExist) {
+          setproductsId((p) => [...p, item?._id]);
+          setisAdded(true);
+        } else {
+          const filterProduct = productsId.filter((p) => p !== item?._id);
+          setproductsId(filterProduct);
+        }
+      }}
+      key={i}
+      className={`rounded-md  ${
+        isAdded && "bg-yellow-200"
+      } cursor-pointer p-1 overflow-hidden border flex gap-3`}
+    >
+      <div className="relative w-[60px]  h-[70px]">
+        <Image src={item?.images[0]} fill={true} />
+      </div>
+      <div>
+        <p className="text-[16px] font-semibold text-yellow-400">
+          {item?.title}
+        </p>
+        <p className="font-semibold text-gray-400">${item?.price}</p>
+        <p className="text-sm text-gray-400">
+          {item?.description?.slice(0, 15)}
+        </p>
       </div>
     </div>
   );

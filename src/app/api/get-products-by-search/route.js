@@ -1,8 +1,10 @@
+import { dbConnect } from "@/lib/dbConnect";
 import Product from "@/models/Product";
 import mongoose from "mongoose";
 
 export async function POST(req) {
   try {
+    await dbConnect();
     const { value, pageNumber } = await req.json();
 
     // Space ko remove karke lowercase me convert karenge
@@ -30,7 +32,23 @@ export async function POST(req) {
       .skip(skip)
       .limit(items);
 
-    return new Response(JSON.stringify({ success: true, products: products }));
+    const product_count = await Product.find({
+      $or: [
+        idQuery, // Yeh tabhi add hoga jab newValue ek valid ObjectId ho
+        { category: new RegExp(newValue, "i") },
+        { gender: new RegExp(newValue, "i") },
+        { title: new RegExp(newValue, "i") },
+        { description: new RegExp(newValue, "i") },
+      ].filter(Boolean), // null values ko remove karta hai
+    }).countDocuments();
+
+    return new Response(
+      JSON.stringify({
+        success: true,
+        products: products,
+        totalProducts: product_count,
+      })
+    );
   } catch (error) {
     return new Response(
       JSON.stringify({ success: false, message: error.message })

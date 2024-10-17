@@ -6,6 +6,8 @@ const couponSchema = new mongoose.Schema({
   minValue: Number,
   maxValue: Number,
   productsId: Array,
+  code: String,
+  expireDate: Date,
 });
 
 const Coupon = mongoose.models.Coupon || mongoose.model("Coupon", couponSchema);
