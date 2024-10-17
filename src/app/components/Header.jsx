@@ -207,18 +207,9 @@ const Header = ({ active }) => {
                   )}
 
                   {user && (
-                    <Link
-                      href="/profile"
-                      className={"flex flex-col items-center"}
-                    >
-                      <div className="w-10 h-10 rounded-full relative">
-                        <Image
-                          src={dummyProduct}
-                          alt="Product"
-                          layout="fill"
-                          objectFit="cover"
-                          className="rounded-full"
-                        />
+                    <Link href="/profile" className={""}>
+                      <div className="w-10 h-10 rounded-full text-3xl text-white bg-pink-400 flex justify-center ">
+                        {user?.name?.slice(0, 1)}
                       </div>
                     </Link>
                   )}

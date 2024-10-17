@@ -12,12 +12,18 @@ import CanceledOrders from "../cancel-orders/page";
 import { IoTrash } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import toast, { Toaster } from "react-hot-toast";
+import { CiDeliveryTruck } from "react-icons/ci";
+import { TbTruckDelivery } from "react-icons/tb";
+import TrackOrderModal from "@/app/components/TrackOrderModal";
 
 const MyOrders = () => {
   const [isSideBarOpen, setisSideBarOpen] = useState(false);
   const [myOrders, setmyOrders] = useState([]);
   const { user } = useSelector((state) => state.user);
   const [cacelOrderOpen, setcacelOrderOpen] = useState(false);
+
+  const [orderForTrackComponent, setorderForTrackComponent] = useState(null);
+  const [isTrackOpen, setisTrackOpen] = useState(true);
 
   const getAllOrdersOfUser = async () => {
     try {
@@ -33,6 +39,13 @@ const MyOrders = () => {
     }
   };
 
+  const handleFindOrder = (orderid) => {
+    const order = myOrders.find((ord) => ord._id === orderid);
+
+    setorderForTrackComponent(order);
+    setisTrackOpen(true);
+  };
+
   useEffect(() => {
     if (user) {
       getAllOrdersOfUser();
@@ -42,6 +55,12 @@ const MyOrders = () => {
   return (
     <>
       <Header active={3} />
+      {isTrackOpen && (
+        <TrackOrderModal
+          setisTrackOpen={setisTrackOpen}
+          order={orderForTrackComponent}
+        />
+      )}
       <Toaster />
       <div className="flex flex-col 800px:flex-row min-h-screen">
         <SideBarOfProfile
@@ -126,7 +145,7 @@ const MyOrders = () => {
                           {order?.status !== "cancel" && (
                             <button
                               className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                              onClick={() => handleTrack(order?._id)}
+                              onClick={() => handleFindOrder(order?._id)}
                             >
                               Track
                             </button>
