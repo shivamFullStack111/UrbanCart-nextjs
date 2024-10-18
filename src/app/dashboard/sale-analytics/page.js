@@ -15,60 +15,92 @@ import { dummyProduct } from "../utils";
 import { useSelector } from "react-redux";
 import { PiBagFill } from "react-icons/pi";
 import { BsBoxFill } from "react-icons/bs";
-import Header from "./header";
-import SideBar from "./sidebar";
+import SideBar from "../Sidebar";
 
 const ared = Aref_Ruqaa({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
 
-const navigation = [
-  {
-    name: "Dashboard",
-    icon: MdDashboard,
-    to: "/dashboard",
-  },
-  {
-    name: "Sale Analytics",
-    icon: BiSolidPurchaseTag,
-    to: "/dashboard/sale-analytics",
-  },
-  {
-    name: "Products",
-    icon: FaBoxes,
-    to: "/dashboard/products",
-  },
-  {
-    name: "Users",
-    icon: FaUsers,
-    to: "/dashboard/users",
-  },
-  {
-    name: "Orders",
-    icon: FaTruckLoading,
-    to: "/dashboard/orders",
-  },
-  {
-    name: "Coupons",
-    icon: RiCoupon3Fill,
-    to: "/dashboard/coupons",
-  },
-];
-
 const Dashboard = ({ active = 1 }) => {
-  const [collapse, setcollapse] = useState(false);
+  const [collapse, setcollapse] = useSyncExternalStore(false);
   const [settingOpen, setsettingOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
 
   return (
     <div className={`flex h-[100vh] overflow-hidden ${ared.className}`}>
       {/* Left sidebar */}
-      <SideBar active={1} />
+      <SideBar active={3} />
 
       <div className="h-full w-full bg-red-400">
         {/* Right header */}
-        <Header />
+        <div
+          className={`${
+            collapse ? "h-16" : "h-24"
+          } w-full flex items-center justify-between px-4 bg-slate-800`}
+        >
+          {/* left header  */}
+          <IoReorderThreeOutline
+            onClick={() => setcollapse((p) => !p)}
+            size={40}
+            className="text-white hover:scale-105 cursor-pointer"
+          />
+          {/* right header part  */}
+          <div className="flex gap-3  items-center  duration-300 ">
+            <div className="relative">
+              <FaBell
+                size={24}
+                className="text-white hover:scale-105 cursor-pointer"
+              />
+              <p className="w-5 h-5 rounded-full flex justify-center items-center bg-orange-400 text-white absolute -top-2 -right-2">
+                <p>3</p>
+              </p>
+            </div>
+            <div className="relative group ">
+              {settingOpen ? (
+                <RxCrossCircled
+                  onClick={() => setsettingOpen((p) => !p)}
+                  size={28}
+                  className="text-white"
+                />
+              ) : (
+                <IoMdSettings
+                  onClick={() => setsettingOpen((p) => !p)}
+                  size={28}
+                  className="text-white"
+                />
+              )}
+
+              {settingOpen && (
+                <div className="absolute flex  bg-white p-2 rounded-md h-32 w-56 -bottom-40 shadow-xl border-[0.2px] right-0">
+                  <div className="flex gap-3 ">
+                    <div className="w-12 h-12 rounded-full overflow-hidden relative">
+                      {" "}
+                      <Image src={dummyProduct} fill={true} alt="profile" />
+                    </div>
+                    <div className="">
+                      <p className="font-semibold">{user?.name}</p>
+                      <p className="font-semibold - text-sm text-gray-500">
+                        {user?.email}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="w-full h-ful relative  flex justify-end items-end">
+                    <div>
+                      <MdLogout
+                        size={26}
+                        className="text-gray-700 group mt-auto ml-auto cursor-pointer"
+                      />
+                      <p className="hidden w-20 absolute font-semibold group-hover:block -right-7 -bottom-10">
+                        Log Out
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
 
         {/* Right main */}
         <div className="h-full pb-20 bg-no-repeat  bg-center bg-cover bg-white overflow-y-scroll">

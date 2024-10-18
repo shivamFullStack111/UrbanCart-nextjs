@@ -1,6 +1,6 @@
 "use client";
-import React from "react";
 
+import React from "react";
 import Head from "next/head"; // Import the Head component
 import Header from "./components/Header";
 import SaleBanner from "./components/SaleBanner";
@@ -16,7 +16,7 @@ import ProductSkeleton from "./components/ProductSkeleton";
 import NewArrival from "./components/NewArrival/page";
 import Link from "next/link";
 import TrendingProducts from "./components/TrendingProducts";
-
+import "../globals.css";
 const roboto = Poppins({
   weight: ["400"],
   style: ["normal"],

@@ -1,10 +1,14 @@
 import React from "react";
 import AdminProtectedRoute from "../components/Admin_Protected_Route";
+import Footer from "../components/Footer";
 
 const componentName = ({ children }) => {
   return (
     <>
-      <AdminProtectedRoute>{children}</AdminProtectedRoute>
+      {/* <AdminProtectedRoute> */}
+      {children}
+      {/* </AdminProtectedRoute> */}
+      <Footer />
     </>
   );
 };
