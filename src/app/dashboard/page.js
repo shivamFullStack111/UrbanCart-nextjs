@@ -15,7 +15,7 @@ import { dummyProduct } from "../utils";
 import { useSelector } from "react-redux";
 import { PiBagFill } from "react-icons/pi";
 import { BsBoxFill } from "react-icons/bs";
-import Header from "./header";
+import Header from "./Header";
 import SideBar from "./sidebar";
 
 const ared = Aref_Ruqaa({
