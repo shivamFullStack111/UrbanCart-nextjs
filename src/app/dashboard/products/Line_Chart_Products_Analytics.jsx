@@ -1,6 +1,6 @@
 "use client";
 
-import React, { PureComponent, useState } from "react";
+import React, { PureComponent, useEffect, useState } from "react";
 import {
   LineChart,
   Line,
