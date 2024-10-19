@@ -48,7 +48,7 @@ const SideBar = ({ active, collapse, setcollapse }) => {
     <>
       <div
         className={`h-full min-w-[45px] ${
-          !collapse && "min-w-[270px] max-w-[270px] 1400px:w-[340px]"
+          !collapse && "min-w-[280px]  1400px:w-[330px]"
         } bg-slate-700 overflow-y-scroll hide-scrollbar`}
       >
         {!collapse && (
