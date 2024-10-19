@@ -11,7 +11,7 @@ import { IoReorderThreeOutline } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 import Image from "next/image";
-import { dummyProduct } from "../utils";
+import { dummyProduct } from "../../utils";
 import { useSelector } from "react-redux";
 import { PiBagFill } from "react-icons/pi";
 import { BsBoxFill } from "react-icons/bs";
