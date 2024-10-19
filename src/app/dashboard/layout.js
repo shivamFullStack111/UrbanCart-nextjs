@@ -1,3 +1,5 @@
+"use client";
+
 import React from "react";
 import AdminProtectedRoute from "../components/Admin_Protected_Route";
 import Footer from "../components/Footer";

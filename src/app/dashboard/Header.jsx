@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 import { FaBell } from "react-icons/fa6";
 import { IoMdSettings } from "react-icons/io";
