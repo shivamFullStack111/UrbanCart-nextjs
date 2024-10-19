@@ -58,8 +58,22 @@ const data = [
 ];
 
 const Line_Chart_Products_Analytics = () => {
-  const responsiveYAxisWidth = window.innerWidth > 800 ? 60 : 30;
+  const [responsiveYAxisWidth, setResponsiveYAxisWidth] = useState(30);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setResponsiveYAxisWidth(window.innerWidth > 800 ? 20 : 30);
+    };
+
+    // Set initial value
+    handleResize();
+
+    // Add event listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup event listener
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart
