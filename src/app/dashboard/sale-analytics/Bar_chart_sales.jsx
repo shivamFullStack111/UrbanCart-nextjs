@@ -22,7 +22,6 @@ const data = [
 
 const Example = () => {
   const responsiveYAxisWidth = window.innerWidth > 800 ? 20 : 30;
-
   return (
     <ResponsiveContainer width="100%" height={"100%"}>
       <BarChart data={data}>
