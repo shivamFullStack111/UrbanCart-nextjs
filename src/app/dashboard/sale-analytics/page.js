@@ -23,7 +23,7 @@ const ared = Aref_Ruqaa({
 });
 
 const Dashboard = ({ active = 1 }) => {
-  const [collapse, setcollapse] = useSyncExternalStore(false);
+  const [collapse, setcollapse] = useState(false);
   const [settingOpen, setsettingOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
 
