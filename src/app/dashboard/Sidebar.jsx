@@ -40,14 +40,13 @@ const navigation = [
   },
 ];
 
-const SideBar = ({ active }) => {
-  const [collapse, setcollapse] = useState(false);
+const SideBar = ({ active, collapse, setcollapse }) => {
   const { user } = useSelector((state) => state.user);
   return (
     <>
       <div
-        className={`h-full ${
-          !collapse && "w-[270px] 1400px:w-[340px]"
+        className={`h-full min-w-[45px] ${
+          !collapse && "min-w-[270px] max-w-[270px] 1400px:w-[340px]"
         } bg-slate-700 overflow-y-scroll hide-scrollbar`}
       >
         {!collapse && (

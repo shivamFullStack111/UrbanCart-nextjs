@@ -7,10 +7,9 @@ import { RxCrossCircled } from "react-icons/rx";
 import { dummyProduct } from "../utils";
 import Image from "next/image";
 
-const Header = () => {
+const Header = ({ collapse, setcollapse }) => {
   const [user, setuser] = useState();
   const [settingOpen, setsettingOpen] = useState(false);
-  const [collapse, setcollapse] = useState(false);
 
   return (
     <>

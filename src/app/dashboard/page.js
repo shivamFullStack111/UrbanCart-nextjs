@@ -57,17 +57,16 @@ const navigation = [
 
 const Dashboard = ({ active = 1 }) => {
   const [collapse, setcollapse] = useState(false);
-  const [settingOpen, setsettingOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
 
   return (
     <div className={`flex h-[100vh] overflow-hidden ${ared.className}`}>
       {/* Left sidebar */}
-      <SideBar active={1} />
+      <SideBar collapse={collapse} setcollapse={setcollapse} active={1} />
 
       <div className="h-full w-full bg-red-400">
         {/* Right header */}
-        <Header />
+        <Header collapse={collapse} setcollapse={setcollapse} />
 
         {/* Right main */}
         <div className="h-full pb-20 bg-no-repeat  bg-center bg-cover bg-white overflow-y-scroll">

@@ -16,190 +16,97 @@ import { useSelector } from "react-redux";
 import { PiBagFill } from "react-icons/pi";
 import { BsBoxFill } from "react-icons/bs";
 import SideBar from "../Sidebar";
+import * as XLSX from "xlsx";
+
+import Header from "../Header";
+import { saveAs } from "file-saver";
+import Bar_chart_sales from "./Bar_chart_sales";
+
+const products = [
+  { name: "Product 1", price: 100, category: "Electronics" },
+  { name: "Product 2", price: 200, category: "Clothing" },
+  { name: "Product 3", price: 150, category: "Accessories" },
+];
 
 const ared = Aref_Ruqaa({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
 
-const Dashboard = ({ active = 1 }) => {
+const Sale_Analytics = ({ active = 1 }) => {
   const [collapse, setcollapse] = useState(false);
-  const [settingOpen, setsettingOpen] = useState(false);
   const { user } = useSelector((state) => state.user);
+
+  const handleExport = () => {
+    // Create a new workbook
+    const workbook = XLSX.utils.book_new();
+
+    // Convert data array to worksheet
+    const worksheet = XLSX.utils.json_to_sheet(products);
+
+    // Add worksheet to workbook
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
+
+    // Generate Excel file
+    const excelBuffer = XLSX.write(workbook, {
+      bookType: "xlsx",
+      type: "array",
+    });
+
+    // Save as Excel file
+    const data = new Blob([excelBuffer], { type: "application/octet-stream" });
+    saveAs(data, "products.xlsx");
+  };
 
   return (
     <div className={`flex h-[100vh] overflow-hidden ${ared.className}`}>
       {/* Left sidebar */}
-      <SideBar active={3} />
+      <SideBar collapse={collapse} setcollapse={setcollapse} active={2} />
 
       <div className="h-full w-full bg-red-400">
         {/* Right header */}
-        <div
-          className={`${
-            collapse ? "h-16" : "h-24"
-          } w-full flex items-center justify-between px-4 bg-slate-800`}
-        >
-          {/* left header  */}
-          <IoReorderThreeOutline
-            onClick={() => setcollapse((p) => !p)}
-            size={40}
-            className="text-white hover:scale-105 cursor-pointer"
-          />
-          {/* right header part  */}
-          <div className="flex gap-3  items-center  duration-300 ">
-            <div className="relative">
-              <FaBell
-                size={24}
-                className="text-white hover:scale-105 cursor-pointer"
-              />
-              <p className="w-5 h-5 rounded-full flex justify-center items-center bg-orange-400 text-white absolute -top-2 -right-2">
-                <p>3</p>
-              </p>
-            </div>
-            <div className="relative group ">
-              {settingOpen ? (
-                <RxCrossCircled
-                  onClick={() => setsettingOpen((p) => !p)}
-                  size={28}
-                  className="text-white"
-                />
-              ) : (
-                <IoMdSettings
-                  onClick={() => setsettingOpen((p) => !p)}
-                  size={28}
-                  className="text-white"
-                />
-              )}
-
-              {settingOpen && (
-                <div className="absolute flex  bg-white p-2 rounded-md h-32 w-56 -bottom-40 shadow-xl border-[0.2px] right-0">
-                  <div className="flex gap-3 ">
-                    <div className="w-12 h-12 rounded-full overflow-hidden relative">
-                      {" "}
-                      <Image src={dummyProduct} fill={true} alt="profile" />
-                    </div>
-                    <div className="">
-                      <p className="font-semibold">{user?.name}</p>
-                      <p className="font-semibold - text-sm text-gray-500">
-                        {user?.email}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="w-full h-ful relative  flex justify-end items-end">
-                    <div>
-                      <MdLogout
-                        size={26}
-                        className="text-gray-700 group mt-auto ml-auto cursor-pointer"
-                      />
-                      <p className="hidden w-20 absolute font-semibold group-hover:block -right-7 -bottom-10">
-                        Log Out
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-        </div>
+        <Header collapse={collapse} setcollapse={setcollapse} />
 
         {/* Right main */}
         <div className="h-full pb-20 bg-no-repeat  bg-center bg-cover bg-white overflow-y-scroll">
-          {/* circles  */}
-          <div className="w-full justify-center flex mt-6 gap-3 800px:gap-[7vw]  ">
-            <div className="flex flex-col items-center">
-              <div className="w-24 border-2 flex justify-center items-center border-green-400 h-24 rounded-full bg-gradient-to-br from-orange-400 via-orange-200 to-white">
-                $9543
-              </div>
-              <p>Total Orders Cost</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-24 border-2 flex justify-center items-center border-green-400 h-24 rounded-full bg-gradient-to-br from-orange-400 via-orange-200 to-white">
-                $8938
-              </div>
-              <p>Total Sales</p>
-            </div>
-          </div>
-
-          {/* total orders and total users  */}
-          <div className="grid grid-cols-1 850px:grid-cols-2 w-full px-3 500px:px-7 800px:px-10 1400px:px-16 mt-8 gap-4">
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
-              <div className="flex justify-between m-6">
-                <PiBagFill
-                  size={52}
-                  className="text-orange-400 bg-orange-200 p-2
-                   rounded-md "
-                />
-                <div className="flex flex-col items-center">
-                  <p className="text-[12px]">TOTAL ORDERS</p>
-                  <p className="text-lg">1,390</p>
-                </div>
-              </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
-                <p></p>
-                <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
-                  View
+          <h1 className=" text-xl m-3 600px:text-2xl 800px:text-3xl font-extrabold text-gray-600">
+            Sale Analytics
+          </h1>
+          <div className=" w-full mt-8 800px:mt-10 grid grid-cols-3 ">
+            <div className="flex   flex-col items-center">
+              <div className="py-2 px-2 600px:px-3 800px:px-6 flex flex-col items-center  bg-green-200 rounded-lg">
+                <p className="text-[12px] 600px:text-[13px] 800px:text-[14px] 1200px:text-[16px] ">
+                  TOTAL ORDERS
+                </p>
+                <p className="text-[16px] font-semibold 600px:text-[20px] 800px:text-[24px] 1200px:text-[26px] ">
+                  3,382
                 </p>
               </div>
             </div>
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
-              <div className="flex justify-between m-6">
-                <FaUsersLine
-                  size={52}
-                  className="text-orange-400 bg-orange-200 p-2
-                   rounded-md "
-                />
-                <div className="flex flex-col items-center">
-                  <p className="text-[12px]">TOTAL USERS</p>
-                  <p className="text-lg">583</p>
-                </div>
+            <div className="flex   flex-col items-center">
+              <div className="py-2 px-2 600px:px-3 800px:px-6 flex flex-col items-center  bg-orange-200 rounded-lg">
+                <p className="text-[12px] 600px:text-[13px] 800px:text-[14px] 1200px:text-[16px] ">
+                  TOTAL SALES
+                </p>
+                <p className="text-[16px] font-semibold 600px:text-[20px] 800px:text-[24px] 1200px:text-[26px] ">
+                  3,382
+                </p>
               </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
-                <p></p>
-                <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
-                  View
+            </div>
+            <div className="flex   flex-col items-center">
+              <div className="py-2 px-2 600px:px-3 800px:px-6 flex flex-col items-center  bg-green-200 rounded-lg">
+                <p className="text-[12px] 600px:text-[13px] 800px:text-[14px] 1200px:text-[16px] ">
+                  TOTAL USERS
+                </p>
+                <p className="text-[16px] font-semibold 600px:text-[20px] 800px:text-[24px] 1200px:text-[26px] ">
+                  3,382
                 </p>
               </div>
             </div>
           </div>
-
-          <div className="grid grid-cols-1 850px:grid-cols-2 w-full px-3 500px:px-7 800px:px-10 1400px:px-16 mt-8 gap-4">
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
-              <div className="flex justify-between m-6">
-                <BsBoxFill
-                  size={52}
-                  className="text-orange-400 bg-orange-200 p-2
-                   rounded-md "
-                />
-                <div className="flex flex-col items-center">
-                  <p className="text-[12px]">TOTAL PRODUCTS</p>
-                  <p className="text-lg">1,390</p>
-                </div>
-              </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
-                <p></p>
-                <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
-                  View
-                </p>
-              </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
-              <div className="flex justify-between m-6">
-                <RiCoupon3Fill
-                  size={52}
-                  className="text-orange-400 bg-orange-200 p-2
-                   rounded-md "
-                />
-                <div className="flex flex-col items-center">
-                  <p className="text-[12px]">TOTAL COUPONS</p>
-                  <p className="text-lg">3</p>
-                </div>
-              </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
-                <p></p>
-                <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
-                  View
-                </p>
-              </div>
+          <div className="flex justify-center mt-6 800px:mt-10 ">
+            <div className=" w-[85vw] h-[50vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
+              <Bar_chart_sales />
             </div>
           </div>
         </div>
@@ -208,4 +115,4 @@ const Dashboard = ({ active = 1 }) => {
   );
 };
 
-export default Dashboard;
+export default Sale_Analytics;
