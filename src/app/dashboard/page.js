@@ -11,12 +11,11 @@ import { IoReorderThreeOutline } from "react-icons/io5";
 import { IoMdSettings } from "react-icons/io";
 import { RxCrossCircled } from "react-icons/rx";
 import Image from "next/image";
-import { dummyProduct } from "../utils";
 import { useSelector } from "react-redux";
 import { PiBagFill } from "react-icons/pi";
 import { BsBoxFill } from "react-icons/bs";
 import Header from "./Header";
-import SideBar from "./sidebar";
+import SideBar from "./Sidebar";
 
 const ared = Aref_Ruqaa({
   weight: ["400", "700"],
