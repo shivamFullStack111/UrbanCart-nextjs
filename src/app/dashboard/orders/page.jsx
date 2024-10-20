@@ -941,7 +941,7 @@ const Orders = ({ active = 1 }) => {
         <Header collapse={collapse} setcollapse={setcollapse} />
 
         {/* Right main */}
-        <div className="h-full pb-20 bg-no-repeat   bg-center bg-cover bg-white overflow-y-scroll">
+        <div className="h-full pb-20 bg-no-repeat  bg-center bg-cover bg-white overflow-y-scroll">
           {/* boxes  */}
           <div className="grid grid-cols-1 500px:grid-cols-2  1000px:grid-cols-4 pl-10 pr-20 500px:pl-4 500px:pr-14  mt-4">
             {/* box 1  */}
@@ -1001,7 +1001,7 @@ const Orders = ({ active = 1 }) => {
           </h1>
 
           <div className="flex justify-center mt-6 800px:mt-10 ">
-            <div className=" w-[85vw] h-[60vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
+            <div className=" w-[80vw] max-w-[85vw]  h-[60vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
               {/* chart here......  */}
               <Line_Chart_Products_Analytics />
             </div>
@@ -1011,7 +1011,7 @@ const Orders = ({ active = 1 }) => {
           <h1 className=" text-lg m-3 600px:text-xl 800px:text-xl font-bold text-gray-600">
             Users
           </h1>
-          <div className="overflow-x-scroll p-2 pr-14 overflow-visible w-full">
+          <div className="overflow-x-scroll p-2 max-w-[85vw]  overflow-visible w-full">
             <table className="w-full">
               <thead className="w-full">
                 <tr>
@@ -1102,20 +1102,21 @@ const Orders = ({ active = 1 }) => {
               </tbody>
             </table>
             {/* prev next button  */}
-            <div className="w-full  flex justify-end">
-              <div className="ml-auto flex ">
-                <p className="px-4 py-1 bg-orange-400 border hover:bg-orange-100 cursor-pointer text-white">
-                  1
+          </div>
+          {/* prev next button  */}
+          <div className="w-full  flex justify-end">
+            <div className="ml-auto flex ">
+              <p className="px-4 py-1 bg-orange-400 border hover:bg-orange-100 cursor-pointer text-white">
+                1
+              </p>
+              {[1, 2, 3, 4].map((i) => (
+                <p
+                  key={i}
+                  className="px-4 py-1  border hover:bg-orange-100 cursor-pointer text-orange-400"
+                >
+                  {i + 1}
                 </p>
-                {[1, 2, 3, 4].map((i) => (
-                  <p
-                    key={i}
-                    className="px-4 py-1  border hover:bg-orange-100 cursor-pointer text-orange-400"
-                  >
-                    {i + 1}
-                  </p>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>

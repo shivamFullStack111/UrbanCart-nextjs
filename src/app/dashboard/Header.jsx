@@ -53,7 +53,7 @@ const Header = ({ collapse, setcollapse }) => {
             )}
 
             {settingOpen && (
-              <div className="absolute flex  bg-white p-2 rounded-md h-32 w-56 -bottom-40 shadow-xl border-[0.2px] right-0">
+              <div className="absolute flex z-50  bg-white p-2 rounded-md h-32 w-56 -bottom-40 shadow-xl border-[0.2px] right-0">
                 <div className="flex gap-3 ">
                   <div className="w-12 h-12 rounded-full overflow-hidden relative">
                     {" "}

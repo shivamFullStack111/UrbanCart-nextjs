@@ -1,7 +1,7 @@
 "use client";
 import { Aref_Ruqaa } from "next/font/google";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FaBell, FaSalesforce, FaUsers, FaUsersLine } from "react-icons/fa6";
 import { MdDashboard, MdLogout } from "react-icons/md";
 import { BiSolidPurchaseTag } from "react-icons/bi";
@@ -16,6 +16,7 @@ import { PiBagFill } from "react-icons/pi";
 import { BsBoxFill } from "react-icons/bs";
 import Header from "./Header";
 import SideBar from "./Sidebar";
+import axios from "axios";
 
 const ared = Aref_Ruqaa({
   weight: ["400", "700"],
@@ -58,6 +59,7 @@ const navigation = [
 const Dashboard = ({ active = 1 }) => {
   const [collapse, setcollapse] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const { totalDatas } = useSelector((state) => state.admin);
 
   return (
     <div className={`flex h-[100vh] overflow-hidden ${ared.className}`}>
@@ -71,20 +73,6 @@ const Dashboard = ({ active = 1 }) => {
         {/* Right main */}
         <div className="h-full pb-20 bg-no-repeat  bg-center bg-cover bg-white overflow-y-scroll">
           {/* circles  */}
-          <div className="w-full justify-center flex mt-6 gap-3 800px:gap-[7vw]  ">
-            <div className="flex flex-col items-center">
-              <div className="w-24 border-2 flex justify-center items-center border-green-400 h-24 rounded-full bg-gradient-to-br from-orange-400 via-orange-200 to-white">
-                $9543
-              </div>
-              <p>Total Orders Cost</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="w-24 border-2 flex justify-center items-center border-green-400 h-24 rounded-full bg-gradient-to-br from-orange-400 via-orange-200 to-white">
-                $8938
-              </div>
-              <p>Total Sales</p>
-            </div>
-          </div>
 
           {/* total orders and total users  */}
           <div className="grid grid-cols-1 850px:grid-cols-2 w-full px-3 500px:px-7 800px:px-10 1400px:px-16 mt-8 gap-4">
@@ -97,7 +85,7 @@ const Dashboard = ({ active = 1 }) => {
                 />
                 <div className="flex flex-col items-center">
                   <p className="text-[12px]">TOTAL ORDERS</p>
-                  <p className="text-lg">1,390</p>
+                  <p className="text-lg">{totalDatas?.totalOrders}</p>
                 </div>
               </div>
               <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
@@ -116,7 +104,7 @@ const Dashboard = ({ active = 1 }) => {
                 />
                 <div className="flex flex-col items-center">
                   <p className="text-[12px]">TOTAL USERS</p>
-                  <p className="text-lg">583</p>
+                  <p className="text-lg">{totalDatas?.totalUsers}</p>
                 </div>
               </div>
               <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
@@ -138,7 +126,7 @@ const Dashboard = ({ active = 1 }) => {
                 />
                 <div className="flex flex-col items-center">
                   <p className="text-[12px]">TOTAL PRODUCTS</p>
-                  <p className="text-lg">1,390</p>
+                  <p className="text-lg">{totalDatas?.totalProducts}</p>
                 </div>
               </div>
               <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
@@ -157,7 +145,7 @@ const Dashboard = ({ active = 1 }) => {
                 />
                 <div className="flex flex-col items-center">
                   <p className="text-[12px]">TOTAL COUPONS</p>
-                  <p className="text-lg">3</p>
+                  <p className="text-lg">{totalDatas?.totalCoupons}</p>
                 </div>
               </div>
               <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">

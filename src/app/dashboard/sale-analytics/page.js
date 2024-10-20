@@ -1,20 +1,7 @@
 "use client";
 import { Aref_Ruqaa } from "next/font/google";
-import Link from "next/link";
-import React, { useState } from "react";
-import { FaBell, FaSalesforce, FaUsers, FaUsersLine } from "react-icons/fa6";
-import { MdDashboard, MdLogout } from "react-icons/md";
-import { BiSolidPurchaseTag } from "react-icons/bi";
-import { FaBoxes, FaTruckLoading } from "react-icons/fa";
-import { RiCoupon3Fill } from "react-icons/ri";
-import { IoReorderThreeOutline } from "react-icons/io5";
-import { IoMdSettings } from "react-icons/io";
-import { RxCrossCircled } from "react-icons/rx";
-import Image from "next/image";
-import { dummyProduct } from "../../utils";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { PiBagFill } from "react-icons/pi";
-import { BsBoxFill } from "react-icons/bs";
 import SideBar from "../Sidebar";
 import * as XLSX from "xlsx";
 
@@ -33,9 +20,20 @@ const ared = Aref_Ruqaa({
   subsets: ["latin"],
 });
 
-const Sale_Analytics = ({ active = 1 }) => {
+const Sale_Analytics = () => {
   const [collapse, setcollapse] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const { totalDatas, past6data } = useSelector((state) => state.admin);
+  const [totalSale, settotalSale] = useState(null);
+  useEffect(() => {
+    const total = past6data?.orders_6?.reduce(
+      (total, order) => total + (parseFloat(order.subTotal) || 0),
+      0
+    );
+
+    // Ensure total is defined; if NaN, set to 0
+    settotalSale(isNaN(total) ? 0 : total);
+  }, [past6data]);
 
   const handleExport = () => {
     // Create a new workbook
@@ -79,7 +77,7 @@ const Sale_Analytics = ({ active = 1 }) => {
                   TOTAL ORDERS
                 </p>
                 <p className="text-[16px] font-semibold 600px:text-[20px] 800px:text-[24px] 1200px:text-[26px] ">
-                  3,382
+                  {totalDatas?.totalOrders}
                 </p>
               </div>
             </div>
@@ -89,7 +87,7 @@ const Sale_Analytics = ({ active = 1 }) => {
                   TOTAL SALES
                 </p>
                 <p className="text-[16px] font-semibold 600px:text-[20px] 800px:text-[24px] 1200px:text-[26px] ">
-                  3,382
+                  ${totalSale}
                 </p>
               </div>
             </div>
@@ -99,13 +97,13 @@ const Sale_Analytics = ({ active = 1 }) => {
                   TOTAL USERS
                 </p>
                 <p className="text-[16px] font-semibold 600px:text-[20px] 800px:text-[24px] 1200px:text-[26px] ">
-                  3,382
+                  {totalDatas?.totalUsers}
                 </p>
               </div>
             </div>
           </div>
           <div className="flex justify-center mt-6 800px:mt-10 ">
-            <div className=" w-[85vw] h-[50vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
+            <div className=" w-[80vw] max-w-[85vw]  h-[60vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
               <Bar_chart_sales />
             </div>
           </div>

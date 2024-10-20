@@ -12,7 +12,6 @@ import { FaPencilAlt, FaStar } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import Line_Chart_Products_Analytics from "../products/Line_Chart_Products_Analytics";
-import LineChartForUser from "./LineChartForUsers";
 // import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
 
 const users = [
@@ -113,7 +112,7 @@ const ared = Aref_Ruqaa({
   subsets: ["latin"],
 });
 
-const Users = ({ active = 1 }) => {
+const Coupons = ({ active = 1 }) => {
   const [collapse, setcollapse] = useState(false);
   const { user } = useSelector((state) => state.user);
 
@@ -156,7 +155,7 @@ const Users = ({ active = 1 }) => {
           <div className="flex justify-center mt-6 800px:mt-10 ">
             <div className=" w-[80vw] max-w-[85vw]  h-[60vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
               {/* chart here......  */}
-              <LineChartForUser />
+              <Line_Chart_Products_Analytics />
             </div>
           </div>
 
@@ -241,21 +240,21 @@ const Users = ({ active = 1 }) => {
                 })}
               </tbody>
             </table>
-            {/* prev next button  */}
-            <div className="w-full  flex justify-end">
-              <div className="ml-auto flex ">
-                <p className="px-4 py-1 bg-orange-400 border hover:bg-orange-100 cursor-pointer text-white">
-                  1
+          </div>
+          {/* prev next button  */}
+          <div className="w-full  flex justify-end">
+            <div className="ml-auto flex ">
+              <p className="px-4 py-1 bg-orange-400 border hover:bg-orange-100 cursor-pointer text-white">
+                1
+              </p>
+              {[1, 2, 3, 4].map((i) => (
+                <p
+                  key={i}
+                  className="px-4 py-1  border hover:bg-orange-100 cursor-pointer text-orange-400"
+                >
+                  {i + 1}
                 </p>
-                {[1, 2, 3, 4].map((i) => (
-                  <p
-                    key={i}
-                    className="px-4 py-1  border hover:bg-orange-100 cursor-pointer text-orange-400"
-                  >
-                    {i + 1}
-                  </p>
-                ))}
-              </div>
+              ))}
             </div>
           </div>
         </div>
@@ -264,4 +263,4 @@ const Users = ({ active = 1 }) => {
   );
 };
 
-export default Users;
+export default Coupons;

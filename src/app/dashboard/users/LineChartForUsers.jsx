@@ -13,7 +13,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const Line_Chart_Products_Analytics = () => {
+const LineChartForUser = () => {
   const [responsiveYAxisWidth, setResponsiveYAxisWidth] = useState(30);
   const [chartData, setChartData] = useState([]);
 
@@ -55,7 +55,7 @@ const Line_Chart_Products_Analytics = () => {
     };
 
     if (past6data?.products_6) {
-      const formattedData = countProductsByMonth(past6data.products_6);
+      const formattedData = countProductsByMonth(past6data.user_6);
       setChartData(formattedData);
     }
   }, [past6data]);
@@ -105,4 +105,4 @@ const Line_Chart_Products_Analytics = () => {
   );
 };
 
-export default Line_Chart_Products_Analytics;
+export default LineChartForUser;

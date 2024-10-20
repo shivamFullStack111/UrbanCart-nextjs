@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import {
   BarChart,
   Bar,
@@ -11,22 +12,58 @@ import {
   LabelList,
 } from "recharts";
 
-const data = [
-  { name: "Page A", uv: 4000, pv: 2400, amt: 2400 },
-  { name: "Page B", uv: 3000, pv: 1398, amt: 2210 },
-  { name: "Page C", uv: 2000, pv: 9800, amt: 2290 },
-  { name: "Page D", uv: 2780, pv: 3908, amt: 2000 },
-  { name: "Page E", uv: 1890, pv: 4800, amt: 2181 },
-  { name: "Page F", uv: 2390, pv: 3800, amt: 2500 },
-  { name: "Page G", uv: 3490, pv: 4300, amt: 2100 },
-];
-
 const Example = () => {
   const [responsiveYAxisWidth, setResponsiveYAxisWidth] = useState(30);
+  const [data, setData] = useState([]);
+
+  // Access past6data from Redux
+  const { past6data } = useSelector((state) => state.admin);
+
+  // Prepare the data for the chart
+  useEffect(() => {
+    const generatePast6Months = () => {
+      const months = [];
+      const currentDate = new Date();
+      for (let i = 5; i >= 0; i--) {
+        const date = new Date();
+        date.setMonth(currentDate.getMonth() - i);
+        const monthName = date.toLocaleString("default", { month: "short" });
+        const year = date.getFullYear();
+        months.push({ name: `${monthName} ${year}`, subTotal: 0 });
+      }
+      return months;
+    };
+
+    const calculateSubTotalByMonth = (orders) => {
+      const past6Months = generatePast6Months();
+
+      orders.forEach((order) => {
+        const orderDate = new Date(order.createdAt);
+        const monthName = orderDate.toLocaleString("default", {
+          month: "short",
+        });
+        const year = orderDate.getFullYear();
+        const monthYear = `${monthName} ${year}`;
+
+        const monthData = past6Months.find((month) => month.name === monthYear);
+        if (monthData) {
+          const orderSubTotal = parseFloat(order.subTotal) || 0; // Ensure subTotal is a valid number
+          monthData.subTotal += orderSubTotal;
+        }
+      });
+
+      return past6Months;
+    };
+
+    if (past6data?.orders_6) {
+      const formattedData = calculateSubTotalByMonth(past6data.orders_6);
+      setData(formattedData);
+    }
+  }, [past6data]);
 
   useEffect(() => {
     const handleResize = () => {
-      setResponsiveYAxisWidth(window.innerWidth > 800 ? 20 : 30);
+      setResponsiveYAxisWidth(window.innerWidth > 800 ? 60 : 30);
     };
 
     // Set initial value
@@ -38,18 +75,23 @@ const Example = () => {
     // Cleanup event listener
     return () => window.removeEventListener("resize", handleResize);
   }, []);
+
   return (
     <ResponsiveContainer width="100%" height={"100%"}>
-      <BarChart data={data}>
+      <BarChart data={data || []}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis className="text-gray-500 text-[12px] " dataKey="name" />
+        <XAxis className="text-gray-500 text-[12px]" dataKey="name" />
         <YAxis
           width={responsiveYAxisWidth}
-          className="text-gray-500 text-[12px]"
+          className="text-gray-500 text-[10px] 800px:text-lg"
         />
         <Tooltip />
-        <Bar dataKey="uv" fill="#fb923c">
-          <LabelList dataKey="uv" position="top" className=" text-[12px]" />
+        <Bar dataKey="subTotal" fill="#fb923c">
+          <LabelList
+            dataKey="subTotal"
+            position="top"
+            className="text-[12px]"
+          />
         </Bar>
       </BarChart>
     </ResponsiveContainer>
