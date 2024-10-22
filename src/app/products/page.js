@@ -2,7 +2,6 @@
 import React, { Suspense, useEffect, useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import SideBar from "./SideBar";
 import { Quicksand } from "next/font/google";
 import axios from "axios";
 import Image from "next/image";
@@ -21,6 +20,7 @@ import {
 } from "@/store/slices/wishlistSlice";
 import toast, { Toaster } from "react-hot-toast";
 import { addItemToCart } from "@/store/slices/cartSlice";
+import SideBar from "./SideBar";
 
 const sand = Quicksand({
   weight: ["400"],

@@ -22,7 +22,10 @@ const Header = ({ collapse, setcollapse }) => {
       >
         {/* left header  */}
         <IoReorderThreeOutline
-          onClick={() => setcollapse((p) => !p)}
+          onClick={() => {
+            if (window.innerWidth < 1000) return;
+            setcollapse((p) => !p);
+          }}
           size={40}
           className="text-white hover:scale-105 cursor-pointer"
         />

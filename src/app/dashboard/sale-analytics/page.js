@@ -2,12 +2,12 @@
 import { Aref_Ruqaa } from "next/font/google";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import SideBar from "../Sidebar";
 import * as XLSX from "xlsx";
 
-import Header from "../Header";
 import { saveAs } from "file-saver";
 import Bar_chart_sales from "./Bar_chart_sales";
+import Header from "../Header";
+import SideBar from "../Sidebar";
 
 const products = [
   { name: "Product 1", price: 100, category: "Electronics" },

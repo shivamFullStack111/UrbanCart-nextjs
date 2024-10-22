@@ -11,7 +11,7 @@ import Image from "next/image";
 import { FaBoxes, FaPencilAlt, FaStar } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
-import Line_Chart_Products_Analytics from "../products/Line_Chart_Products_Analytics";
+import Line_Chart_Products_Analytics from "./Line_Chart_for_Orders";
 import { TbShoppingCartCancel, TbTruckDelivery } from "react-icons/tb";
 // import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
 import { AiOutlineDeliveredProcedure } from "react-icons/ai";

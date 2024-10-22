@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 import { FaBoxes, FaTruckLoading } from "react-icons/fa";
 import { FaUsers } from "react-icons/fa6";
@@ -44,11 +44,33 @@ const navigation = [
 
 const SideBar = ({ active, collapse, setcollapse }) => {
   const { user } = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (window.innerWidth < 1000) {
+      setcollapse(true);
+    }
+  }, []);
+
+  const widthChange = (e) => {
+    const width = window.innerWidth;
+    if (width < 1000) {
+      setcollapse(true);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", widthChange);
+
+    // return () => {
+    //   removeEventListener(widthChange);
+    // };
+  }, []);
+
   return (
     <>
       <div
         className={`h-full min-w-[45px] ${
-          !collapse && "min-w-[280px]  1400px:w-[330px]"
+          !collapse && "!w-[300px]  1400px:w-[330px]"
         } bg-slate-700 overflow-y-scroll hide-scrollbar`}
       >
         {!collapse && (
