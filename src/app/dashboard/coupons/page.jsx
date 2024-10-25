@@ -11,8 +11,7 @@ import Image from "next/image";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
-import Line_Chart_Products_Analytics from "../orders/products/Line_Chart_Products_Analytics";
-// import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
+import Line_Chart_Products_Analytics from "../orders/Line_Chart_for_Orders";
 
 const users = [
   {
