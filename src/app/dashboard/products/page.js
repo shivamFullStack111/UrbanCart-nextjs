@@ -1,6 +1,6 @@
 "use client";
 import { Aref_Ruqaa } from "next/font/google";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 
@@ -12,9 +12,11 @@ import { FaPencilAlt, FaStar } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
+import axios from "axios";
+import { getAllProducts } from "@/functions/productsFunction";
 // import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
 
-const products = [
+const productts = [
   {
     _id: {
       $oid: "67107333c7edd5264a2921a1",
@@ -345,13 +347,36 @@ const ared = Aref_Ruqaa({
 const Products = ({ active = 1 }) => {
   const [collapse, setcollapse] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const [products, setproducts] = useState([]);
+  const [totalProducts, settotalProducts] = useState(1);
+  const [currentPage, setcurrentPage] = useState(1);
+
+  const getProducts = async (pageNumber) => {
+    try {
+      const res = await axios.post("/api/all-products", { pageNumber });
+      setproducts(res?.data.products);
+
+      console.log(
+        res?.data.products,
+        "||||||||||||||||||||||||||||||||||||||||||||||||||"
+      );
+
+      settotalProducts(res?.data?.totalProducts);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getProducts(1);
+  }, []);
 
   const handleExport = () => {
     // Create a new workbook
     const workbook = XLSX.utils.book_new();
 
     // Convert data array to worksheet
-    const worksheet = XLSX.utils.json_to_sheet(products);
+    const worksheet = XLSX.utils.json_to_sheet(t);
 
     // Add worksheet to workbook
     XLSX.utils.book_append_sheet(workbook, worksheet, "Products");
@@ -419,7 +444,7 @@ const Products = ({ active = 1 }) => {
                             <div className="w-20 h-20 rounded-md overflow-hidden bg-green-200 relative  ">
                               <Image fill={true} src={product.images[0]} />
                             </div>
-                            <div>
+                            <div className="w-32 overflow-hidden">
                               <p>{product?.title}</p>
                               <div className="flex gap-1 items-center">
                                 <p className="font-semibold">Size:</p>
@@ -485,15 +510,24 @@ const Products = ({ active = 1 }) => {
             </table>
             {/* prev next button  */}
           </div>
-          <div className="w-full  flex justify-end">
-            <div className="ml-auto flex ">
-              <p className="px-4 py-1 bg-orange-400 border hover:bg-orange-100 cursor-pointer text-white">
-                1
-              </p>
-              {[1, 2, 3, 4].map((i) => (
+          <div className="w-full  flex justify-end pb-10">
+            <div className="ml-auto max-w-48 overflow-x-scroll mr-6 flex ">
+              {[
+                ...Array(
+                  Math.floor(totalProducts / 8) < totalProducts / 8
+                    ? Math.floor(totalProducts / 8) + 1
+                    : Math.floor(totalProducts / 8)
+                ).keys(),
+              ].map((i) => (
                 <p
+                  onClick={() => {
+                    setcurrentPage(i + 1);
+                    getProducts(i + 1);
+                  }}
                   key={i}
-                  className="px-4 py-1  border hover:bg-orange-100 cursor-pointer text-orange-400"
+                  className={`px-4 py-1   border hover:bg-orange-100 cursor-pointer text-orange-400  ${
+                    currentPage == i + 1 && "bg-orange-400 text-white"
+                  }`}
                 >
                   {i + 1}
                 </p>

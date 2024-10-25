@@ -7,7 +7,7 @@ export async function POST(req) {
     await dbConnect();
 
     // Parse the request body
-    const { pageNumber = 1 } = await req.json();
+    const { pageNumber } = await req.json();
 
     const item = 8;
     const allProducts = await Product.find()
@@ -15,11 +15,14 @@ export async function POST(req) {
       .limit(item)
       .lean(); // Improves performance by returning plain JS objects
 
+    const totalProducts = await Product.countDocuments();
+
     return new Response(
       JSON.stringify({
         success: true,
         message: `Products found with limit ${item}`,
         products: allProducts,
+        totalProducts,
       }),
       {
         status: 200,

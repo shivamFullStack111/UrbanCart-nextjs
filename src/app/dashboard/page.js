@@ -17,7 +17,7 @@ import { BsBoxFill } from "react-icons/bs";
 import Header from "./Header";
 import SideBar from "./Sidebar";
 import axios from "axios";
-
+import { motion } from "framer-motion";
 const ared = Aref_Ruqaa({
   weight: ["400", "700"],
   subsets: ["latin"],
@@ -76,7 +76,17 @@ const Dashboard = ({ active = 1 }) => {
 
           {/* total orders and total users  */}
           <div className="grid grid-cols-1 850px:grid-cols-2 w-full px-3 500px:px-7 800px:px-10 1400px:px-16 mt-8 gap-4">
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  duration: 0.8,
+                },
+              }}
+              className="bg-white rounded-lg shadow-xl border-[0.3px] "
+            >
               <div className="flex justify-between m-6">
                 <PiBagFill
                   size={52}
@@ -94,8 +104,18 @@ const Dashboard = ({ active = 1 }) => {
                   View
                 </p>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  duration: 0.8,
+                },
+              }}
+              className="bg-white rounded-lg shadow-xl border-[0.3px] "
+            >
               <div className="flex justify-between m-6">
                 <FaUsersLine
                   size={52}
@@ -113,11 +133,21 @@ const Dashboard = ({ active = 1 }) => {
                   View
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
 
           <div className="grid grid-cols-1 850px:grid-cols-2 w-full px-3 500px:px-7 800px:px-10 1400px:px-16 mt-8 gap-4">
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  duration: 0.8,
+                },
+              }}
+              className="bg-white rounded-lg shadow-xl border-[0.3px] "
+            >
               <div className="flex justify-between m-6">
                 <BsBoxFill
                   size={52}
@@ -135,8 +165,18 @@ const Dashboard = ({ active = 1 }) => {
                   View
                 </p>
               </div>
-            </div>
-            <div className="bg-white rounded-lg shadow-xl border-[0.3px] ">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{
+                x: 0,
+                opacity: 1,
+                transition: {
+                  duration: 0.8,
+                },
+              }}
+              className="bg-white rounded-lg shadow-xl border-[0.3px] "
+            >
               <div className="flex justify-between m-6">
                 <RiCoupon3Fill
                   size={52}
@@ -154,7 +194,7 @@ const Dashboard = ({ active = 1 }) => {
                   View
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </div>

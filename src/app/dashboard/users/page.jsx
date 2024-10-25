@@ -1,6 +1,6 @@
 "use client";
 import { Aref_Ruqaa } from "next/font/google";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 
@@ -11,11 +11,11 @@ import Image from "next/image";
 import { FaPencilAlt, FaStar } from "react-icons/fa";
 import { FaEye } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
-// import Line_Chart_Products_Analytics from "../orders/products/Line_Chart_Products_Analytics";
 import LineChartForUser from "./LineChartForUsers";
-// import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
+import axios from "axios";
+import userProfile from "../../images/user.png";
 
-const users = [
+const userss = [
   {
     _id: {
       $oid: "670e4c455cf0a637610b7575",
@@ -116,6 +116,26 @@ const ared = Aref_Ruqaa({
 const Users = ({ active = 1 }) => {
   const [collapse, setcollapse] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const [users, setusers] = useState([]);
+  const [totalUsers, settotalUsers] = useState(0);
+
+  const [currentPage, setcurrentPage] = useState(1);
+
+  const getUsers = async (pageNumber) => {
+    try {
+      const res = await axios.post("/api/get-user-by-pageNumber", {
+        pageNumber,
+      });
+      setusers(res?.data?.users);
+      settotalUsers(res?.data?.totalUsers);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => {
+    getUsers(1);
+  }, []);
 
   const handleExport = () => {
     // Create a new workbook
@@ -184,10 +204,13 @@ const Users = ({ active = 1 }) => {
                       className="py-10"
                     >
                       <td className="py-2 px-4">
-                        <div className="flex justify-center">
+                        <div className="flex  ">
                           <div className="flex items-center gap-2">
-                            <div className="w-20 h-20 rounded-md overflow-hidden bg-green-200 relative  ">
-                              {/* <Image fill={true} src={user.images[0]} /> */}
+                            <div className="w-20 h-20 rounded-full overflow-hidden bg-blue-100 relative  ">
+                              <Image
+                                fill={true}
+                                src={user?.url || userProfile}
+                              />
                             </div>
                             <div>
                               <p>{user?.name}</p>
@@ -244,13 +267,22 @@ const Users = ({ active = 1 }) => {
             {/* prev next button  */}
             <div className="w-full  flex justify-end">
               <div className="ml-auto flex ">
-                <p className="px-4 py-1 bg-orange-400 border hover:bg-orange-100 cursor-pointer text-white">
-                  1
-                </p>
-                {[1, 2, 3, 4].map((i) => (
+                {[
+                  ...Array(
+                    Math.floor(totalUsers / 8) < totalUsers / 8
+                      ? Math.floor(totalUsers / 8) + 1
+                      : Math.floor(totalUsers / 8)
+                  ).keys(),
+                ].map((i) => (
                   <p
+                    onClick={() => {
+                      setcurrentPage(i + 1);
+                      getUsers(i + 1);
+                    }}
                     key={i}
-                    className="px-4 py-1  border hover:bg-orange-100 cursor-pointer text-orange-400"
+                    className={`px-4 py-1   border hover:bg-orange-100 cursor-pointer text-orange-400  ${
+                      currentPage == i + 1 && "bg-orange-400 text-white"
+                    }`}
                   >
                     {i + 1}
                   </p>
