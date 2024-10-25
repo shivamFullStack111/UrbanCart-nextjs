@@ -11,8 +11,15 @@ export async function POST(req) {
       .limit(item)
       .lean();
 
+    const totalOrders = await Order.countDocuments();
+
     return new Response(
-      JSON.stringify({ success: true, message: "orders get", orders })
+      JSON.stringify({
+        success: true,
+        message: "orders get",
+        orders,
+        totalOrders,
+      })
     );
   } catch (error) {
     return new Response(

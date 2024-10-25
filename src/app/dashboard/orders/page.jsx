@@ -1,6 +1,6 @@
 "use client";
 import { Aref_Ruqaa } from "next/font/google";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import * as XLSX from "xlsx";
 
@@ -13,10 +13,11 @@ import { FaEye } from "react-icons/fa6";
 import { MdDelete } from "react-icons/md";
 import Line_Chart_Products_Analytics from "./Line_Chart_for_Orders";
 import { TbShoppingCartCancel, TbTruckDelivery } from "react-icons/tb";
-// import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
 import { AiOutlineDeliveredProcedure } from "react-icons/ai";
+import axios from "axios";
+import moment from "moment";
 
-const orders = [
+const orderss = [
   {
     _id: {
       $oid: "670faabae445ffd2a3f97237",
@@ -909,6 +910,23 @@ const ared = Aref_Ruqaa({
 const Orders = ({ active = 1 }) => {
   const [collapse, setcollapse] = useState(false);
   const { user } = useSelector((state) => state.user);
+  const [orders, setorders] = useState([]);
+  const [currentPage, setcurrentPage] = useState(1);
+  const [totalOrders, settotalOrders] = useState(1);
+
+  const getOrders = async (pageNumber) => {
+    try {
+      const res = await axios.post("/api/get-orders-by-pageNumber", {
+        pageNumber,
+      });
+      settotalOrders(res?.data?.totalOrders);
+      setorders(res?.data?.orders);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+
+  useEffect(() => [getOrders(1)], []);
 
   const handleExport = () => {
     // Create a new workbook
@@ -1035,12 +1053,12 @@ const Orders = ({ active = 1 }) => {
                     >
                       <td className="py-2 px-4">
                         <div className="flex justify-center">
-                          <p>#nfnhj74r884hrbfjnr</p>
+                          <p>#{order?._id}</p>
                         </div>
                       </td>
-                      <td className="py-2 px-4">
+                      <td className="py-2 px-4 min-w-36">
                         <div className="flex justify-center">
-                          <p>10/3/2023</p>
+                          <p>{moment(new Date()).format("MMM Do YYYY")}</p>
                         </div>
                       </td>
                       <td className="py-2 px-4">
@@ -1104,15 +1122,24 @@ const Orders = ({ active = 1 }) => {
             {/* prev next button  */}
           </div>
           {/* prev next button  */}
-          <div className="w-full  flex justify-end">
-            <div className="ml-auto flex ">
-              <p className="px-4 py-1 bg-orange-400 border hover:bg-orange-100 cursor-pointer text-white">
-                1
-              </p>
-              {[1, 2, 3, 4].map((i) => (
+          <div className="w-full  flex justify-end pb-10">
+            <div className="ml-auto flex p-3 ">
+              {[
+                ...Array(
+                  totalOrders / 8 > Math.floor(totalOrders / 8)
+                    ? Math.floor(totalOrders / 8) + 1
+                    : Math.floor(totalOrders / 8)
+                ).keys(),
+              ].map((i) => (
                 <p
+                  onClick={() => {
+                    setcurrentPage(i + 1);
+                    getOrders(i + 1);
+                  }}
                   key={i}
-                  className="px-4 py-1  border hover:bg-orange-100 cursor-pointer text-orange-400"
+                  className={`px-4 py-1   border hover:bg-orange-100 cursor-pointer text-orange-400  ${
+                    currentPage == i + 1 && "bg-orange-400 text-white"
+                  }`}
                 >
                   {i + 1}
                 </p>
