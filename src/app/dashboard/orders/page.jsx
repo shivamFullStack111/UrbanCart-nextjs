@@ -1058,7 +1058,11 @@ const Orders = ({ active = 1 }) => {
                       </td>
                       <td className="py-2 px-4 min-w-36">
                         <div className="flex justify-center">
-                          <p>{moment(new Date()).format("MMM Do YYYY")}</p>
+                          <p>
+                            {moment(new Date(order?.createdAt)).format(
+                              "MMM Do YYYY"
+                            )}
+                          </p>
                         </div>
                       </td>
                       <td className="py-2 px-4">
@@ -1075,7 +1079,7 @@ const Orders = ({ active = 1 }) => {
 
                       <td className="py-2 px-4">
                         <div className="flex justify-center">
-                          <p>Online</p>
+                          <p>{order?.paymentType || "COD"}</p>
                         </div>
                       </td>
 
