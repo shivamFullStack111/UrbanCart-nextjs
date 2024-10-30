@@ -7,6 +7,7 @@ import {
   clothingMaterials,
   fitTypes,
   footwearMaterials,
+  heelHeights,
   kidsClothing,
   kidsFootwear,
   menClothing,
@@ -17,9 +18,28 @@ import {
   womenClothing,
   womenFootwear,
 } from "@/app/utils";
-const ProductEditPage = ({ seteditOpen, product }) => {
+import axios from "axios";
+import toast, { Toaster } from "react-hot-toast";
+const ProductEditPage = ({ seteditOpen, product, setselectedEditProduct }) => {
+  const updateProduct = async () => {
+    try {
+      const res = await axios.post(`/api/update-product`, { product });
+      if (res?.data?.success) {
+        toast.success(res.data?.message);
+        setTimeout(() => {
+          setselectedEditProduct(null);
+          seteditOpen(false);
+        }, 400);
+      } else {
+        toast.error(res.data?.message);
+      }
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   return (
     <>
+      <Toaster />
       <div className="fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#0004] z-50 flex justify-center items-center">
         <div className="w-full h-full 600px:w-[550px] 600px:h-[94%] p-2 bg-white overflow-y-scroll hide-scrollbar 600px:rounded-xl">
           <RxCross1
@@ -46,6 +66,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               <p className="text-sm mb-1  font-semibold">TITLE:</p>
               <input
                 value={product?.title}
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    title: e.target.value,
+                  }));
+                }}
                 type="text"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
                 placeholder="Enter title"
@@ -56,6 +82,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">GENDER:</p>
               <input
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    gender: e.target.value,
+                  }));
+                }}
                 value={product?.gender}
                 type="text"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -67,6 +99,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">CATEGORY:</p>
               <input
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    category: e.target.value,
+                  }));
+                }}
                 value={product?.category}
                 type="text"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -78,6 +116,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">BRAND:</p>
               <input
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    brand: e.target.value,
+                  }));
+                }}
                 value={product?.brand}
                 type="text"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -89,12 +133,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">CLOTH TYPE:</p>
               <DropDown
-                // onSelect={(val) =>
-                //   setproduct((p) => ({
-                //     ...p,
-                //     clothType: val.toLowerCase(),
-                //   }))
-                // }
+                onSelect={(val) =>
+                  setselectedEditProduct((p) => ({
+                    ...p,
+                    clothType: val.toLowerCase(),
+                  }))
+                }
                 heading={product?.clothType || "Select cloth type"}
                 items={
                   product?.category == "clothing"
@@ -116,6 +160,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">STOCK KEEPING UNIT:</p>
               <input
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    stockKeepingUnit: e.target.value,
+                  }));
+                }}
                 value={product?.stockKeepingUnit}
                 type="number"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -127,6 +177,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">MRP PRICE:</p>
               <input
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    mrpPrice: e.target.value,
+                  }));
+                }}
                 value={product?.mrpPrice}
                 type="number"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -138,6 +194,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">SELLING PRICE:</p>
               <input
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    sellingPrice: e.target.value,
+                  }));
+                }}
                 value={product?.sellingPrice}
                 type="number"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -150,6 +212,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">STOCK:</p>
               <input
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    stock: e.target.value,
+                  }));
+                }}
                 value={product?.stock}
                 type="number"
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -161,6 +229,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">DESCRIPTION:</p>
               <textarea
+                onChange={(e) => {
+                  setselectedEditProduct((prev) => ({
+                    ...prev,
+                    description: e.target.value,
+                  }));
+                }}
                 value={product?.description}
                 rows={5}
                 className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -215,12 +289,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">MATERIAL:</p>
               <DropDown
-                // onSelect={(val) =>
-                //   setproductSpecifications((p) => ({
-                //     ...p,
-                //     material: val.toLowerCase(),
-                //   }))
-                // }
+                onSelect={(val) =>
+                  setselectedEditProduct((p) => ({
+                    ...p,
+                    material: val.toLowerCase(),
+                  }))
+                }
                 heading={product?.material || "Select Material"}
                 items={
                   product?.category == "footwear"
@@ -234,12 +308,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">CLOTH PATTERN:</p>
               <DropDown
-                // onSelect={(val) =>
-                //   setproductSpecifications((p) => ({
-                //     ...p,
-                //     clothPattern: val.toLowerCase(),
-                //   }))
-                // }
+                onSelect={(val) =>
+                  setselectedEditProduct((p) => ({
+                    ...p,
+                    clothPattern: val.toLowerCase(),
+                  }))
+                }
                 heading={product?.clothPattern || "Select Cloth Pattern"}
                 items={patterns}
               />
@@ -249,12 +323,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">FIT TYPE:</p>
               <DropDown
-                // onSelect={(val) =>
-                //   setproductSpecifications((p) => ({
-                //     ...p,
-                //     fitType: val.toLowerCase(),
-                //   }))
-                // }
+                onSelect={(val) =>
+                  setselectedEditProduct((p) => ({
+                    ...p,
+                    fitType: val.toLowerCase(),
+                  }))
+                }
                 heading={product?.fitType || "Select Cloth Fit Type"}
                 items={fitTypes}
               />
@@ -266,12 +340,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
                 <p className="text-sm mb-1  font-semibold">SLEEVE TYPE:</p>
                 <DropDown
                   heading={product?.sleeveType || "Select Sleeve Type "}
-                  // onSelect={(val) =>
-                  //   setproductSpecifications((p) => ({
-                  //     ...p,
-                  //     sleeveType: val.toLowerCase(),
-                  //   }))
-                  // }
+                  onSelect={(val) =>
+                    setselectedEditProduct((p) => ({
+                      ...p,
+                      sleeveType: val.toLowerCase(),
+                    }))
+                  }
                   items={sleeveTypes}
                 />
               </div>
@@ -282,12 +356,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               <p className="text-sm mb-1  font-semibold">NECK TYPE:</p>
               <DropDown
                 heading={product?.neckType || "Select Neck Type "}
-                // onSelect={(val) =>
-                //   setproductSpecifications((p) => ({
-                //     ...p,
-                //     neckType: val.toLowerCase(),
-                //   }))
-                // }
+                onSelect={(val) =>
+                  setselectedEditProduct((p) => ({
+                    ...p,
+                    neckType: val.toLowerCase(),
+                  }))
+                }
                 items={neckStyles}
               />
             </div>
@@ -298,6 +372,12 @@ const ProductEditPage = ({ seteditOpen, product }) => {
                 {" "}
                 <p className="text-sm mb-1  font-semibold">HEEL HEIGHT:</p>
                 <input
+                  onChange={(e) => {
+                    setselectedEditProduct((prev) => ({
+                      ...prev,
+                      heelHeight: e.target.value,
+                    }));
+                  }}
                   value={product?.heelHeight}
                   type="number"
                   className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
@@ -306,7 +386,10 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               </div>
             )}
 
-            <div className="h-12 flex cursor-pointer justify-center items-center w-full mt-4 rounded-md bg-violet-500 text-white text-lg font-semibold border-2 hover:bg-white hover:text-violet-500 hover:border-violet-500">
+            <div
+              onClick={() => updateProduct()}
+              className="h-12 flex cursor-pointer justify-center items-center w-full mt-4 rounded-md bg-violet-500 text-white text-lg font-semibold border-2 hover:bg-white hover:text-violet-500 hover:border-violet-500"
+            >
               Update
             </div>
           </div>

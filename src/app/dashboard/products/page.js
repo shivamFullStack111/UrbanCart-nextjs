@@ -74,6 +74,7 @@ const Products = () => {
         <ProductEditPage
           product={selectedEditProduct}
           seteditOpen={seteditOpen}
+          setselectedEditProduct={setselectedEditProduct}
         />
       )}
       <div className={`flex h-[100vh] overflow-hidden ${ared.className}`}>
