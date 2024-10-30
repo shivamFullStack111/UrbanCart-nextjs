@@ -3,8 +3,21 @@ import React, { useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { motion } from "framer-motion";
 import DropDown from "@/app/profile/create-product/DropDown";
+import {
+  clothingMaterials,
+  fitTypes,
+  footwearMaterials,
+  kidsClothing,
+  kidsFootwear,
+  menClothing,
+  menFootwear,
+  neckStyles,
+  patterns,
+  sleeveTypes,
+  womenClothing,
+  womenFootwear,
+} from "@/app/utils";
 const ProductEditPage = ({ seteditOpen, product }) => {
-  const [active, setactive] = useState(0);
   return (
     <>
       <div className="fixed top-0 left-0 w-[100vw] h-[100vh] bg-[#0004] z-50 flex justify-center items-center">
@@ -76,29 +89,225 @@ const ProductEditPage = ({ seteditOpen, product }) => {
               {" "}
               <p className="text-sm mb-1  font-semibold">CLOTH TYPE:</p>
               <DropDown
-                heading={product?.clothType || "Select Cloth type"}
-                onSelect={
-                  (val) => console.log(val)
-                  // setproductDetails((p) => ({
-                  //   ...p,
-                  //   gender: val.toLowerCase(),
-                  // }))
+                // onSelect={(val) =>
+                //   setproduct((p) => ({
+                //     ...p,
+                //     clothType: val.toLowerCase(),
+                //   }))
+                // }
+                heading={product?.clothType || "Select cloth type"}
+                items={
+                  product?.category == "clothing"
+                    ? product?.gender == "men"
+                      ? menClothing
+                      : product?.gender == "women"
+                      ? womenClothing
+                      : kidsClothing
+                    : product?.gender == "men"
+                    ? menFootwear
+                    : product?.gender == "women"
+                    ? womenFootwear
+                    : kidsFootwear
                 }
-                items={[
-                  {
-                    key: "Men",
-                    label: "Men",
-                  },
-                  {
-                    key: "Women",
-                    label: "Women",
-                  },
-                  {
-                    key: "Kid",
-                    label: "Kid",
-                  },
-                ]}
               />
+            </div>
+            {/* stock keeping unit  */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">STOCK KEEPING UNIT:</p>
+              <input
+                value={product?.stockKeepingUnit}
+                type="number"
+                className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
+                placeholder="Enter title"
+              />
+            </div>
+            {/* mrp price   */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">MRP PRICE:</p>
+              <input
+                value={product?.mrpPrice}
+                type="number"
+                className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
+                placeholder="Enter title"
+              />
+            </div>
+            {/* selling price   */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">SELLING PRICE:</p>
+              <input
+                value={product?.sellingPrice}
+                type="number"
+                className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
+                placeholder="Enter title"
+              />
+            </div>
+
+            {/* stock  */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">STOCK:</p>
+              <input
+                value={product?.stock}
+                type="number"
+                className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
+                placeholder="Enter title"
+              />
+            </div>
+            {/* description  */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">DESCRIPTION:</p>
+              <textarea
+                value={product?.description}
+                rows={5}
+                className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
+                placeholder="Enter title"
+              />
+            </div>
+            {/* colors  */}
+
+            <div className="flex justify-between items-center">
+              <p className="text-sm mb-1  font-semibold">COLORS:</p>
+              <div className="bg-violet-400 border-2 rounded-sm text-white px-3  hover:bg-white font-semibold hover:border-violet-400 hover:text-violet-400 cursor-pointer ">
+                Add
+              </div>
+            </div>
+            {product?.colors?.length && (
+              <div className="overflow-x-scroll flex gap-2 hide-scrollbar">
+                {product?.colors?.map((c, i) => (
+                  <div
+                    style={{ backgroundColor: c?.color }}
+                    className="h-10 w-10 relative mt-2 rounded-full "
+                    key={i}
+                  >
+                    <RxCross1 className="-top-1 absolute cursor-pointer hover:bg-red-400 -right-1 rounded-full p-1 text-2xl bg-black text-white" />
+                  </div>
+                ))}
+              </div>
+            )}
+            {/* sizes  */}
+
+            <div className="flex justify-between items-center mt-4">
+              <p className="text-sm mb-1  font-semibold">SIZE:</p>
+              <div className="bg-violet-400 border-2 rounded-sm text-white px-3  hover:bg-white font-semibold hover:border-violet-400 hover:text-violet-400 cursor-pointer ">
+                Add
+              </div>
+            </div>
+            {product?.sizes?.length && (
+              <div className="overflow-x-scroll flex gap-2 hide-scrollbar">
+                {product?.sizes?.map((c, i) => (
+                  <div
+                    // style={{ backgroundColor: c?.color }}
+                    className="h-8 w-12 flex justify-center items-center bg-black text-white py-1 p-3 relative mt-2  "
+                    key={i}
+                  >
+                    {c}
+                    <RxCross1 className="-top-1 absolute cursor-pointer hover:bg-red-400 -right-1 rounded-full p-1 text-2xl bg-black text-white" />
+                  </div>
+                ))}
+              </div>
+            )}
+            {/* material  */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">MATERIAL:</p>
+              <DropDown
+                // onSelect={(val) =>
+                //   setproductSpecifications((p) => ({
+                //     ...p,
+                //     material: val.toLowerCase(),
+                //   }))
+                // }
+                heading={product?.material || "Select Material"}
+                items={
+                  product?.category == "footwear"
+                    ? footwearMaterials
+                    : clothingMaterials
+                }
+              />
+            </div>
+            {/* material  */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">CLOTH PATTERN:</p>
+              <DropDown
+                // onSelect={(val) =>
+                //   setproductSpecifications((p) => ({
+                //     ...p,
+                //     clothPattern: val.toLowerCase(),
+                //   }))
+                // }
+                heading={product?.clothPattern || "Select Cloth Pattern"}
+                items={patterns}
+              />
+            </div>
+            {/* fit type  */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">FIT TYPE:</p>
+              <DropDown
+                // onSelect={(val) =>
+                //   setproductSpecifications((p) => ({
+                //     ...p,
+                //     fitType: val.toLowerCase(),
+                //   }))
+                // }
+                heading={product?.fitType || "Select Cloth Fit Type"}
+                items={fitTypes}
+              />
+            </div>
+            {/* sleveve type  */}
+            {product?.gender == "women" && (
+              <div className="mt-4">
+                {" "}
+                <p className="text-sm mb-1  font-semibold">SLEEVE TYPE:</p>
+                <DropDown
+                  heading={product?.sleeveType || "Select Sleeve Type "}
+                  // onSelect={(val) =>
+                  //   setproductSpecifications((p) => ({
+                  //     ...p,
+                  //     sleeveType: val.toLowerCase(),
+                  //   }))
+                  // }
+                  items={sleeveTypes}
+                />
+              </div>
+            )}
+            {/* nect type  */}
+            <div className="mt-4">
+              {" "}
+              <p className="text-sm mb-1  font-semibold">NECK TYPE:</p>
+              <DropDown
+                heading={product?.neckType || "Select Neck Type "}
+                // onSelect={(val) =>
+                //   setproductSpecifications((p) => ({
+                //     ...p,
+                //     neckType: val.toLowerCase(),
+                //   }))
+                // }
+                items={neckStyles}
+              />
+            </div>
+
+            {/* heel height  */}
+            {product?.category == "footwear" && (
+              <div className="mt-4">
+                {" "}
+                <p className="text-sm mb-1  font-semibold">HEEL HEIGHT:</p>
+                <input
+                  value={product?.heelHeight}
+                  type="number"
+                  className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
+                  placeholder="Enter title"
+                />
+              </div>
+            )}
+
+            <div className="h-12 flex cursor-pointer justify-center items-center w-full mt-4 rounded-md bg-violet-500 text-white text-lg font-semibold border-2 hover:bg-white hover:text-violet-500 hover:border-violet-500">
+              Update
             </div>
           </div>
         </div>

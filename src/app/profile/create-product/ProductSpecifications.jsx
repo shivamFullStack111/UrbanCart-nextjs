@@ -191,7 +191,7 @@ const ProductSpecifications = ({
                 {/* <input className="w-full p-1 py-2  outline-none border-2 rounded-md focus:border-violet-400 bg-gray-100"></input> */}
               </div>
             )}
-            {/*  Sleeve Type (for top and cloth)  */}
+            {/*  neck Type (for top and cloth)  */}
             <div className="p-1">
               <p className="text-[16px] font-bold text-gray-500">Neck Type</p>
               <DropDown

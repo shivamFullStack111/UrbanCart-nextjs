@@ -29,7 +29,7 @@ const Products = () => {
   const [totalProducts, settotalProducts] = useState(1);
   const [currentPage, setcurrentPage] = useState(1);
 
-  const [editOpen, seteditOpen] = useState(true);
+  const [editOpen, seteditOpen] = useState(false);
   const [selectedEditProduct, setselectedEditProduct] = useState(null);
 
   const getProducts = async (pageNumber) => {
