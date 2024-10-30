@@ -15,6 +15,8 @@ import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
 import axios from "axios";
 import { getAllProducts } from "@/functions/productsFunction";
 import ProductEditPage from "./ProductEditPage";
+import Link from "next/link";
+import toast, { Toaster } from "react-hot-toast";
 // import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
 
 const ared = Aref_Ruqaa({
@@ -32,6 +34,10 @@ const Products = () => {
   const [editOpen, seteditOpen] = useState(false);
   const [selectedEditProduct, setselectedEditProduct] = useState(null);
 
+  useEffect(() => {
+    console.log(products);
+  }, [products]);
+
   const getProducts = async (pageNumber) => {
     try {
       const res = await axios.post("/api/all-products", { pageNumber });
@@ -46,6 +52,25 @@ const Products = () => {
   useEffect(() => {
     getProducts(1);
   }, []);
+
+  const handleDelete = async (productid) => {
+    try {
+      const res = await axios.post("/api/delete-product", { productid });
+
+      if (res.data?.success) {
+        toast.success(res.data.message);
+        settotalProducts((p) => p - 1);
+        const updatedProducts = products?.filter(
+          (product) => product._id !== productid
+        );
+        setproducts(updatedProducts);
+      } else {
+        toast.error(res.data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
 
   const handleExport = () => {
     // Create a new workbook
@@ -70,9 +95,12 @@ const Products = () => {
 
   return (
     <>
+      <Toaster />
       {editOpen && (
         <ProductEditPage
           product={selectedEditProduct}
+          setproducts={setproducts}
+          allproducts={products}
           seteditOpen={seteditOpen}
           setselectedEditProduct={setselectedEditProduct}
         />
@@ -167,12 +195,15 @@ const Products = () => {
                         <td className="py-2 px-4">
                           <div className="flex justify-center items-center gap-2">
                             <div className="flex gap-3 ">
-                              <div className="px-3 rounded-lg py-1 bg-blue-200">
+                              <Link
+                                href={`/product-detail/${product?._id}`}
+                                className="px-3 rounded-lg py-1 bg-blue-200"
+                              >
                                 <FaEye
                                   size={22}
                                   className=" hover:scale-110 cursor-pointer transition-all duration-200 text-gray-500 "
                                 />
-                              </div>
+                              </Link>
                               <div className="px-3 rounded-lg py-1 bg-orange-200">
                                 <FaPencilAlt
                                   onClick={() => {
@@ -183,7 +214,10 @@ const Products = () => {
                                   className="hover:scale-110 cursor-pointer transition-all duration-200 text-orange-400           "
                                 />
                               </div>
-                              <div className="px-3 rounded-lg py-1 bg-red-200">
+                              <div
+                                onClick={() => handleDelete(product._id)}
+                                className="px-3 rounded-lg py-1 bg-red-200"
+                              >
                                 <MdDelete
                                   size={22}
                                   className=" hover:scale-110 cursor-pointer transition-all duration-200 text-red-400 "

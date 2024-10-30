@@ -1,5 +1,5 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { RxCross1 } from "react-icons/rx";
 import { motion } from "framer-motion";
 import DropDown from "@/app/profile/create-product/DropDown";
@@ -7,7 +7,6 @@ import {
   clothingMaterials,
   fitTypes,
   footwearMaterials,
-  heelHeights,
   kidsClothing,
   kidsFootwear,
   menClothing,
@@ -20,12 +19,32 @@ import {
 } from "@/app/utils";
 import axios from "axios";
 import toast, { Toaster } from "react-hot-toast";
-const ProductEditPage = ({ seteditOpen, product, setselectedEditProduct }) => {
+const ProductEditPage = ({
+  seteditOpen,
+  product,
+  setselectedEditProduct,
+  setproducts,
+  allproducts,
+}) => {
   const updateProduct = async () => {
     try {
       const res = await axios.post(`/api/update-product`, { product });
       if (res?.data?.success) {
         toast.success(res.data?.message);
+        // console.log("product chaged", product);
+        // console.log("product chaged", allproducts);
+
+        const editProducts = allproducts.map((prdt) => {
+          if (prdt._id === product._id) {
+            console.log("match");
+            return product;
+          } else {
+            console.log("not match");
+            return prdt;
+          }
+        });
+
+        setproducts(editProducts);
         setTimeout(() => {
           setselectedEditProduct(null);
           seteditOpen(false);
@@ -51,7 +70,17 @@ const ProductEditPage = ({ seteditOpen, product, setselectedEditProduct }) => {
             {product?.images?.map((img, i) => (
               <div key={i} className="p-1 border">
                 <div className="w-24 relative h-32">
-                  <RxCross1 className="absolute right-1 cursor-pointer top-1 text-white bg-black hover:bg-red-400 text-xl z-40" />
+                  <RxCross1
+                    onClick={() => {
+                      setselectedEditProduct((prev) => {
+                        return {
+                          ...prev,
+                          images: prev.images?.filter((imgg) => imgg !== img),
+                        };
+                      });
+                    }}
+                    className="absolute right-1 cursor-pointer top-1 text-white bg-black hover:bg-red-400 text-xl z-40"
+                  />
                   <Image alt="product" src={img} fill={true} />
                 </div>
               </div>
@@ -77,23 +106,36 @@ const ProductEditPage = ({ seteditOpen, product, setselectedEditProduct }) => {
                 placeholder="Enter title"
               />
             </div>
+
             {/* gender  */}
             <div className="mt-4">
               {" "}
               <p className="text-sm mb-1  font-semibold">GENDER:</p>
-              <input
-                onChange={(e) => {
-                  setselectedEditProduct((prev) => ({
-                    ...prev,
-                    gender: e.target.value,
-                  }));
-                }}
-                value={product?.gender}
-                type="text"
-                className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
-                placeholder="Enter title"
+              <DropDown
+                onSelect={(val) =>
+                  setselectedEditProduct((p) => ({
+                    ...p,
+                    gender: val.toLowerCase(),
+                  }))
+                }
+                heading={product?.gender || "Select gender"}
+                items={[
+                  {
+                    key: "Men",
+                    label: "Men",
+                  },
+                  {
+                    key: "Women",
+                    label: "Women",
+                  },
+                  {
+                    key: "Kid",
+                    label: "Kid",
+                  },
+                ]}
               />
             </div>
+
             {/* category  */}
             <div className="mt-4">
               {" "}
