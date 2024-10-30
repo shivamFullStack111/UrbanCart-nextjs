@@ -3,28 +3,9 @@ import React, { useEffect, useState } from "react";
 import SideBarOfProfile from "../SideBar";
 import Header from "@/app/components/Header";
 import Footer from "@/app/components/Footer";
-import DropDown from "./DropDown";
-import { FaArrowCircleLeft, FaPlus } from "react-icons/fa";
-import { TiTick } from "react-icons/ti";
 import axios from "axios";
-import {
-  bgColors,
-  clothingMaterials,
-  fitTypes,
-  footwearMaterials,
-  kidsClothing,
-  kidsFootwear,
-  menClothing,
-  menFootwear,
-  neckStyles,
-  patterns,
-  sleeveTypes,
-  soleMaterials,
-  womenClothing,
-  womenFootwear,
-} from "@/app/utils";
-import Image from "next/image";
-import toast, { Toaster } from "react-hot-toast";
+
+import { Toaster } from "react-hot-toast";
 import ProductDetails from "./ProductDetails";
 import ProductSpecifications from "./ProductSpecifications";
 import ProductOverview from "./ProductOverview";
@@ -42,30 +23,6 @@ const CreateProduct = () => {
     console.log(productSpecifications?.sizes);
   }, [productSpecifications]);
   // Dummy array of orders
-  const dummyOrders = [
-    {
-      id: "ORD123",
-      total: 250.0,
-      discount: 20.0,
-      gst: 18.5,
-      delivery: 15.0,
-      orderDate: "2024-09-01",
-      totalItems: 3,
-      buyerName: "John Doe",
-      status: "Shipped",
-    },
-    {
-      id: "ORD456",
-      total: 520.0,
-      discount: 50.0,
-      gst: 35.5,
-      delivery: 25.0,
-      orderDate: "2024-09-02",
-      totalItems: 5,
-      buyerName: "Jane Smith",
-      status: "Delivered",
-    },
-  ];
 
   const handleCreateProduct = async () => {
     try {

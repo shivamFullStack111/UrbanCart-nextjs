@@ -4,18 +4,18 @@ import mongoose from "mongoose";
 
 const productSchema = new mongoose.Schema(
   {
-    title: { type: String, required: true }, // Corrected typo and added validation
-    gender: { type: String, required: true },
-    category: { type: String, required: true, index: true }, // Indexed for faster queries
-    brand: { type: String, required: true },
-    clothType: { type: String, required: true },
-    stockKeepingUnit: { type: Number, unique: true, required: true }, // Unique SKU
-    mrpPrice: { type: Number, required: true },
-    sellingPrice: { type: Number, required: true },
-    stock: { type: Number, required: true, min: 0 }, // Prevent negative stock
+    title: { type: String }, // Corrected typo and added validation
+    gender: { type: String },
+    category: { type: String, index: true }, // Indexed for faster queries
+    brand: { type: String },
+    clothType: { type: String },
+    stockKeepingUnit: { type: Number, unique: true }, // Unique SKU
+    mrpPrice: { type: Number },
+    sellingPrice: { type: Number },
+    stock: { type: Number, min: 0 }, // Prevent negative stock
     totalSale: { type: Number, default: 0, min: 0 }, // Prevent negative stock
-    description: { type: String, required: true },
-    images: { type: [String], required: true }, // Array of image URLs
+    description: { type: String },
+    images: { type: [String] }, // Array of image URLs
     totalRating: { type: Number, default: 0 },
     // Specification
     colors: [
@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema(
     ],
 
     sizes: { type: [String], default: [] },
-    material: { type: String, required: true },
+    material: { type: String },
     clothPattern: { type: String },
     fitType: { type: String },
     sleeveType: { type: String },

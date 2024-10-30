@@ -3,18 +3,10 @@ import DropDown from "./DropDown";
 import { FaPlus } from "react-icons/fa";
 import toast, { Toaster } from "react-hot-toast";
 import {
-  bgColors,
-  clothingMaterials,
-  fitTypes,
-  footwearMaterials,
   kidsClothing,
   kidsFootwear,
   menClothing,
   menFootwear,
-  neckStyles,
-  patterns,
-  sleeveTypes,
-  soleMaterials,
   womenClothing,
   womenFootwear,
 } from "@/app/utils";
