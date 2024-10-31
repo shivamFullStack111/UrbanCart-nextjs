@@ -14,6 +14,7 @@ import {
   menFootwear,
   neckStyles,
   patterns,
+  sizes,
   sleeveTypes,
   womenClothing,
   womenFootwear,
@@ -27,8 +28,8 @@ const ProductEditPage = ({
   setproducts,
   allproducts,
 }) => {
-  const [chooseColorOpen, setchooseColorOpen] = useState(true);
-  const [chooseSizeOpen, setchooseSizeOpen] = useState(true);
+  const [chooseColorOpen, setchooseColorOpen] = useState(false);
+  const [chooseSizeOpen, setchooseSizeOpen] = useState(false);
   const updateProduct = async () => {
     try {
       const res = await axios.post(`/api/update-product`, { product });
@@ -319,12 +320,24 @@ const ProductEditPage = ({
                     {bgColors.map((c, i) => (
                       <p
                         onClick={() => {
-                          const isAlreadyExist =
-                            setselectedEditProduct?.colors?.find(
-                              (co) => co.color === c.color
-                            );
-
-                          alert(isAlreadyExist);
+                          // console.log(c, product);
+                          const isExist = product?.colors?.find(
+                            (p) => p.color === c.color
+                          );
+                          console.log(isExist);
+                          if (isExist) {
+                            setselectedEditProduct((prev) => ({
+                              ...prev,
+                              colors: prev.colors?.filter(
+                                (clr) => clr.color !== c.color
+                              ),
+                            }));
+                          } else {
+                            setselectedEditProduct((prev) => ({
+                              ...prev,
+                              colors: [...(prev.colors || []), c],
+                            }));
+                          }
                         }}
                         style={{ backgroundColor: c.color }}
                         key={i}
@@ -343,7 +356,17 @@ const ProductEditPage = ({
                     className="h-10 w-10 relative mt-2 rounded-full "
                     key={i}
                   >
-                    <RxCross1 className="-top-1 absolute cursor-pointer hover:bg-red-400 -right-1 rounded-full p-1 text-2xl bg-black text-white" />
+                    <RxCross1
+                      onClick={() => {
+                        setselectedEditProduct((prev) => ({
+                          ...prev,
+                          colors: prev.colors?.filter(
+                            (clr) => clr.color !== c.color
+                          ),
+                        }));
+                      }}
+                      className="-top-1 absolute cursor-pointer hover:bg-red-400 -right-1 rounded-full p-1 text-2xl bg-black text-white"
+                    />
                   </div>
                 ))}
               </div>
@@ -362,12 +385,36 @@ const ProductEditPage = ({
               {/* absolute box for choose size ......................................................................... */}
 
               {chooseSizeOpen && (
-                <div className="absolute z-30 w-full h-40 bg-gray-100 shadow-2xl rounded-2xl border border-gray-400">
-                  <div className="w-full flex justify-end">
+                <div className="absolute overflow-y-scroll hide-scrollbar z-30 w-full h-40 bg-gray-100 shadow-2xl rounded-2xl border border-gray-400">
+                  <div className="w-full flex justify-between items-center p-2">
+                    <p className="text-xl text-gray-500 font-semibold">
+                      Add more sizes
+                    </p>
                     <RxCross1
                       onClick={() => setchooseSizeOpen(false)}
-                      className="text-2xl hover:scale-110 hover:text-red-400 m-2 cursor-pointer"
+                      className="text-2xl hover:scale-110 hover:text-red-400 m-2 mb-0 cursor-pointer"
                     />
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {sizes.map((c, i) => (
+                      <p
+                        onClick={() => {
+                          const isExist = product?.sizes?.find((cl) => cl == c);
+
+                          console.log(isExist);
+                          if (!isExist) {
+                            setselectedEditProduct((prev) => ({
+                              ...prev,
+                              sizes: [...(prev.sizes || []), c],
+                            }));
+                          }
+                        }}
+                        key={i}
+                        className="h-8 w-10 relative cursor-pointer  bg-black flex justify-center items-center text-white text-lg font-semibold   mb-2 rounded-sm"
+                      >
+                        {c}
+                      </p>
+                    ))}
                   </div>
                 </div>
               )}
@@ -381,7 +428,15 @@ const ProductEditPage = ({
                     key={i}
                   >
                     {c}
-                    <RxCross1 className="-top-1 absolute cursor-pointer hover:bg-red-400 -right-1 rounded-full p-1 text-2xl bg-black text-white" />
+                    <RxCross1
+                      onClick={() => {
+                        setselectedEditProduct((prev) => ({
+                          ...prev,
+                          sizes: prev?.sizes?.filter((s) => s !== c),
+                        }));
+                      }}
+                      className="-top-1 absolute cursor-pointer hover:bg-red-400 -right-1 rounded-full p-1 text-2xl bg-black text-white"
+                    />
                   </div>
                 ))}
               </div>
