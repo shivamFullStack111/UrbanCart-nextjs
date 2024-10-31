@@ -1,0 +1,10 @@
+  <h1 className=" text-xl m-3 600px:text-2xl 800px:text-3xl font-extrabold text-gray-600">
+              Orders Analytics
+            </h1>
+
+            <div className="flex justify-center mt-6 800px:mt-10 ">
+              <div className=" w-[80vw] max-w-[85vw]  h-[60vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
+                {/* chart here......  */}
+                <Line_Chart_Products_Analytics />
+              </div>
+            </div>

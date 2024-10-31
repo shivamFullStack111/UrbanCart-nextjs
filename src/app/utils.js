@@ -1655,6 +1655,13 @@ export const dummyProducts = [
   },
 ];
 
+export const allStatus = [
+  "Processing",
+  "Order Confirmed",
+  "Out For Delivery",
+  "Order Delivered",
+];
+
 export const clothCategories = [
   {
     name: "Clothing",
