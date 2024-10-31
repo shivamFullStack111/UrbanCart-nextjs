@@ -4,6 +4,7 @@ import { RxCross1 } from "react-icons/rx";
 import { motion } from "framer-motion";
 import DropDown from "@/app/profile/create-product/DropDown";
 import {
+  bgColors,
   clothingMaterials,
   fitTypes,
   footwearMaterials,
@@ -26,6 +27,8 @@ const ProductEditPage = ({
   setproducts,
   allproducts,
 }) => {
+  const [chooseColorOpen, setchooseColorOpen] = useState(true);
+  const [chooseSizeOpen, setchooseSizeOpen] = useState(true);
   const updateProduct = async () => {
     try {
       const res = await axios.post(`/api/update-product`, { product });
@@ -135,24 +138,30 @@ const ProductEditPage = ({
                 ]}
               />
             </div>
-
-            {/* category  */}
             <div className="mt-4">
               {" "}
-              <p className="text-sm mb-1  font-semibold">CATEGORY:</p>
-              <input
-                onChange={(e) => {
-                  setselectedEditProduct((prev) => ({
-                    ...prev,
-                    category: e.target.value,
-                  }));
-                }}
-                value={product?.category}
-                type="text"
-                className="w-full text-lg p-2 rounded-md outline-none focus:border-violet-400 bg-white border-2 "
-                placeholder="Enter title"
+              <p className="text-sm mb-1  font-semibold">GENDER:</p>
+              <DropDown
+                heading={product?.category || "Select category"}
+                onSelect={(val) =>
+                  setselectedEditProduct((p) => ({
+                    ...p,
+                    category: val.toLowerCase(),
+                  }))
+                }
+                items={[
+                  {
+                    key: "Clothing",
+                    label: "Clothing",
+                  },
+                  {
+                    key: "Footwear",
+                    label: "Footwear",
+                  },
+                ]}
               />
             </div>
+
             {/* brand  */}
             <div className="mt-4">
               {" "}
@@ -285,13 +294,48 @@ const ProductEditPage = ({
             </div>
             {/* colors  */}
 
-            <div className="flex justify-between items-center">
+            <div className="flex justify-between items-center relative">
               <p className="text-sm mb-1  font-semibold">COLORS:</p>
-              <div className="bg-violet-400 border-2 rounded-sm text-white px-3  hover:bg-white font-semibold hover:border-violet-400 hover:text-violet-400 cursor-pointer ">
+              <div
+                onClick={() => setchooseColorOpen(true)}
+                className="bg-violet-400 border-2 rounded-sm text-white px-3  hover:bg-white font-semibold hover:border-violet-400 hover:text-violet-400 cursor-pointer "
+              >
                 Add
               </div>
+              {/* absolute box for choose color ......................................................................... */}
+
+              {chooseColorOpen && (
+                <div className="absolute overflow-y-scroll hide-scrollbar z-30 w-full h-40 bg-gray-100 shadow-2xl rounded-2xl border border-gray-400">
+                  <div className="w-full flex justify-between items-center p-2">
+                    <p className="text-xl text-gray-500 font-semibold">
+                      Add more colors
+                    </p>
+                    <RxCross1
+                      onClick={() => setchooseColorOpen(false)}
+                      className="text-2xl hover:scale-110 hover:text-red-400 m-2 mb-0 cursor-pointer"
+                    />
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {bgColors.map((c, i) => (
+                      <p
+                        onClick={() => {
+                          const isAlreadyExist =
+                            setselectedEditProduct?.colors?.find(
+                              (co) => co.color === c.color
+                            );
+
+                          alert(isAlreadyExist);
+                        }}
+                        style={{ backgroundColor: c.color }}
+                        key={i}
+                        className="h-10 w-10 mb-2 rounded-full"
+                      ></p>
+                    ))}
+                  </div>
+                </div>
+              )}
             </div>
-            {product?.colors?.length && (
+            {product?.colors?.length > 0 && (
               <div className="overflow-x-scroll flex gap-2 hide-scrollbar">
                 {product?.colors?.map((c, i) => (
                   <div
@@ -306,13 +350,29 @@ const ProductEditPage = ({
             )}
             {/* sizes  */}
 
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex justify-between relative items-center mt-4">
               <p className="text-sm mb-1  font-semibold">SIZE:</p>
-              <div className="bg-violet-400 border-2 rounded-sm text-white px-3  hover:bg-white font-semibold hover:border-violet-400 hover:text-violet-400 cursor-pointer ">
+              <div
+                onClick={() => setchooseSizeOpen(true)}
+                className="bg-violet-400 border-2 rounded-sm text-white px-3  hover:bg-white font-semibold hover:border-violet-400 hover:text-violet-400 cursor-pointer "
+              >
                 Add
               </div>
+
+              {/* absolute box for choose size ......................................................................... */}
+
+              {chooseSizeOpen && (
+                <div className="absolute z-30 w-full h-40 bg-gray-100 shadow-2xl rounded-2xl border border-gray-400">
+                  <div className="w-full flex justify-end">
+                    <RxCross1
+                      onClick={() => setchooseSizeOpen(false)}
+                      className="text-2xl hover:scale-110 hover:text-red-400 m-2 cursor-pointer"
+                    />
+                  </div>
+                </div>
+              )}
             </div>
-            {product?.sizes?.length && (
+            {product?.sizes?.length > 0 && (
               <div className="overflow-x-scroll flex gap-2 hide-scrollbar">
                 {product?.sizes?.map((c, i) => (
                   <div
