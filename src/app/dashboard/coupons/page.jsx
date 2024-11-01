@@ -14,6 +14,7 @@ import { FaEye } from "react-icons/fa6";
 import moment from "moment";
 import Edit_Coupon from "./Edit_Coupon";
 import CreateCoupon from "./CreateCoupon";
+import toast, { Toaster } from "react-hot-toast";
 
 const ared = Aref_Ruqaa({
   weight: ["400", "700"],
@@ -71,6 +72,7 @@ const Coupons = () => {
 
   return (
     <>
+      <Toaster />
       {createCouponOpen && (
         <CreateCoupon setcreateCouponsOpen={setcreateCouponOpen} />
       )}
@@ -190,6 +192,23 @@ const Coupons = () => {
                               </div>
                               <div className="px-3 rounded-lg py-1 bg-red-200">
                                 <MdDelete
+                                  onClick={async () => {
+                                    const res = await axios.post(
+                                      "/api/delete-coupon",
+                                      { couponid: coupon?._id }
+                                    );
+
+                                    if (res.data?.success) {
+                                      toast.success(res.data.message);
+                                      const updatedCoupns = coupons.filter(
+                                        (cpn) => cpn._id !== coupon._id
+                                      );
+                                      settotalcoupons((p) => p - 1);
+                                      setcoupons(updatedCoupns);
+                                    } else {
+                                      toast.error(res.data.message);
+                                    }
+                                  }}
                                   size={22}
                                   className=" hover:scale-110 cursor-pointer transition-all duration-200 text-red-400 "
                                 />

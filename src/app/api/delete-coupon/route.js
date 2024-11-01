@@ -1,12 +1,13 @@
-import Product from "@/models/Product";
+import Coupon from "@/models/coupon";
 
 export async function POST(req) {
   try {
     const { couponid } = await req.json();
-    await Product.findOneAndDelete({ _id: couponid });
+
+    await Coupon.findOneAndDelete({ _id: couponid });
 
     return new Response(
-      JSON.stringify({ success: true, message: "Product deleted successfully" })
+      JSON.stringify({ success: true, message: "coupon successfully deleted!" })
     );
   } catch (error) {
     return new Response(
