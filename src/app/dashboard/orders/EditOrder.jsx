@@ -84,11 +84,20 @@ const EditOrder = ({
               }
               className=" outline-none border-2 focus:border-violet-500 p-2 rounded w-full mb-4"
             >
-              {allStatus.map((i) => (
-                <option className="" color="#a78bfa" key={i}>
-                  {i}
-                </option>
-              ))}
+              {allStatus.map((i, index) => {
+                const statusIndex = allStatus.findIndex(
+                  (sts) => sts === order?.status
+                );
+                console.log(statusIndex);
+
+                if (statusIndex <= index) {
+                  return (
+                    <option className="" color="#a78bfa" key={i}>
+                      {i}
+                    </option>
+                  );
+                }
+              })}
             </select>
 
             {/* <label className="block mb-2 font-semibold">

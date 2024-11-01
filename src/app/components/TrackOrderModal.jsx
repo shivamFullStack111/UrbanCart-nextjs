@@ -3,12 +3,14 @@ import { GiTick } from "react-icons/gi";
 import { RxCross1 } from "react-icons/rx";
 import { TbTruckDelivery } from "react-icons/tb";
 import { TiTick } from "react-icons/ti";
-const status = ["processing", "confirmed", "out for delivery", " delivered"];
+import { allStatus } from "../utils";
 const TrackOrderModal = ({ setisTrackOpen, order }) => {
   const [doneStep, setdoneStep] = useState();
 
   useEffect(() => {
-    const index = status?.findIndex((s) => s === order?.status?.toLowerCase());
+    const index = allStatus?.findIndex(
+      (s) => s === order?.status?.toLowerCase()
+    );
     setdoneStep(index + 1);
   }, [order]);
 

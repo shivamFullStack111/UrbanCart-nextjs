@@ -1656,10 +1656,11 @@ export const dummyProducts = [
 ];
 
 export const allStatus = [
-  "Processing",
-  "Order Confirmed",
-  "Out For Delivery",
-  "Order Delivered",
+  "processing",
+  "confirmed",
+  "out for delivery",
+  "delivered",
+  "cancel"
 ];
 
 export const clothCategories = [
