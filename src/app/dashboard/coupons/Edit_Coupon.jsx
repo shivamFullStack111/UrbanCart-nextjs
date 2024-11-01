@@ -169,7 +169,7 @@ const Edit_Coupon = ({
             </div>
             <div
               onClick={() => updateCoupon()}
-              className="flex rounded-md cursor-pointer hover:bg-violet-400 mt-6 justify-center items-center py-2 bg-violet-500 cursor-pointer text-white font-semibold"
+              className="flex rounded-md hover:bg-violet-400 mt-6 justify-center items-center py-2 bg-violet-500 cursor-pointer text-white font-semibold"
             >
               Update
             </div>
