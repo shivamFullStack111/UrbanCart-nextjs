@@ -9,14 +9,12 @@ import SideBar from "../Sidebar";
 import Header from "../Header";
 import Image from "next/image";
 import { FaBoxes, FaPencilAlt, FaStar } from "react-icons/fa";
-import { FaEye } from "react-icons/fa6";
-import { MdDelete } from "react-icons/md";
-// import Line_Chart_Products_Analytics from "./Line_Chart_for_Orders";
 import { TbShoppingCartCancel, TbTruckDelivery } from "react-icons/tb";
 import { AiOutlineDeliveredProcedure } from "react-icons/ai";
 import axios from "axios";
 import moment from "moment";
 import EditOrder from "./EditOrder";
+import Line_Chart_Products_Analytics from "./Line_Chart_for_Orders";
 
 const ared = Aref_Ruqaa({
   weight: ["400", "700"],
@@ -143,7 +141,16 @@ const Orders = ({ active = 1 }) => {
               </div>
             </div>
             {/* chat here  */}
+            <h1 className=" text-xl m-3 600px:text-2xl 800px:text-3xl font-extrabold text-gray-600">
+              Orders Analytics
+            </h1>
 
+            <div className="flex justify-center mt-6 800px:mt-10 ">
+              <div className=" w-[80vw] max-w-[85vw]  h-[60vw]  800px:w-[60vw] 1200px:w-[50vw] 800px:h-[30vw]">
+                {/* chart here......  */}
+                <Line_Chart_Products_Analytics />
+              </div>
+            </div>
             {/* map all users list  */}
             <h1 className=" text-lg m-3 600px:text-xl 800px:text-xl font-bold text-gray-600">
               Users
