@@ -1,6 +1,7 @@
+import axios from "axios";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { BsSearch } from "react-icons/bs";
 import { CiDiscount1 } from "react-icons/ci";
 import { RxCross1, RxCross2 } from "react-icons/rx";
@@ -21,6 +22,7 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
         value,
         pageNumber,
       });
+
       if (res?.data?.success) {
         setproducts(res?.data?.products);
         settotalProductIn_db(res?.data?.totalProducts);
@@ -39,7 +41,7 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
     }
     const time = setTimeout(() => {
       getProducts();
-    }, 1000);
+    }, 500);
 
     return () => {
       clearTimeout(time);
