@@ -207,7 +207,7 @@ const CreateCoupon = ({ setcreateCouponsOpen }) => {
 
           <div
             onClick={handleSubmit}
-            className="bg-yellow-400 gap-2 hover:bg-yellow-300 text-white rounded-md font-semibold text-xl flex justify-center items-center mt-4 py-2"
+            className="bg-yellow-400 cursor-pointer gap-2 hover:bg-yellow-300 text-white rounded-md font-semibold text-xl flex justify-center items-center mt-4 py-2"
           >
             <CiDiscount1 size={25} /> Create
           </div>

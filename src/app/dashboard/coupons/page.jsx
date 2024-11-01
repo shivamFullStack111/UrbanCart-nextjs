@@ -78,6 +78,8 @@ const Coupons = () => {
       )}
       {editOpen && (
         <Edit_Coupon
+          allcoupons={coupons}
+          setallcoupons={setcoupons}
           coupon={currentEditCoupon}
           setcurrentEditCoupon={setcurrentEditCoupon}
           seteditOpen={seteditOpen}
@@ -107,146 +109,155 @@ const Coupons = () => {
                 Create Coupon
               </div>
             </div>
-            <div className="overflow-x-scroll p-2 max-w-[85vw]  overflow-visible w-full">
-              <table className="w-full">
-                <thead className="w-full">
-                  <tr>
-                    <th className="px-2">Coupons Id</th>
-                    <th className="px-2">Created date</th>
-                    <th className="px-2">Title</th>
-                    <th className="px-2">Description </th>
-                    <th className="px-2">Min-value</th>
-                    <th className="px-2">Max-value</th>
-                    <th className="px-2">Products</th>
-                  </tr>
-                </thead>
-                <tbody className="w-full  ">
-                  {coupons?.map((coupon, i) => {
-                    return (
-                      <tr
-                        key={i}
-                        // className=""
-                        className="py-10"
-                      >
-                        <td className="py-2 px-4">
-                          <div className="flex justify-center">
-                            <p>#{coupon?._id}</p>
-                          </div>
-                        </td>
-                        <td className="py-2 px-4 min-w-36">
-                          <div className="flex justify-center">
-                            <p>
-                              {moment(new Date(coupon?.createdAt)).format(
-                                "MMM Do YYYY"
-                              )}
-                            </p>
-                          </div>
-                        </td>
-                        <td className="py-2 px-4">
-                          <div className="flex justify-center">
-                            <p>{coupon?.title}</p>
-                          </div>
-                        </td>
-
-                        <td className="py-2 px-4">
-                          <div className="flex justify-center">
-                            <p>{coupon?.description}</p>
-                          </div>
-                        </td>
-
-                        <td className="py-2 px-4">
-                          <div className="flex justify-center">
-                            <p>{coupon?.minValue || "COD"}</p>
-                          </div>
-                        </td>
-
-                        <td className="py-2 px-4">
-                          <div className="flex justify-center">
-                            <p>{coupon?.maxValue}</p>
-                          </div>
-                        </td>
-                        <td className="py-2 px-4">
-                          <div className="flex justify-center">
-                            <p>{coupon?.productsId?.length}</p>
-                          </div>
-                        </td>
-
-                        <td className="py-2 px-4">
-                          <div className="flex justify-center items-center gap-2">
-                            <div className="flex gap-3 ">
-                              <div className="px-3 rounded-lg py-1 bg-blue-200">
-                                <FaEye
-                                  size={22}
-                                  className=" hover:scale-110 cursor-pointer transition-all duration-200 text-gray-500 "
-                                />
-                              </div>
-                              <div className="px-3 rounded-lg py-1 bg-orange-200">
-                                <FaPencilAlt
-                                  onClick={() => {
-                                    setcurrentEditCoupon(coupon);
-                                    seteditOpen(true);
-                                  }}
-                                  size={22}
-                                  className="hover:scale-110 cursor-pointer transition-all duration-200 text-orange-400           "
-                                />
-                              </div>
-                              <div className="px-3 rounded-lg py-1 bg-red-200">
-                                <MdDelete
-                                  onClick={async () => {
-                                    const res = await axios.post(
-                                      "/api/delete-coupon",
-                                      { couponid: coupon?._id }
-                                    );
-
-                                    if (res.data?.success) {
-                                      toast.success(res.data.message);
-                                      const updatedCoupns = coupons.filter(
-                                        (cpn) => cpn._id !== coupon._id
-                                      );
-                                      settotalcoupons((p) => p - 1);
-                                      setcoupons(updatedCoupns);
-                                    } else {
-                                      toast.error(res.data.message);
-                                    }
-                                  }}
-                                  size={22}
-                                  className=" hover:scale-110 cursor-pointer transition-all duration-200 text-red-400 "
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </td>
+            {coupons?.length > 0 && (
+              <>
+                <div className="overflow-x-scroll p-2 max-w-[85vw]  overflow-visible w-full">
+                  <table className="w-full">
+                    <thead className="w-full">
+                      <tr>
+                        <th className="px-2">Coupons Id</th>
+                        <th className="px-2">Created date</th>
+                        <th className="px-2">Title</th>
+                        <th className="px-2">Description </th>
+                        <th className="px-2">Min-value</th>
+                        <th className="px-2">Max-value</th>
+                        <th className="px-2">Products</th>
                       </tr>
-                    );
-                  })}
-                </tbody>
-              </table>
-              {/* prev next button  */}
-            </div>
-            <div className="w-full  flex justify-end pb-10">
-              <div className="ml-auto flex p-3 ">
-                {[
-                  ...Array(
-                    totalcoupons / 8 > Math.floor(totalcoupons / 8)
-                      ? Math.floor(totalcoupons / 8) + 1
-                      : Math.floor(totalcoupons / 8)
-                  ).keys(),
-                ].map((i) => (
-                  <p
-                    onClick={() => {
-                      setcurrentPage(i + 1);
-                      getCoupons(i + 1);
-                    }}
-                    key={i}
-                    className={`px-4 py-1   border hover:bg-orange-100 cursor-pointer text-orange-400  ${
-                      currentPage == i + 1 && "bg-orange-400 text-white"
-                    }`}
-                  >
-                    {i + 1}
-                  </p>
-                ))}
+                    </thead>
+                    <tbody className="w-full  ">
+                      {coupons?.map((coupon, i) => {
+                        return (
+                          <tr
+                            key={i}
+                            // className=""
+                            className="py-10"
+                          >
+                            <td className="py-2 px-4">
+                              <div className="flex justify-center">
+                                <p>#{coupon?._id}</p>
+                              </div>
+                            </td>
+                            <td className="py-2 px-4 min-w-36">
+                              <div className="flex justify-center">
+                                <p>
+                                  {moment(coupon.createdAt).format(
+                                    "MMM Do YYYY"
+                                  )}
+                                </p>
+                              </div>
+                            </td>
+                            <td className="py-2 px-4">
+                              <div className="flex justify-center">
+                                <p>{coupon?.title}</p>
+                              </div>
+                            </td>
+
+                            <td className="py-2 px-4">
+                              <div className="flex justify-center">
+                                <p>{coupon?.description}</p>
+                              </div>
+                            </td>
+
+                            <td className="py-2 px-4">
+                              <div className="flex justify-center">
+                                <p>{coupon?.minValue || "COD"}</p>
+                              </div>
+                            </td>
+
+                            <td className="py-2 px-4">
+                              <div className="flex justify-center">
+                                <p>{coupon?.maxValue}</p>
+                              </div>
+                            </td>
+                            <td className="py-2 px-4">
+                              <div className="flex justify-center">
+                                <p>{coupon?.productsId?.length}</p>
+                              </div>
+                            </td>
+
+                            <td className="py-2 px-4">
+                              <div className="flex justify-center items-center gap-2">
+                                <div className="flex gap-3 ">
+                                  <div className="px-3 rounded-lg py-1 bg-orange-200">
+                                    <FaPencilAlt
+                                      onClick={() => {
+                                        setcurrentEditCoupon(coupon);
+                                        seteditOpen(true);
+                                      }}
+                                      size={22}
+                                      className="hover:scale-110 cursor-pointer transition-all duration-200 text-orange-400           "
+                                    />
+                                  </div>
+                                  <div className="px-3 rounded-lg py-1 bg-red-200">
+                                    <MdDelete
+                                      onClick={async () => {
+                                        const res = await axios.post(
+                                          "/api/delete-coupon",
+                                          { couponid: coupon?._id }
+                                        );
+
+                                        if (res.data?.success) {
+                                          toast.success(res.data.message);
+                                          const updatedCoupns = coupons.filter(
+                                            (cpn) => cpn._id !== coupon._id
+                                          );
+                                          settotalcoupons((p) => p - 1);
+                                          setcoupons(updatedCoupns);
+                                        } else {
+                                          toast.error(res.data.message);
+                                        }
+                                      }}
+                                      size={22}
+                                      className=" hover:scale-110 cursor-pointer transition-all duration-200 text-red-400 "
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
+                  {/* prev next button  */}
+                </div>
+                <div className="w-full  flex justify-end pb-10">
+                  <div className="ml-auto flex p-3 ">
+                    {[
+                      ...Array(
+                        totalcoupons / 8 > Math.floor(totalcoupons / 8)
+                          ? Math.floor(totalcoupons / 8) + 1
+                          : Math.floor(totalcoupons / 8)
+                      ).keys(),
+                    ].map((i) => (
+                      <p
+                        onClick={() => {
+                          setcurrentPage(i + 1);
+                          getCoupons(i + 1);
+                        }}
+                        key={i}
+                        className={`px-4 py-1   border hover:bg-orange-100 cursor-pointer text-orange-400  ${
+                          currentPage == i + 1 && "bg-orange-400 text-white"
+                        }`}
+                      >
+                        {i + 1}
+                      </p>
+                    ))}
+                  </div>
+                </div>
+              </>
+            )}
+            {coupons?.length == 0 && (
+              <div className="w-full bg-gray-100 h-full flex justify-center items-center ">
+                <div
+                  className={
+                    "bg-white shadow-2xl animate-bounce rounded-xl px-10 py-3  flex flex-col items-center"
+                  }
+                >
+                  <p>No coupon found!</p>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>
