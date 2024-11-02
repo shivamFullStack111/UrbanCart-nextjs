@@ -28,6 +28,7 @@ import toast from "react-hot-toast";
 import { addItemToWishlist } from "@/store/slices/wishlistSlice";
 import { setUser } from "@/store/slices/userSlice";
 import Cookies from "js-cookie";
+import { MdDashboard } from "react-icons/md";
 
 const Wishlist = dynamic(() => import("./Wishlist"), {
   ssr: false, // Isko server side render nahi karna chahte
@@ -182,20 +183,29 @@ const Header = ({ active }) => {
                   />
                 </div>
                 <div className="ml-[3vw] mr-[5vw] gap-4 flex items-center">
-                  <div
-                    onClick={() => setisWishlistOpen(true)}
-                    className="flex flex-col items-center ml-[3vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
-                  >
-                    <CiHeart size={25} />
-                    <p className="text-sm font-medium">Wishlist</p>
-                  </div>
-                  <Link
-                    href={"/cart"}
-                    className="flex flex-col items-center ml-[1vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
-                  >
-                    <GiShoppingBag size={25} />
-                    <p className="text-sm font-medium">Cart</p>
-                  </Link>
+                  {user?.isAdmin ? (
+                    <Link href={"/dashboard"}>
+                      <MdDashboard className="text-2xl text-gray-400" />
+                    </Link>
+                  ) : (
+                    <>
+                      {" "}
+                      <div
+                        onClick={() => setisWishlistOpen(true)}
+                        className="flex flex-col items-center ml-[3vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
+                      >
+                        <CiHeart size={25} />
+                        <p className="text-sm font-medium">Wishlist</p>
+                      </div>
+                      <Link
+                        href={"/cart"}
+                        className="flex flex-col items-center ml-[1vw] text-gray-500 cursor-pointer hover hover:text-gray-600"
+                      >
+                        <GiShoppingBag size={25} />
+                        <p className="text-sm font-medium">Cart</p>
+                      </Link>
+                    </>
+                  )}
 
                   {!user && (
                     <Link

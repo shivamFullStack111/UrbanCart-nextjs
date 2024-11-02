@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Head from "next/head"; // Import the Head component
 import Header from "./components/Header";
 import SaleBanner from "./components/SaleBanner";
@@ -16,6 +16,8 @@ import ProductSkeleton from "./components/ProductSkeleton";
 import NewArrival from "./components/NewArrival/page";
 import Link from "next/link";
 import TrendingProducts from "./components/TrendingProducts";
+import videoo from "../app/images/video.mp4";
+
 import "../globals.css";
 const roboto = Poppins({
   weight: ["400"],
@@ -34,11 +36,24 @@ const Home = () => {
         <link rel="icon" href="/favicon.ico" /> {/* Updated favicon path */}
       </Head>
       <Header active={1} />
-      <div className="flex justify-center bg-gray-300">
-        <div className="p-3 w-full h-52 550px:h-64  800px:h-80 1000px:w-[1300px] 1000px:h-[600px] relative">
-          <Image fill={true} alt="sale" src={saleImage} />
+      <div className="flex justify-center ">
+        {/* vide  */}
+        <div className="w-full max-800px:mt-[67px] h-[40vw]">
+          <video
+            src={videoo}
+            muted
+            autoPlay
+            loop
+            className="w-full object-fill h-full"
+            controls={false}
+          >
+            <source className="w-full h-full" src={videoo} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       </div>
+      {/* moving line  */}
+      <BrandCarousel />
 
       {/* gender categories  */}
       <div className="w-full flex justify-center gap-6  mt-6">
@@ -105,3 +120,74 @@ const Home = () => {
 };
 
 export default Home;
+
+const BrandCarousel = () => {
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const scrollContainer = scrollRef.current;
+    let scrollAmount = 0;
+
+    const autoScroll = () => {
+      if (scrollContainer) {
+        scrollAmount += 1; // Increase this value for faster scrolling
+        scrollContainer.scrollLeft = scrollAmount;
+
+        // Reset the scroll position to the start if it reaches the end
+        if (
+          scrollAmount >=
+          scrollContainer.scrollWidth - scrollContainer.clientWidth
+        ) {
+          scrollAmount = 0; // Reset scroll position
+        }
+      }
+    };
+
+    const interval = setInterval(autoScroll, 30); // Adjust the interval for speed
+    return () => clearInterval(interval); // Cleanup on component unmount
+  }, []);
+
+  return (
+    <div
+      ref={scrollRef}
+      className="w-full mt-4 overflow-x-scroll hide-scrollbar py-1 800px:py-2 flex gap-8 text-xl 800px:text-2xl text-white bg-black"
+    >
+      {[
+        "Nike",
+        "Adidas",
+        "Gucci",
+        "Louis Vuitton",
+        "Zara",
+        "H&M",
+        "Chanel",
+        "Uniqlo",
+        "Prada",
+        "Levi's",
+        "Puma",
+        "Ralph Lauren",
+        "Calvin Klein",
+        "Dior",
+        "Burberry",
+        "Armani",
+        "Versace",
+        "Tommy Hilfiger",
+        "The North Face",
+        "Under Armour",
+        "Fendi",
+        "Lacoste",
+        "New Balance",
+        "ASOS",
+        "Mango",
+        "Forever 21",
+        "American Eagle",
+        "Hollister",
+        "Abercrombie & Fitch",
+        "Aritzia",
+      ].map((i) => (
+        <div key={i} className="flex-shrink-0 ">
+          {i}
+        </div>
+      ))}
+    </div>
+  );
+};
