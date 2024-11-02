@@ -23,7 +23,7 @@ const ared = Aref_Ruqaa({
   subsets: ["latin"],
 });
 
-const navigation = [
+export const dashboardNavigation = [
   {
     name: "Dashboard",
     icon: MdDashboard,
@@ -98,12 +98,15 @@ const Dashboard = ({ active = 1 }) => {
                   <p className="text-lg">{totalDatas?.totalOrders}</p>
                 </div>
               </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
+              <Link
+                href={"/dashboard/orders"}
+                className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center"
+              >
                 <p></p>
                 <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
                   View
                 </p>
-              </div>
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -127,12 +130,15 @@ const Dashboard = ({ active = 1 }) => {
                   <p className="text-lg">{totalDatas?.totalUsers}</p>
                 </div>
               </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
+              <Link
+                href={"/dashboard/users"}
+                className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center"
+              >
                 <p></p>
                 <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
                   View
                 </p>
-              </div>
+              </Link>
             </motion.div>
           </div>
 
@@ -159,12 +165,15 @@ const Dashboard = ({ active = 1 }) => {
                   <p className="text-lg">{totalDatas?.totalProducts}</p>
                 </div>
               </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
+              <Link
+                href={"/dashboard/products"}
+                className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center"
+              >
                 <p></p>
                 <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
                   View
                 </p>
-              </div>
+              </Link>
             </motion.div>
             <motion.div
               initial={{ opacity: 0, x: 50 }}
@@ -188,12 +197,15 @@ const Dashboard = ({ active = 1 }) => {
                   <p className="text-lg">{totalDatas?.totalCoupons}</p>
                 </div>
               </div>
-              <div className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center">
+              <Link
+                href={"/dashboard/coupons"}
+                className="h-10 bg-green-100 px-6 cursor-pointer  w-full flex justify-between items-center"
+              >
                 <p></p>
                 <p className="text-green-500 underline text-[12px] hover:scale-110 font-bold">
                   View
                 </p>
-              </div>
+              </Link>
             </motion.div>
           </div>
         </div>

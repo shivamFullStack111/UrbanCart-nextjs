@@ -140,7 +140,7 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
             </Link>
           ))}
 
-          {user && user?.isAdmin && (
+          {/* {user && user?.isAdmin && (
             <Link
               href={"/profile/create-product"}
               className={`text-lg py-2 bg-white text-gray-700 hover:bg-yellow-200 cursor-pointer hover:translate-x-2 transition-all duration-150 rounded-xl px-2 font-semibold ${
@@ -149,7 +149,7 @@ const SideBarOfProfile = ({ isSideBarOpen, setisSideBarOpen, page }) => {
             >
               Create Product
             </Link>
-          )}
+          )} */}
 
           <div
             onClick={() => {

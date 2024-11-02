@@ -17,6 +17,7 @@ import { getAllProducts } from "@/functions/productsFunction";
 import ProductEditPage from "./ProductEditPage";
 import Link from "next/link";
 import toast, { Toaster } from "react-hot-toast";
+import CreateProductModal from "./CreateProductModal";
 // import Line_Chart_Products_Analytics from "./Line_Chart_Products_Analytics";
 
 const ared = Aref_Ruqaa({
@@ -30,6 +31,7 @@ const Products = () => {
   const [products, setproducts] = useState([]);
   const [totalProducts, settotalProducts] = useState(1);
   const [currentPage, setcurrentPage] = useState(1);
+  const [createProductOpen, setcreateProductOpen] = useState(true);
 
   const [editOpen, seteditOpen] = useState(false);
   const [selectedEditProduct, setselectedEditProduct] = useState(null);
@@ -95,6 +97,7 @@ const Products = () => {
 
   return (
     <>
+      {createProductOpen && <CreateProductModal />}
       <Toaster />
       {editOpen && (
         <ProductEditPage
@@ -128,9 +131,17 @@ const Products = () => {
             </div>
 
             {/* map all products list  */}
-            <h1 className=" text-lg m-3 600px:text-xl 800px:text-xl font-bold text-gray-600">
-              Products
-            </h1>
+            <div className="w-full flex justify-between items-center">
+              <h1 className=" text-lg m-3 600px:text-xl 800px:text-xl font-bold text-gray-600">
+                Products
+              </h1>
+              <div
+                onClick={() => setcreateProductOpen(true)}
+                className="cursor-pointer px-4 py-1 items-center justify-center rounded-lg bg-orange-500 hover:bg-orange-400 text-white text-lg font-semibold"
+              >
+                Create product
+              </div>
+            </div>
             <div className="overflow-x-scroll p-2 max-w-[85vw]  overflow-visible w-full">
               <table className="w-full">
                 <thead className="w-full">
