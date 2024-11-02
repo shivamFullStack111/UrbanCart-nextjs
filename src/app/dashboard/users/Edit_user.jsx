@@ -24,7 +24,7 @@ const Edit_user = ({
       if (res?.data?.success) {
         toast.success(res.data.message);
 
-        const updatedUsers = alluser.map((usrr) => {
+        const updatedUsers = alluser?.map((usrr) => {
           if (usrr?.email == user?.email) {
             if (user.isAdmin) {
               return { ...usrr, isAdmin: true };
